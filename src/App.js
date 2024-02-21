@@ -1,29 +1,16 @@
 import './App.css';
 import { animated ,useSpring } from '@react-spring/web'
-
+// 사용기술  -> 상태관리 zustand, api 상태관리 react-query
+// 디자인 
+import Footerline from './components/Footerline';  
+import Dicemain from './pages/mainpage'
 function App() {
-  const [springs, api] = useSpring(() => ({
-    from: { x: 0 },
-  }))
-  const handleClick = () => {
-    api.start({
-          to: {
-        x: springs.x.get() === 500 ? 0 : 500,
-      },
-    
-    })
-  }
+
   return (
     <div className="App">
-     <animated.div onClick={handleClick}
-      style={{
-        width: 50,
-        height: 50,
-        background: '#ff6d6d',
-        borderRadius: 8,
-        ...springs
-      }}
-    />
+   
+    <Dicemain/>
+ 
     </div>
   );
 }

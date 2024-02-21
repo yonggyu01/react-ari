@@ -2,10 +2,118 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+
+.cube-wrapper {
+  --R: calc(pi * 2 / 360); /* pi is 3.141592653589793 */
+  --angle: 45;
+  --applyAngle: calc(var(--angle) * var(--R));
+  width: 800px;
+  height: 800px;
+ 
+  transform-style: preserve-3d;
+  transform: perspective(2700px) rotateX(-30deg) rotateY(45deg) scale3d(.3, .3, 0.3);
+  position: relative;
+  left: calc(50vw - 400px);
+  top: calc(50vh - 400px);
+  transition: 0.8s linear;
 }
+/* .cube-wrapper:hover{
+  transform: perspective(700px) rotateX(-30deg) rotateY(45deg) matrix3d(
+      1, 0, 0, 0, 
+        0, cos(var(--applyAngle)), sin(var(--applyAngle)), 0,
+        0, sin(var(--applyAngle) * -1), cos(var(--applyAngle)), 0,
+        0, 0, 0, 1   
+    );
+} */
+.cube-wrapper.top {
+  transform: perspective(2700px) rotateX(-90deg) rotateY(-45deg) scale3d(.4, .4, 0.4)
+  matrix3d( 
+      cos(var(--applyAngle)), 0, sin(var(--applyAngle) * -1), 0, 
+      0, 1, 0, 0, 
+      sin(var(--applyAngle)), 0, cos(var(--applyAngle)), 0, 
+      0, 0, 0, 1 );
+  
+}
+.cube-wrapper.front{
+  transform: perspective(2700px) rotateX(105deg) rotateY(-45deg) scale3d(.4, .4, 0.4)
+  /* matrix3d( 
+      cos(var(--applyAngle)), 0, sin(var(--applyAngle) * -1), 0, 
+      0, 1, 0, 0, 
+      sin(var(--applyAngle)), 0, cos(var(--applyAngle)), 0, 
+      0, 0, 0, 1 ); */
+
+}
+.cube-wrapper.left{
+  transform: perspective(2700px) rotateX(-20deg) rotateY(240deg) scale3d(.5, .5, 0.5)
+  /* matrix3d( 
+      cos(var(--applyAngle)), 0, sin(var(--applyAngle) * -1), 0, 
+      0, 1, 0, 0, 
+      sin(var(--applyAngle)), 0, cos(var(--applyAngle)), 0, 
+      0, 0, 0, 1 ); */
+
+}
+.cube-wrapper.right{
+  transform: perspective(2700px) rotateX(-10deg) rotateY(130deg) scale3d(.4, .4, 0.4)
+  /* matrix3d( 
+      cos(var(--applyAngle)), 0, sin(var(--applyAngle) * -1), 0, 
+      0, 1, 0, 0, 
+      sin(var(--applyAngle)), 0, cos(var(--applyAngle)), 0, 
+      0, 0, 0, 1 ); */
+
+}
+.cube-wrapper.buttom{
+  transform: perspective(2700px) rotateX(-170deg) rotateY(-15deg) scale3d(.5, .5, 0.5)
+  /* matrix3d( 
+      cos(var(--applyAngle)), 0, sin(var(--applyAngle) * -1), 0, 
+      0, 1, 0, 0, 
+      sin(var(--applyAngle)), 0, cos(var(--applyAngle)), 0, 
+      0, 0, 0, 1 ); */
+
+}
+.cube-wrapper.back{
+  transform: perspective(2700px) rotateX(0deg) rotateY(135deg) 
+  matrix3d( 
+      cos(var(--applyAngle)), 0, sin(var(--applyAngle) * -1), 0, 
+      0, 1, 0, 0, 
+      sin(var(--applyAngle)), 0, cos(var(--applyAngle)), 0, 
+      0, 0, 0, 1 );
+}
+.cube-wrapper > div {
+position: absolute;
+  width: 800px;
+  height: 800px;
+  text-align: center;
+  background-size: cover;
+   font-weight: bold;
+  font-size: 20px;
+  border:1px solid black;
+}
+.cube-front {
+background-color: red;
+  transform: translate3d(0, 0, 400px);
+}
+.cube-back {
+  background-color: blue;
+  transform: rotateY(180deg) translate3d(0, 0, 400px);
+}
+.cube-top {
+  background-color: rgb(254, 27, 236);
+  transform: rotateX(90deg) translate3d(0, 0, 400px);
+}
+.cube-bottom {
+  background-color: rgb(39, 157, 82);
+  transform: rotateX(-90deg) translate3d(0, 0, 400px);
+}
+.cube-left {
+  background-color:rgb(255, 221, 1);
+  transform: rotateY(-90deg) translate3d(0, 0, 400px);
+}
+.cube-right {
+  background-color: red;
+  transform: rotateY(90deg) translate3d(0, 0, 400px);
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -13,20 +121,12 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.mybest{
+  /* position: absolute; */
+  /* top : 0 */
+  transition: all 1s;
 }
 
-.App-link {
-  color: #61dafb;
-}
 
 @keyframes App-logo-spin {
   from {
