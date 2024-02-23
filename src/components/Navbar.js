@@ -9,6 +9,31 @@ return (
         rolling()
     }}>Ari page</a>
   </div>
+
+  <ul className="menu menu-horizontal bg-base-200 rounded-box">
+  <li><a>Item 1</a></li>
+  <li>
+    <details >
+      <summary>Parent item</summary>
+      <ul>
+        <li><a>Submenu 1</a></li>
+        <li><a>Submenu 2</a></li>
+        <li>
+          <details >
+            {/* open하면 열림 */}
+            <summary>Parent</summary>
+            <ul>
+              <li><a>item 1</a></li>
+              <li><a>item 2</a></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </details>
+  </li>
+  <li><a>Item 3</a></li>
+</ul>
+
   <div className="flex-none">
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">

@@ -1,7 +1,7 @@
 import { useState,useRef } from "react"
 import Navbar from '../components/Navbar'
 import Login from '../components/loginpage'
-import { animated ,useSpring } from '@react-spring/web'
+import { animated  } from '@react-spring/web'
 import Footerline from '../components/Footerline';  
 function Dicemain(){
 const [mymy,setmy]  =useState(false)
@@ -30,7 +30,7 @@ function rolling(){
         }
     console.log(value)
   }
-  const [top,settop] = useState(false)
+//   const [top,settop] = useState(false)
 return(  <animated.div className="bg-red-50">
     <Navbar setmy={setmy} mymy={mymy} rolling={rolling}/>
     <animated.div className={mymy? 'cube-wrapper mybest' : 'mybest' } ref={roll} style={{transform}} >

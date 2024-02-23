@@ -1,5 +1,16 @@
+import { useState,useRef } from 'react'
+import { animated  } from '@react-spring/web'
 import '../css/Loginpage.css'
 function Loginpage(){
+  const [sign,setsign]=useState(false)
+  const signrolling =useRef()
+  const [tranrotate,setroll] = useState(`transform: perspective(700px) rotateX(0deg) rotateY(${sign? 0 : 180}deg)`) ;
+  function rolling(){
+    setsign(!sign)
+    setroll(`transform: perspective(700px) rotateX(0deg) rotateY(${sign? 0 : 180}deg)`)
+    console.log(tranrotate,sign,signrolling.current)
+    signrolling.current.style = tranrotate
+  }
 return(
 <>
 
@@ -10,9 +21,9 @@ return(
       <p className="py-1">반갑습니다. </p>
     </div>
 
-
+<animated.div className="card h460px loginwrap" style={{tranrotate}} ref={signrolling}>
 {/* 로그인창 */}
-    <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+    <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 login">
       <form className="card-body">
         <div className="form-control">
           <label className="label">
@@ -31,7 +42,8 @@ return(
         </div>
         <div className="form-control mt-5">
           <button className="btn btn-neutral mb-2" onClick={(e)=>{e.preventDefault()
-
+          
+            rolling()
           }}>Sign in</button>
           <button className="btn btn-primary mb-2" onClick={(e)=>{e.preventDefault()
 
@@ -44,7 +56,7 @@ return(
     </div>
 
       {/* 회원가입창 */}
-    <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 ">
+    <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 signin">
       <form className="card-body">
         <div className="form-control">
           <label className="label">
@@ -57,19 +69,24 @@ return(
             <span className="label-text">Password</span>
           </label>
           <input type="password" placeholder="password" className="input input-bordered"  required />
+        </div>
+        <div className="form-control">
           <label className="label">
-            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+            <span className="label-text">Password-check</span>
           </label>
+          <input type="password-check" placeholder="password" className="input input-bordered"  required />
         </div>
         <div className="form-control mt-5">
           <button className="btn btn-neutral mb-2" onClick={(e)=>{e.preventDefault()
-          }}>Sign in</button>
+          setsign(!sign)
+          rolling()
+         }}>Sign in</button>
         </div>
       </form>
     </div>
 
 
-
+    </animated.div>
 
 
   </div>

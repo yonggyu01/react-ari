@@ -129,18 +129,31 @@ background-color: red;
   transition: all 1s;
 }
 .loginwrap{
-  transform: perspective(700px) rotateX(0deg) rotateY(0deg) ;
+  /* transform: perspective(700px) rotateX(0deg) rotateY(0deg) ; */
+  transform-style: preserve-3d;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.8);
 }
 .login{
-  transform: perspective(700px) rotateX(0deg) rotateY(0deg) ;
+  
   backface-visibility: hidden;
-
+  position: absolute;
+  min-width: 279px;
+  left:-140px;
 }
 .signin{
-  transform: perspective(700px) rotateX(0deg) rotateY(180deg) ;
+  transform: rotateY(180deg) ;
   backface-visibility: hidden;
-
+  position: absolute;
+  min-width: 279px;
+  left:-140px;
 }
+.rotback{
+  transform: rotate3d( 0deg 0deg 0deg) ;
+}
+.h460px{
+  height: 460px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
