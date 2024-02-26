@@ -1,8 +1,17 @@
 import baby from '../imgs/baba.jpg'
+import Drawlist from '../components/darwlist'
+import { useState } from 'react'
+
 export default function Navbar({setmy,mymy,rolling}){
+  const [drawbar,setdrawbar] = useState(false)
 return (
     <>
-    <div className="navbar bg-base-100 shadow-primary stroke-primary">
+    <div className="navbar bg-base-100 shadow-primary stroke-primary z-10 mb-2">
+    <button className="btn btn-square btn-ghost sm:hidden" onClick={()=>{
+setdrawbar(!drawbar)
+    }}>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+    </button>
   <div className="flex-1">
     <a className="btn btn-ghost text-xl" onClick={()=>{
         setmy(!mymy)
@@ -10,7 +19,7 @@ return (
     }}>Ari page</a>
   </div>
 
-  <ul className="menu menu-horizontal bg-base-200 rounded-box">
+  <ul className="menu menu-horizontal bg-base-200 rounded-box max-sm:hidden">
   <li><a>Item 1</a></li>
   <li>
     <details >
@@ -73,6 +82,7 @@ return (
     </div>
   </div>
 </div>
+{drawbar&&<Drawlist/>}
     </>
 )
 

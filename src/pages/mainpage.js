@@ -1,8 +1,11 @@
 import { useState,useRef } from "react"
+import Itemview from './itemview'
+
 import Navbar from '../components/Navbar'
 import Login from '../components/loginpage'
 import { animated  } from '@react-spring/web'
 import Footerline from '../components/Footerline';  
+import Slidepic from "./slidepic"
 function Dicemain(){
 const [mymy,setmy]  =useState(false)
 const deg=useRef(45)
@@ -35,18 +38,21 @@ return(  <animated.div className="bg-red-50">
     <Navbar setmy={setmy} mymy={mymy} rolling={rolling}/>
     <animated.div className={mymy? 'cube-wrapper mybest' : 'mybest' } ref={roll} style={{transform}} >
     <div className={mymy? 'cube-front mybest' : 'mybest1'}>
-    <Login></Login>
+    {/* <Login></Login> */}
+    <Itemview></Itemview>
+    <Slidepic/>
 
     </div>
-   
-    <div className={mymy? "cube-back mybest" : 'mybest2'}></div>
+    <div className={mymy? "cube-back mybest" : 'mybest2'}>
+
+    </div>
     <div className={mymy? "cube-top mybest" : 'mybest1'}></div>
     <div className={mymy? "cube-bottom mybest" : 'mybest2'}></div>
     <div className={mymy? "cube-left mybest" : 'mybest1'}></div>
     <div className={mymy? "cube-right mybest" : 'mybest2'}></div>
 </animated.div>
 
-<Footerline clickwhat={clickwhat}/>
+{/* <Footerline clickwhat={clickwhat}/> */}
 </animated.div>
 )
 }

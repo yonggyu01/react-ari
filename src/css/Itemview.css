@@ -1,0 +1,48 @@
+.mygridwrap{
+    display: grid;
+    grid-template-areas: 
+                        'a b'
+                        'c b';
+    grid-template-columns: 45% 35%;
+    gap:10px;
+   justify-content: center;
+
+}
+
+.myarea1{
+    grid-area: a;
+}
+.myarea2{
+    grid-area: b;
+   
+}
+.bgmyfood{
+    background-image: url(../imgs/KakaoTalk_20240226_133505813_01.jpg);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 150%;
+    height: 100%;
+}
+.myarea3{
+    grid-area: c;
+    
+}
+.pt46{
+    padding-top: 4.5rem;
+}
+.textdivider{
+    display: grid;
+    grid-template-areas: 
+    'a b'
+    'c c'; 
+    height: 100%;
+}
+.cardivder{
+    display: grid;
+    grid-template-areas: 
+    'a b'
+    'a c';
+    grid-template-columns: 50%;
+    gap:10px;
+    height: 100%;
+}
