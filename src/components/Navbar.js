@@ -2,11 +2,11 @@ import baby from '../imgs/baba.jpg'
 import Drawlist from '../components/darwlist'
 import { useState } from 'react'
 
-export default function Navbar({setmy,mymy,rolling}){
+export default function Navbar({setmy,mymy,rolling,onLogoclick}){
   const [drawbar,setdrawbar] = useState(false)
 return (
     <>
-    <div className="navbar bg-base-100 shadow-primary stroke-primary z-10 mb-2">
+    <div className="navbar bg-base-100 shadow-primary stroke-primary z-10 fixed">
     <button className="btn btn-square btn-ghost sm:hidden" onClick={()=>{
 setdrawbar(!drawbar)
     }}>
@@ -16,6 +16,7 @@ setdrawbar(!drawbar)
     <a className="btn btn-ghost text-xl" onClick={()=>{
         setmy(!mymy)
         rolling()
+        onLogoclick()
     }}>Ari page</a>
   </div>
 

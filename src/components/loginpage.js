@@ -1,27 +1,39 @@
-import { useState,useRef } from 'react'
+import { useState,useRef, useEffect } from 'react'
 import { animated  } from '@react-spring/web'
+import {useStore} from '../store/store'
 import '../css/Loginpage.css'
-function Loginpage(){
+function Loginpage({Clicklogo}){
+  const {username,namechange} = useStore()
+  console.log(useStore())
+  const [userid,setuser] = useState()
+  useEffect(()=>{
+    if(Clicklogo){
+      setmax('hero min-h-full bg-base-200')
+    }else{
+      setmax('hero min-h-screen bg-base-200')
+    }
+  },[Clicklogo])
+ 
   const [sign,setsign]=useState(false)
-  const signrolling =useRef()
-  const [tranrotate,setroll] = useState(`transform: perspective(700px) rotateX(0deg) rotateY(${sign? 0 : 180}deg)`) ;
+  const [maxheight,setmax] = useState('hero min-h-screen bg-base-200')
+  const [tranrotate,setroll] = useState({transform: 'perspective(700px) rotateX(0deg) rotateY( 0deg)'}) ;
   function rolling(){
     setsign(!sign)
-    setroll(`transform: perspective(700px) rotateX(0deg) rotateY(${sign? 0 : 180}deg)`)
-    console.log(tranrotate,sign,signrolling.current)
-    signrolling.current.style = tranrotate
+    setroll( {transform: `perspective(700px) rotateX(0deg) rotateY(${ sign? 0 : 180}deg)` })
   }
 return(
 <>
-
-<div className="hero min-h-calc bg-base-200">
+{!Clicklogo? <div className="onlyheighbar"></div> : null}
+<div className={maxheight}>
+  <button style={{position:'absolute', top : '500px',left :' 15px'}} onClick={()=>{namechange(userid)}}>aaaaaaa{userid}aaaaaa</button>
+   
   <div className="hero-content flex-col">
-    <div className="text-center lg:text-left">
-      <h1 className="text-5xl font-bold">가입,로그인 </h1>
-      <p className="py-1">반갑습니다. </p>
+    <div className="text-center">
+      {!sign? <h1 className="text-5xl font-bold">회원 로그인 </h1> :<h1 className="text-5xl font-bold">회원가입 </h1> }
+      <p className="py-1">반갑습니다.  </p>
     </div>
-
-<animated.div className="card h460px loginwrap" style={{tranrotate}} ref={signrolling}>
+  <pre></pre>
+<animated.div className="card h460px loginwrap" style={tranrotate}>
 {/* 로그인창 */}
     <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 login">
       <form className="card-body">
@@ -29,7 +41,7 @@ return(
           <label className="label">
             <span className="label-text">Email</span>
           </label>
-          <input type="email" placeholder="email" className="input input-bordered"  />
+          <input type="email" placeholder="email" value={userid} onChange={(e)=>{setuser(e.target.value)}}  className="input input-bordered"  />
         </div>
         <div className="form-control">
           <label className="label">

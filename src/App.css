@@ -1,10 +1,12 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 .min-h-calc{
   height: calc(100vh - 0px);
 }
-
+.onlyheighbar{
+  height: 64px;
+}
 
 .cube-wrapper {
   --R: calc(pi * 2 / 360); /* pi is 3.141592653589793 */
