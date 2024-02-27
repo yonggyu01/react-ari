@@ -2,7 +2,7 @@ import { useState,useRef } from "react"
 import Itemview from './itemview'
 import Myviewpage from './Myviewpage'
 import Timeline from './timelinepage'
-
+import Arimain from "./arimainpage"
 import Navbar from '../components/Navbar'
 import Login from '../components/loginpage'
 import { animated  } from '@react-spring/web'
@@ -53,8 +53,9 @@ return(  <animated.div >
    
     <animated.div className={mymy? 'cube-wrapper mybest' : 'mybest' } ref={roll} style={{transform}} >
     <div className={mymy? 'cube-front mybest' : 'mybest1'}>
+    
     <Login Clicklogo={Clicklogo} ></Login>
-
+    <Arimain></Arimain>
    
 
     </div>
