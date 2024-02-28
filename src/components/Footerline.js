@@ -19,7 +19,7 @@ arrow_left_alt
 				<li data-title="Right"><span className="material-symbols-outlined"  onClick={()=>{clickwhat('Right')}}>
 arrow_right_alt
 </span></li>
-				<li data-title="Cartpage"><span class="material-symbols-outlined" onClick={()=>{clickwhat('Up')}}>
+				<li data-title="Cartpage"><span className="material-symbols-outlined" onClick={()=>{clickwhat('Up')}}>
 arrow_upward
 </span></li>
 		</ul>

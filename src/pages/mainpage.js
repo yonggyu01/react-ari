@@ -1,4 +1,4 @@
-import { useState,useRef } from "react"
+import { useState,useRef, useEffect } from "react"
 import Itemview from './itemview'
 import Myviewpage from './Myviewpage'
 import Timeline from './timelinepage'
@@ -7,9 +7,12 @@ import Navbar from '../components/Navbar'
 import Login from '../components/loginpage'
 import { animated  } from '@react-spring/web'
 import Footerline from '../components/Footerline';  
-import Slidepic from "./slidepic"
+import {useStore} from '../store/store'
+
 function Dicemain(){
-const [mymy,setmy]  =useState(false)
+    const {logoclick,islogo,rollbox,setroll} = useStore()
+
+
 const deg=useRef(-30)
 const ydeg=useRef(45)
 const [transform, settrans] = useState(null)
@@ -21,10 +24,13 @@ function onLogoclick(){
 function rolling(){
     roll.current.style=''
 }
+useEffect(()=>{
+    rolling()
+},[rollbox])
 
   function clickwhat(value){
     console.log(deg)
-    if(mymy===false){
+    if(rollbox===false){
          roll.current.style=''
     }else if(value==='Home'){
             ydeg.current = -30 
@@ -40,7 +46,7 @@ function rolling(){
             ydeg.current = -30 
             deg.current = 45
             roll.current.style=''
-            setmy(!mymy)
+            setroll()
         }else if(value === 'Up'){
             ydeg.current+=45
             settrans(`perspective(2700px) rotateX(${ydeg.current}deg) rotateY(${deg.current}deg) scale3d(.3, .3, 0.3)`)
@@ -49,34 +55,33 @@ function rolling(){
   }
 //   const [top,settop] = useState(false)
 return(  <animated.div >
-    <Navbar setmy={setmy} mymy={mymy} rolling={rolling} onLogoclick={onLogoclick}  />
+    <Navbar  rolling={rolling} onLogoclick={onLogoclick}  />
    
-    <animated.div className={mymy? 'cube-wrapper mybest' : 'mybest' } ref={roll} style={{transform}} >
-    <div className={mymy? 'cube-front mybest' : 'mybest1'}>
+    <animated.div className={rollbox? 'cube-wrapper mybest' : 'mybest' } ref={roll} style={{transform}} >
+    <div className={rollbox? 'cube-front mybest' : 'mybest1'}>
     
-    <Login Clicklogo={Clicklogo} ></Login>
-    <Arimain></Arimain>
+    {/* <Login Clicklogo={Clicklogo} ></Login> */}
+    {/* <Arimain></Arimain> */}
    
 
     </div>
-    <div className={mymy? "cube-back mybest" : 'mybest2'}>
+    <div className={rollbox? "cube-back mybest" : 'mybest2'}>
     {/* <Itemview></Itemview> */}
     <Myviewpage Clicklogo={Clicklogo}></Myviewpage>
     </div>
-    <div className={mymy? "cube-top mybest" : 'mybest1'}>
-    <Slidepic/>
+    <div className={rollbox? "cube-top mybest" : 'mybest1'}>
     </div>
 
-    <div className={mymy? "cube-bottom mybest" : 'mybest2'}>
+    <div className={rollbox? "cube-bottom mybest" : 'mybest2'}>
     <Timeline Clicklogo={Clicklogo}></Timeline>
     </div>
-    <div className={mymy? "cube-left mybest" : 'mybest1'}>
+    <div className={rollbox? "cube-left mybest" : 'mybest1'}>
 
     </div>
-    <div className={mymy? "cube-right mybest" : 'mybest2'}></div>
+    <div className={rollbox? "cube-right mybest" : 'mybest2'}></div>
 </animated.div>
 
-{Clicklogo && <Footerline clickwhat={clickwhat} onLogoclick={onLogoclick}/>}
+{rollbox && <Footerline clickwhat={clickwhat} onLogoclick={onLogoclick}/>}
 </animated.div>
 )
 }

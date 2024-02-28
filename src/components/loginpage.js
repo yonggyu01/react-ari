@@ -1,18 +1,24 @@
 import { useState,useRef, useEffect } from 'react'
 import { animated  } from '@react-spring/web'
 import {useStore} from '../store/store'
+import { useNavigate } from "react-router-dom";
 import '../css/Loginpage.css'
 function Loginpage({Clicklogo}){
-  const {username,namechange} = useStore()
+  const {logoclick,islogo} = useStore()
   console.log(useStore())
   const [userid,setuser] = useState()
-  useEffect(()=>{
-    if(Clicklogo){
-      setmax('hero min-h-full bg-base-200')
-    }else{
-      setmax('hero min-h-screen bg-base-200')
-    }
-  },[Clicklogo])
+  const navigate = useNavigate();
+ 
+    
+  
+
+  // useEffect(()=>{
+  //   if(Clicklogo){
+  //     setmax('hero min-h-full bg-base-200')
+  //   }else{
+  //     setmax('hero min-h-screen bg-base-200')
+  //   }
+  // },[Clicklogo])
  
   const [sign,setsign]=useState(false)
   const [maxheight,setmax] = useState('hero min-h-screen bg-base-200')
@@ -21,11 +27,13 @@ function Loginpage({Clicklogo}){
     setsign(!sign)
     setroll( {transform: `perspective(700px) rotateX(0deg) rotateY(${ sign? 0 : 180}deg)` })
   }
+  function clicklogo(){
+    islogo()
+  }
 return(
 <>
-{!Clicklogo? <div className="onlyheighbar"></div> : null}
+{/* {!Clicklogo? <div className="onlyheighbar"></div> : null} */}
 <div className={maxheight}>
-  <button style={{position:'absolute', top : '500px',left :' 15px'}} onClick={()=>{namechange(userid)}}>aaaaaaa{userid}aaaaaa</button>
    
   <div className="hero-content flex-col">
     <div className="text-center">
@@ -58,7 +66,7 @@ return(
             rolling()
           }}>Sign in</button>
           <button className="btn btn-primary mb-2" onClick={(e)=>{e.preventDefault()
-
+            navigate('/')
 }}>Login</button>
           <button className="btn  btn-warning " onClick={(e)=>{e.preventDefault()
 
@@ -92,6 +100,7 @@ return(
           <button className="btn btn-neutral mb-2" onClick={(e)=>{e.preventDefault()
           setsign(!sign)
           rolling()
+        
          }}>Sign in</button>
         </div>
       </form>
