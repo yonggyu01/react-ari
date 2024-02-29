@@ -53,7 +53,7 @@ return (
       </ul>
     </details>
   </li>
-  <li><span>구매페이지</span></li>
+  <li><Link to='ari/product'>구매페이지</Link></li>
 </ul>
 
   <div className="flex-none">

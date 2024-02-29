@@ -21,6 +21,7 @@
   left: calc(50vw - 400px);
   top: calc(50vh - 400px);
   transition: 0.8s linear;
+
 }
 /* .cube-wrapper:hover{
   transform: perspective(700px) rotateX(-30deg) rotateY(45deg) matrix3d(
@@ -155,7 +156,30 @@ background-color: red;
 .h460px{
   height: 460px;
 }
-
+#bgimgs0{
+background-image: url('./imgs/아리1.png'); 
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+}
+#bgimgs1{
+background-image: url('./imgs/윈도.PNG');  
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+}
+#bgimgs2{
+background-image: url('./imgs/cgv.PNG' ); 
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+}
+#bgimgs3{
+background-image: url(./imgs/vue.PNG); 
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center; 
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

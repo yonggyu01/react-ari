@@ -7,7 +7,7 @@ export const useStore = create((set) => ({
   islogo:() => set((state)=>({ ...state , logoclick : !state.logoclick })),
   loginnow : false,
   loginsuc : ()=> set((state)=>({...state, loginnow : !state.loginnow})),
-  userid : '',
+  userid : '로그인아이디',
   userSign : (value)=>set((state)=>({...state, userid : value})),
   mycart : [],
   setmycart: (val)=>set((state)=>({...state,mycart:[...state.mycart,val]})),

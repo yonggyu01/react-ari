@@ -4,6 +4,7 @@ export default function Popo (){
     const navigate = useNavigate();
     const location = useLocation();
 const { page } = location.state;
+console.log(page)
     return(
 <div className="mockup-window border bg-white-300">
     <button className="absolute top-2 right-10" onClick={()=>{navigate('/')}}><svg className="w-[35px] h-[35px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
