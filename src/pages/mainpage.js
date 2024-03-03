@@ -8,8 +8,9 @@ import Login from '../components/loginpage'
 import { animated  } from '@react-spring/web'
 import Footerline from '../components/Footerline';  
 import {useStore} from '../store/store'
-
+import Myblog from "./myBlog"
 function Dicemain(){
+
     const {logoclick,islogo,rollbox,setroll} = useStore()
 
 
@@ -55,7 +56,7 @@ useEffect(()=>{
   }
 //   const [top,settop] = useState(false)
 return(  <animated.div >
-    <Navbar  rolling={rolling} onLogoclick={onLogoclick}  />
+    {/* <Navbar /> */}
    
     <animated.div className={rollbox? 'cube-wrapper mybest' : 'mybest' } ref={roll} style={{transform}} >
     <div className={rollbox? 'cube-front mybest' : 'mybest1'}>
@@ -76,7 +77,7 @@ return(  <animated.div >
     <Timeline Clicklogo={Clicklogo}></Timeline>
     </div>
     <div className={rollbox? "cube-left mybest" : 'mybest1'}>
-
+        <Myblog/>
     </div>
     <div className={rollbox? "cube-right mybest" : 'mybest2'}></div>
 </animated.div>

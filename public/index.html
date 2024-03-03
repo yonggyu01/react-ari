@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+   
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -35,6 +37,18 @@
         'opsz' 24
       }
       </style>
+      <!-- <script src="https://unpkg.com/dsteem@latest/dist/dsteem.js"></script> -->
+    
+       <!-- <script>
+    var client = new dsteem.Client('https://api.steemit.com')
+    client.database.getDiscussions('trending', {tag: 'writing', limit: 1}).then(function(discussions){
+        document.body.innerHTML += '<h1>' + discussions[0].title + '</h1>'
+        document.body.innerHTML += '<h2>by ' + discussions[0].author + '</h2>'
+        document.body.innerHTML += '<pre style="white-space: pre-wrap">' + discussions[0].body + '</pre>'
+    })
+</script> -->
+     
+      <!-- https://github.com/steemit/dsteem?tab=readme-ov-file -->
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

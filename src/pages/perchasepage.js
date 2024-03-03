@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Productpage (){
+  const [inputval, setinputval]=useState(1)
+  function sum(val){
+    setinputval(val)
+  }
     const productlist = [
         {
         src : 'https://img.momsdiary.co.kr/board/suda/spboard2/pds/eventpost/322641/nayounoh_2109011504352.jpg',
@@ -107,19 +112,19 @@ return(
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          stroke-width="1.5"
+          strokeWidth="1.5"
           stroke="currentColor"
           className="size-4 rtl:rotate-180"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
         </svg>
       </button>
     </div>
 
     <div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8">
-      <div className="hidden space-y-4 lg:block">
+      {/* <div className="hidden space-y-4 lg:block">
         <div>
-          <label for="SortBy" className="block text-xs font-medium text-gray-700">  </label>
+          <label htmlFor="SortBy" className="block text-xs font-medium text-gray-700">  </label>
 
           <select id="SortBy" className="mt-1 rounded border-gray-300 text-sm">
             <option>정렬하기</option>
@@ -146,13 +151,13 @@ return(
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
-                    class="h-4 w-4"
+                    className="h-4 w-4"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       d="M19.5 8.25l-7.5 7.5-7.5-7.5"
                     />
                   </svg>
@@ -170,7 +175,7 @@ return(
 
                 <ul className="space-y-1 border-t border-gray-200 p-4">
                   <li>
-                    <label for="FilterInStock" className="inline-flex items-center gap-2">
+                    <label htmlFor="FilterInStock" className="inline-flex items-center gap-2">
                       <input
                         type="checkbox"
                         id="FilterInStock"
@@ -182,7 +187,7 @@ return(
                   </li>
 
                   <li>
-                    <label for="FilterPreOrder" className="inline-flex items-center gap-2">
+                    <label htmlFor="FilterPreOrder" className="inline-flex items-center gap-2">
                       <input
                         type="checkbox"
                         id="FilterPreOrder"
@@ -194,7 +199,7 @@ return(
                   </li>
 
                   <li>
-                    <label for="FilterOutOfStock" className="inline-flex items-center gap-2">
+                    <label htmlFor="FilterOutOfStock" className="inline-flex items-center gap-2">
                       <input
                         type="checkbox"
                         id="FilterOutOfStock"
@@ -221,13 +226,13 @@ return(
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     className="h-4 w-4"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       d="M19.5 8.25l-7.5 7.5-7.5-7.5"
                     />
                   </svg>
@@ -245,7 +250,7 @@ return(
 
                 <div className="border-t border-gray-200 p-4">
                   <div className="flex justify-between gap-4">
-                    <label for="FilterPriceFrom" className="flex items-center gap-2">
+                    <label htmlFor="FilterPriceFrom" className="flex items-center gap-2">
                       <span className="text-sm text-gray-600">원</span>
 
                       <input
@@ -256,7 +261,7 @@ return(
                       />
                     </label>
 
-                    <label for="FilterPriceTo" className="flex items-center gap-2">
+                    <label htmlFor="FilterPriceTo" className="flex items-center gap-2">
                       <span className="text-sm text-gray-600">원</span>
 
                       <input
@@ -274,7 +279,7 @@ return(
             
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="lg:col-span-3">
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -282,7 +287,10 @@ return(
     
       
         {productlist.map((item,idx) => {return(
-        <a href="#" className="group relative block overflow-hidden">
+         <li key={item.title + idx}> 
+        <Link className="group relative block overflow-hidden" onClick={()=>{
+        	document.getElementById(`my_modal_pr${idx}`).showModal()  
+        }}>
         <button
           className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
         >
@@ -306,7 +314,7 @@ return(
       
         <img
           src={item.src}
-          alt=""
+          alt={item.title}
           className="h-64 grayscale hover:grayscale-0 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
         />
       
@@ -317,6 +325,70 @@ return(
       
           <p className="mt-1.5 text-sm text-gray-700">{item.price}</p>
       
+       
+        </div>
+      </Link>
+      {/* 모달로 띄워야지 */}
+      <dialog id={`my_modal_pr${idx}`} className="modal h-500px">
+				<div className="modal-box ">
+        <h3 className="font-bold text-lg text-center">{item.title}</h3>
+					<figure className='mb-3'>
+					{/* <div id={'proimgs'+idx} className='h-96 w-96'/> */}
+          <img src={item.src}  className='object-contain'/>
+					</figure>
+					
+					<div className='flex flex-row items-center'>
+					<div className='w-1/2'>
+			
+          <div className="flow-root">
+  <dl className="-my-3 divide-y divide-gray-100 text-sm">
+    <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+      <dt className="font-medium text-gray-900">제품명</dt>
+      <dd className="text-gray-700 sm:col-span-2">{item.title}</dd>
+    </div>
+
+    <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+      <dt className="font-medium text-gray-900">내용</dt>
+      <dd className="text-gray-700 sm:col-span-2">{item.content}</dd>
+    </div>
+
+    <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+      <dt className="font-medium text-gray-900">정상가 </dt>
+      <dd className="text-gray-700 sm:col-span-2">{item.price}</dd>
+    </div>
+
+    <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+      <dt className="font-medium text-gray-900">세일가</dt>
+      <dd className="text-gray-700 sm:col-span-2">{item.sale}</dd>
+    </div>
+  </dl>
+</div>
+<div>
+  <label htmlFor="Quantity" className="sr-only"> Quantity </label>
+
+  <div className="flex items-center gap-1 justify-center">
+    <button type="button" className="size-10 leading-10 text-gray-600 transition hover:opacity-75">
+      &minus;
+    </button>
+
+    <input
+      type="number"
+      id="Quantity"
+      value={inputval}
+      onChange={(e)=>{
+        sum(e.target.value)
+      }}
+      className="h-10 w-16 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+    />
+
+    <button type="button" className="size-10 leading-10 text-gray-600 transition hover:opacity-75">
+      +
+    </button>
+  </div>
+</div>
+			
+					</div>
+			
           <form className="mt-4">
             <button
               className="block w-full rounded bg-gray-400 hover:bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105"
@@ -324,8 +396,15 @@ return(
               Add to Cart
             </button>
           </form>
-        </div>
-      </a>)  })
+					</div>
+				</div>
+				<form method="dialog" className="modal-backdrop">
+					<button>close</button>
+				</form>
+				</dialog>
+      </li>
+      
+      )})
       }
       
         </ul>

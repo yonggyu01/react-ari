@@ -3,6 +3,8 @@ import aripic1 from '../imgs/ari1.jpg'
 import aripic2 from '../imgs/ari2.jpg'
 import Productpage from './perchasepage'
 import { useStore } from '../store/store'
+import Arireviewpage from './arireviewpage'
+import Aripicture from './aripicture'
 
 export default function Arimain(){
   const {userid,loginnow} = useStore()
@@ -23,33 +25,7 @@ export default function Arimain(){
 		</div>
 	</div>
 </div>
-<div className="navbar fixed lg:hidden z-10">
-  <div className="flex-1">
-   </div>
-  <div className="flex-none gap-2">
-    
-    <div className="dropdown dropdown-end">
-      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-      <div className="avatar online placeholder">
-  <div className="bg-neutral text-neutral-content rounded-full w-10">
-  {loginnow? <span className="text-xs truncate">{userid}</span> :<span className="text-xs truncate">login</span> }
-    
-  </div>
-</div> 
-      </div>
-      <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-        <li>
-          <a className="justify-between">
-            Profile
-            <span className="badge">New</span>
-          </a>
-        </li>
-        <li><Link to='/'>Home</Link></li>
-        {loginnow? <li><a>Logout</a></li> :<li><Link to="/login">Login</Link></li> }
-      </ul>
-    </div>
-  </div>
-</div>
+
         <div className="min-h-full sm:flex sm:flex-row w-full justify-center items-center gap-5 bg-white relative">
           <img src={aripic1} className='grayscale	sm:w-3/5 md:w-2/5 min-w-96 rounded-md'/>
           <div className='flex flex-col justyfi-end'>
@@ -64,6 +40,8 @@ export default function Arimain(){
           </div>
         </div>
         <Productpage></Productpage>
+        <Arireviewpage></Arireviewpage>
+        <Aripicture/>
         </>
     )
     

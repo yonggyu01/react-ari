@@ -14,13 +14,21 @@ import Productpage from './pages/perchasepage';
 import Notfound from './pages/notfound';
 import Indexpage from './pages/indexpage';
 import Ariindex from './pages/ariindex';
+import Adminpage from './pages/Adminpage';
+import Myblog from './pages/myBlog';
+import Portfolio from './pages/Portfolio';
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       
       <Route path="/" element={<Indexpage/>} errorElement={<Notfound/>} >
       <Route index element={<Dicemain/>}/>
-      
+
+        <Route path="/admin" element={<Adminpage/>}>
+
+        </Route>
+        <Route path="/blog" element={<Myblog/>}></Route>
+        <Route path="/portfolio" element={<Portfolio/>}></Route>
         <Route path="/login" element={<Loginpage/>}></Route>
         <Route path="popo" element={<Popo/>}></Route>
         <Route path="order" element={<Orderpage/>}></Route>

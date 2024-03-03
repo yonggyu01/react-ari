@@ -1,5 +1,5 @@
 import { useEffect, useId, useState ,useRef} from 'react'
-import Navbar from '../components/Navbar'
+// import Navbar from '../components/Navbar'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '../store/store'
 export default function Orderpage(){
@@ -59,7 +59,7 @@ export default function Orderpage(){
     console.log('토탈',total)
     return(
         <>
-        <Navbar></Navbar>
+        {/* <Navbar></Navbar> */}
         <div className='flex justify-center pt-10'>
         <div className="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 bg-gray-50 text-gray-800 ">
 	<h2 className="text-xl font-semibold">Your cart</h2>

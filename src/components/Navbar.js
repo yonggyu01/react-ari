@@ -1,22 +1,24 @@
 import baby from '../imgs/baba.jpg'
 // import Drawlist from '../components/darwlist'
 import {useStore} from '../store/store'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate,useLocation } from 'react-router-dom';
 
-export default function Navbar({rolling,onLogoclick}){
+export default function Navbar(){
   const navigate = useNavigate()
+  const location = useLocation()
   const {logoclick,islogo,loginnow, loginsuc,userid,rollbox,setroll} = useStore()
   function logoc(){
     islogo()
-
-
   }
+
+  console.log(location.pathname.split('/')[1].length)
+  
 return (
     <>
     <div className="drawer z-10">
   <input id="my-drawer-3" type="checkbox" className="drawer-toggle" /> 
   <div className="drawer-content flex flex-col"></div>
-    <div className="navbar bg-base-100 shadow-primary stroke-primary  fixed">
+    <div className="navbar bg-base-100 shadow-primary stroke-primary  absolute">
         <div className="flex-none md:hidden">
         <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -24,36 +26,44 @@ return (
       </div>
   <div className="flex-1">
     <span className="btn btn-ghost text-xl" onClick={()=>{
+      if(location.pathname.split('/')[1].length === 0){
         setroll()
-        // rolling()
-        // onLogoclick()
         logoc()
+      }else{
+        navigate('/')
+      }
     }}>Ari page</span>
   </div>
 
   <ul className="menu menu-horizontal bg-base-200 rounded-box max-md:hidden">
-  <li><span><Link to='ari'>아리 팬페이지</Link></span></li>
+  <li><span><Link to='/ari'>아리 팬페이지</Link></span></li>
   <li>
     <details >
       <summary>포트폴리오 소개</summary>
       <ul>
         <li><span>기술스택</span></li>
-        <li><span>블로그</span></li>
+        <li><Link to="portfolio"><span>포트폴리오</span></Link></li>
         <li>
           <details >
             {/* open하면 열림 */}
-            <summary>포트폴리오</summary>
+            <summary><Link onClick={()=>{
+              if(location.pathname.split('/')[1].length!==0){
+                navigate('/blog')
+              }else{
+                document.getElementById('myblog').scrollIntoView({block: "start", inline: "nearest"})
+              }
+            }}>블로그</Link></summary>
             <ul>
-              <li><span>하드코딩</span></li>
-              <li><span>Vue</span></li>
-              <li><span>React</span></li>
+              <li><Link><span>하드코딩</span></Link></li>
+              <li><Link><span>Vue</span></Link></li>
+              <li><Link><span>React</span></Link></li>
             </ul>
           </details>
         </li>
       </ul>
     </details>
   </li>
-  <li><Link to='ari/product'>구매페이지</Link></li>
+  <li><Link to='/ari/product'>구매페이지</Link></li>
 </ul>
 
   <div className="flex-none">
