@@ -2,10 +2,12 @@
 .container1 {
 	position: relative;
 	display: grid;
+	margin:auto ;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	gap: 1em;
+	/* width: 1000px; */
+	height: 500px;
 	
-	/* height: 500px; */
 	transition: all 400ms;
 }
 

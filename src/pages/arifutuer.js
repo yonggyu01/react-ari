@@ -5,7 +5,7 @@ import '../css/arifutuer.css'
 export default function Future(){
     return(
         <div className="container1 w-full" data-text="아리">
-	<div className="boox boox-1" >
+	<div className="boox boox-1 " >
         <img src='/imgs/ari2.jpg' className='object-fit round-lg overflow-hidden'/>
     </div>
 	<div className="boox boox-2" >

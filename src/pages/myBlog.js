@@ -7,11 +7,11 @@ export default function Myblog(){
     const [mysteemdata, setmysteem]=useState([])
     const imgsrc = /https.+[$jpg]/i
     useEffect(()=>{
-        // var client = new Client('https://api.steemit.com')
-        // // console.log()
-        // client.database.getDiscussions('trending', { tag: 'yongvue', limit: 5 })
-        // .then((res)=>{
-        // console.log(res)})
+        var client = new Client('https://api.steemit.com')
+        // console.log()
+        client.database.getDiscussions('trending', { tag: 'yongreact', limit: 5 })
+        .then((res)=>{
+        console.log(res)})
         // {"jsonrpc":"2.0", "method":"tags_api.get_comment_discussions_by_payout", "params":{"tag":"steem","limit":1}, "id":1}' https://api.steemit.com
         fetch('https://api.steemit.com', {
   method: 'POST',
@@ -23,7 +23,7 @@ export default function Myblog(){
     method: 'condenser_api.get_blog',
     // method: 'tags_api.get_comment_discussions_by_payout',
     params: ['yonggyu01', 0, 6],
-    // params: {tag : 'yongvue', limit:5},
+    // params: {tag : 'yongreact', limit:5},
     id: 1,
   }),
 })
