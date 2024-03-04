@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom"
+
+
 export default function Aripicture(){
     return (
         <>
@@ -53,9 +56,9 @@ export default function Aripicture(){
       </li>
 
       <li className="lg:col-span-2 lg:col-start-2 lg:row-span-2 lg:row-start-1">
-        <a href="#" className="group relative block">
+        <Link to='future' className="group relative block">
           <img
-            src="/imgs/아리1.PNG"
+            src="/imgs/ari5.jpg"
             alt=""
             className="aspect-square w-full object-cover transition duration-500 group-hover:opacity-90 grayscale group-hover:grayscale-0"
           />
@@ -69,7 +72,7 @@ export default function Aripicture(){
              구경하기
             </span>
           </div>
-        </a>
+        </Link>
       </li>
     </ul>
   </div>

@@ -17,6 +17,7 @@ import Ariindex from './pages/ariindex';
 import Adminpage from './pages/Adminpage';
 import Myblog from './pages/myBlog';
 import Portfolio from './pages/Portfolio';
+import Future from './pages/arifutuer.js';
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -28,13 +29,14 @@ function App() {
 
         </Route>
         <Route path="/blog" element={<Myblog/>}></Route>
-        <Route path="/portfolio" element={<Portfolio/>}></Route>
+        <Route path="portfolio" element={<Portfolio/>}></Route>
         <Route path="/login" element={<Loginpage/>}></Route>
         <Route path="popo" element={<Popo/>}></Route>
         <Route path="order" element={<Orderpage/>}></Route>
         <Route path="ari" element={<Ariindex/>}>
           <Route index element={<Arimain/>}></Route>
           <Route path="product" element={<Productpage/>}></Route>
+          <Route path="future" element={<Future/>}></Route>
         </Route>
       </Route>
       

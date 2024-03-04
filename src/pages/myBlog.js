@@ -8,10 +8,11 @@ export default function Myblog(){
     const imgsrc = /https.+[$jpg]/i
     useEffect(()=>{
         // var client = new Client('https://api.steemit.com')
-        // console.log()
-        // client.database.getDiscussions('created', { tag: 'yongvue', limit: 5 })
-        // .then((res)=>{setmysteem(res)
-        // console.log(mysteemdata)
+        // // console.log()
+        // client.database.getDiscussions('trending', { tag: 'yongvue', limit: 5 })
+        // .then((res)=>{
+        // console.log(res)})
+        // {"jsonrpc":"2.0", "method":"tags_api.get_comment_discussions_by_payout", "params":{"tag":"steem","limit":1}, "id":1}' https://api.steemit.com
         fetch('https://api.steemit.com', {
   method: 'POST',
   headers: {
@@ -20,12 +21,15 @@ export default function Myblog(){
   body: JSON.stringify({
     jsonrpc: '2.0',
     method: 'condenser_api.get_blog',
+    // method: 'tags_api.get_comment_discussions_by_payout',
     params: ['yonggyu01', 0, 6],
+    // params: {tag : 'yongvue', limit:5},
     id: 1,
   }),
 })
   .then(response => response.json())
  .then((res)=>{
+   console.log(res)
     setmysteem(res.result)
     // console.log(res)
     console.log(mysteemdata)
@@ -35,20 +39,9 @@ export default function Myblog(){
 
         
     },[])
-let resultdata=[]
+
 //    const query = '/@yonggyu01/';
-function datamaker(aguments){
-    for(let x of aguments){
-        resultdata.push(<Link  className="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-900 keychainify-checked">
-        <img role="presentation" className="object-cover w-full rounded h-44 dark:bg-gray-500" src={x.comment.body.match(imgsrc)} />
-        <div className="p-6 space-y-2">
-            <h3 className="text-2xl font-semibold group-hover:underline group-focus:underline">{x.comment.title}</h3>
-            <span className="text-xs dark:text-gray-400">{x.comment.created}</span>
-            <p>{x.comment.body}</p>
-        </div>
-    </Link>)
-    }
-}
+
 
 
 
@@ -59,16 +52,16 @@ function datamaker(aguments){
     return (
         <>
   
-        <section id="myblog" className="dark:bg-gray-800 dark:text-gray-100">
+        <section id="myblog" className="dark:bg-gray-800 dark:text-gray-100 w-full bg-white">
         <div className="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
-            <a rel="noopener noreferrer" href="#" className="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-900 keychainify-checked">
+            {/* <a rel="noopener noreferrer" href="#" className="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-900 keychainify-checked">
                 <img src="https://source.unsplash.com/random/480x360" alt="" className="object-cover w-full h-64 rounded sm:h-96 lg:col-span-7 dark:bg-gray-500" />
                 <div className="p-6 space-y-2 lg:col-span-5">
                     <h3 className="text-2xl font-semibold sm:text-4xl group-hover:underline group-focus:underline">여긴 제목?</h3>
                     <span className="text-xs dark:text-gray-400">여기에 날짜 넣을거임</span>
                     <p>여기에 내용입력할거야 후하핫.</p>
                 </div>
-            </a>
+            </a> */}
             <div className="grid justify-center  grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                {mysteemdata&& mysteemdata.map((x)=>{ return <Link key={x.title} >
                <article className="overflow-hidden rounded-lg shadow transition hover:shadow-lg">
@@ -104,9 +97,9 @@ function datamaker(aguments){
                
          
             </div>
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
                 <button type="button" className="px-6 py-3 text-sm rounded-md hover:underline dark:bg-gray-900 dark:text-gray-400">글 더보기</button>
-            </div>
+            </div> */}
         </div>
     </section>
     </>

@@ -1,5 +1,4 @@
 import { useState,useRef, useEffect } from "react"
-import Itemview from './itemview'
 import Myviewpage from './Myviewpage'
 import Timeline from './timelinepage'
 import Arimain from "./arimainpage"
@@ -9,6 +8,8 @@ import { animated  } from '@react-spring/web'
 import Footerline from '../components/Footerline';  
 import {useStore} from '../store/store'
 import Myblog from "./myBlog"
+import Myskill from "./Myskill"
+import Realfooter from "../components/Realfooter"
 function Dicemain(){
 
     const {logoclick,islogo,rollbox,setroll} = useStore()
@@ -60,26 +61,26 @@ return(  <animated.div >
    
     <animated.div className={rollbox? 'cube-wrapper mybest' : 'mybest' } ref={roll} style={{transform}} >
     <div className={rollbox? 'cube-front mybest' : 'mybest1'}>
-    
-    {/* <Login Clicklogo={Clicklogo} ></Login> */}
-    {/* <Arimain></Arimain> */}
-   
 
+    
+ 
     </div>
     <div className={rollbox? "cube-back mybest" : 'mybest2'}>
     {/* <Itemview></Itemview> */}
     <Myviewpage Clicklogo={Clicklogo}></Myviewpage>
     </div>
     <div className={rollbox? "cube-top mybest" : 'mybest1'}>
+    <Myskill></Myskill>
     </div>
-
     <div className={rollbox? "cube-bottom mybest" : 'mybest2'}>
     <Timeline Clicklogo={Clicklogo}></Timeline>
     </div>
     <div className={rollbox? "cube-left mybest" : 'mybest1'}>
         <Myblog/>
     </div>
-    <div className={rollbox? "cube-right mybest" : 'mybest2'}></div>
+    <div className={rollbox? "cube-right mybest" : 'mybest2'}>
+    <Realfooter/>
+    </div>
 </animated.div>
 
 {rollbox && <Footerline clickwhat={clickwhat} onLogoclick={onLogoclick}/>}

@@ -5,6 +5,7 @@ import Productpage from './perchasepage'
 import { useStore } from '../store/store'
 import Arireviewpage from './arireviewpage'
 import Aripicture from './aripicture'
+import Future from './arifutuer'
 
 export default function Arimain(){
   const {userid,loginnow} = useStore()
@@ -42,6 +43,7 @@ export default function Arimain(){
         <Productpage></Productpage>
         <Arireviewpage></Arireviewpage>
         <Aripicture/>
+       
         </>
     )
     

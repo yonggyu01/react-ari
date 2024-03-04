@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import baby from '../imgs/baba.jpg'
 // import Drawlist from '../components/darwlist'
 import {useStore} from '../store/store'
@@ -6,19 +7,19 @@ import { Link, useNavigate,useLocation } from 'react-router-dom';
 export default function Navbar(){
   const navigate = useNavigate()
   const location = useLocation()
-  const {logoclick,islogo,loginnow, loginsuc,userid,rollbox,setroll} = useStore()
+  const {logoclick,islogo,loginnow, loginsuc,userid,rollbox,setroll,setnaviscroll,naviscroll} = useStore()
   function logoc(){
     islogo()
   }
 
-  console.log(location.pathname.split('/')[1].length)
-  
+  // console.log(location.pathname.split('/')[1].length)
 return (
     <>
     <div className="drawer z-10">
   <input id="my-drawer-3" type="checkbox" className="drawer-toggle" /> 
+  {!naviscroll && <div className='h-16' />}
   <div className="drawer-content flex flex-col"></div>
-    <div className="navbar bg-base-100 shadow-primary stroke-primary  absolute">
+    <div className="navbar bg-base-100 shadow-primary stroke-primary  fixed">
         <div className="flex-none md:hidden">
         <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -42,21 +43,29 @@ return (
       <summary>포트폴리오 소개</summary>
       <ul>
         <li><span>기술스택</span></li>
-        <li><Link to="portfolio"><span>포트폴리오</span></Link></li>
+        <li><Link to="/blog"><span>블로그</span></Link></li>
         <li>
           <details >
             {/* open하면 열림 */}
-            <summary><Link onClick={()=>{
-              if(location.pathname.split('/')[1].length!==0){
-                navigate('/blog')
-              }else{
-                document.getElementById('myblog').scrollIntoView({block: "start", inline: "nearest"})
-              }
-            }}>블로그</Link></summary>
+            <summary><Link onClick={(e)=>{
+              e.preventDefault()
+              navigate('/portfolio', {state : {info : 'window'}})
+              // if(location.pathname.split('/')[1].length!==0){
+              // }
+              // else{
+                // document.getElementById('myblog').scrollIntoView({block: "start", inline: "nearest"})
+              // }
+            }}>포트폴리오</Link></summary>
             <ul>
-              <li><Link><span>하드코딩</span></Link></li>
-              <li><Link><span>Vue</span></Link></li>
-              <li><Link><span>React</span></Link></li>
+              <li><Link  onClick={(e)=>{
+                e.preventDefault()
+              navigate('/portfolio', {state : {info : 'window'}})}} > <span>window Project</span></Link></li>
+              <li><Link onClick={(e)=>{
+                e.preventDefault()
+              navigate('/portfolio', {state : {info : 'vue'}})}} ><span>Vue</span></Link></li>
+              <li><Link onClick={(e)=>{
+                e.preventDefault()
+              navigate('/portfolio', {state : {info : 'react'}})}}><span>React</span></Link></li>
             </ul>
           </details>
         </li>
