@@ -9,6 +9,7 @@ import Footerline from '../components/Footerline';
 import {useStore} from '../store/store'
 import Myblog from "./myBlog"
 import Myskill from "./Myskill"
+import Yonggyu from "./yonggyu"
 import Realfooter from "../components/Realfooter"
 function Dicemain(){
 
@@ -61,7 +62,7 @@ return(  <animated.div >
    
     <animated.div className={rollbox? 'cube-wrapper mybest' : 'mybest' } ref={roll} style={{transform}} >
     <div className={rollbox? 'cube-front mybest' : 'mybest1'}>
-
+    <Yonggyu></Yonggyu>
     
  
     </div>

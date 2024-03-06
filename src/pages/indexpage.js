@@ -25,11 +25,11 @@ const [loca,setloca] =useState(location.length)
         }
       },[])
       useEffect(()=>{
-     
+        console.log('화면올리기')
              if(location.length>1){
               document.getElementById("root").scrollTo(0, 0);
         }
-      },[])
+      },[location])
       // 스크롤에 맞춰서 네비게이션에 마진 div하나 만들어서 높이 강제로 주고 빼고 하기
     return(
         <>

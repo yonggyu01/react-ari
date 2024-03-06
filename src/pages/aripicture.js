@@ -16,11 +16,11 @@ export default function Aripicture(){
 
     <ul className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
       <li>
-        <a href="#" className="group relative block">
+        <Link to='ari100' className="group relative block">
           <img
-            src="/imgs/아리1.PNG"
+            src="/imgs/ari98.jpg"
             alt=""
-            className="aspect-square w-full object-cover transition duration-500 group-hover:opacity-90 grayscale group-hover:grayscale-0"
+            className="aspect-square w-full object-cover transition duration-500 object-top group-hover:opacity-90 grayscale group-hover:grayscale-0"
           />
 
           <div className="absolute inset-0 flex flex-col items-start justify-end p-6">
@@ -32,15 +32,15 @@ export default function Aripicture(){
               More
             </span>
           </div>
-        </a>
+        </Link>
       </li>
 
       <li>
         <a href="#" className="group relative block">
           <img
-           src="/imgs/아리1.PNG"
+           src="/imgs/arigom.gif"
             alt=""
-            className="aspect-square w-full object-cover transition duration-500 group-hover:opacity-90 grayscale group-hover:grayscale-0"
+            className="aspect-square w-full object-cover transition duration-500 group-hover:opacity-90 grayscale group-hover:grayscale-0 object-top"
           />
 
           <div className="absolute inset-0 flex flex-col items-start justify-end p-6">

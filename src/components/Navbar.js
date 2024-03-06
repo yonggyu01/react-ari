@@ -43,7 +43,14 @@ return (
       <summary>포트폴리오 소개</summary>
       <ul>
         <li><span>기술스택</span></li>
-        <li><Link to="/blog"><span>블로그</span></Link></li>
+        <li><Link onClick={(e)=>{
+              e.preventDefault()
+              if(location.pathname.split('/')[1].length!==0){
+              }
+              else{
+                document.getElementById('myblog').scrollIntoView({block: "start", inline: "nearest",behavior:'smooth'})
+              }}}>
+              <span>블로그</span></Link></li>
         <li>
           <details >
             {/* open하면 열림 */}

@@ -18,6 +18,8 @@ import Adminpage from './pages/Adminpage';
 import Myblog from './pages/myBlog';
 import Portfolio from './pages/Portfolio';
 import Future from './pages/arifutuer.js';
+import Ari100pic from './pages/ari100pic';
+
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -37,6 +39,7 @@ function App() {
           <Route index element={<Arimain/>}></Route>
           <Route path="product" element={<Productpage/>}></Route>
           <Route path="future" element={<Future/>}></Route>
+          <Route path="ari100" element={<Ari100pic/>}></Route>
         </Route>
       </Route>
       
