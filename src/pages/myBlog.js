@@ -9,9 +9,9 @@ export default function Myblog(){
     useEffect(()=>{
         var client = new Client('https://api.steemit.com')
         // console.log()
-        client.database.getDiscussions('trending', { tag: 'yongreact', limit: 5 })
-        .then((res)=>{
-        console.log(res)})
+        client.database.getDiscussions('created', { tag: 'yongvue', limit: 5 })
+        // client.database.getDiscussions('created', { tag: 'yongreact', limit: 5 })
+        .then(res=>res).then(res=>  {console.log(res , '뷰')})
         // {"jsonrpc":"2.0", "method":"tags_api.get_comment_discussions_by_payout", "params":{"tag":"steem","limit":1}, "id":1}' https://api.steemit.com
         fetch('https://api.steemit.com', {
   method: 'POST',

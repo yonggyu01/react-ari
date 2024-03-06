@@ -176,6 +176,52 @@ export default function Portfolio(){
 			   ucon : `회원 정보, 관리, 상품판매 관련 정보를 확인 할 수 있도록 admin page를 도입하였습니다.`,
 			   fsrc : './imgs/arifanpage.PNG',
 			   ssrc : './imgs/arifanpage1.PNG'
+			   },	{
+				id:'team',
+				 maintitle :'CGV Clone site 제작 관련 정보',
+				 mainsub : '팀프로젝트 :  CGV',
+				 main3 : '첫 팀프로젝트로 3명이서 작업했으며  일부 페이지 html + css작업과 전체페이지의 자바스크립트를 담당했습니다. ',
+				stack : 	<div className='flex flex-row gap-3'><div className="flex flex-col justify-center items-end">
+											   <svg className="w-[35px] h-[35px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+											   <path d="m3 2 1.6 17.8L12 22l7.5-2.2L21 2H3Zm14 6H9l.2 2H17l-.6 6.6-4.2 1.4-4.3-1.4-.3-3h2l.2 1.4 2.4.8 2.3-.7.3-3H7.4L7 6h10.4L17 8Z"/>
+												 </svg>
+												 <p className="mt-2 dark:text-gray-400">HTML </p>
+											   </div>
+											   <div className="flex flex-col justify-center items-center">
+												 <svg className="w-[35px] h-[35px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+												   <path d="m3 2 1.6 17.8L12 22l7.5-2.2L21 2H3Zm13.3 14.7L12 18l-4.3-1.2-.3-3.1h2.1l.2 1.5 2.3.6 2.3-.6.3-3H7.3l-.2-2h7.7l.1-2H7l-.2-2h10.6l-1 10.6Z"/>
+												</svg>
+												<p className="mt-2 dark:text-gray-400">CSS </p>
+											   </div>
+											   <div className="flex flex-col justify-center items-center">
+											   <img src="/imgs/javascript-logo-svgrepo-com.svg" alt="svg" width="35" height="35"/>
+											   <p className="mt-2 dark:text-gray-400">Javascript </p>
+											   </div>
+											 </div>,
+			   vers : 	<div className="flex gap-4">
+										   <div className="flex flex-col justify-center items-center">
+											   <img src="/imgs/github-icon-1-logo-svgrepo-com.svg" alt="svg" width="35" height="35"/>
+											   <p className="mt-2 dark:text-gray-400">Git hub </p>
+										   </div>
+										   <p className=" leadi dark:text-gray-50 text-center">Netlify<br></br>
+										   
+											   </p> 
+			   
+										   </div>,
+			   mainend : `순수 자바스크립트, CSS를 활용한 SPA 프로젝트입니다.  <br/>
+											   페이지별로 화면 전환이 없고 전부 한 페이지에서 작동합니다.`,
+			   secondtitle : 'Window95와 유사하게 동작',
+			   secondsubtitle : 'Window운영체제에 포함된 기능들을 최대한 Javascript와 css를 활용해서 구현하기 위해 노력했습니다.',
+			   ttitle:'파일 드래그 앤 드롭기능',
+			   tcon : '바탕화면에 아이콘을 드래그 앤 드롭을 통해 다른 폴더로 옮길 수 있습니다.',
+			   ytitle:'Canvas 활용한 그림판 구현',
+			   ycon : `Window의 대표기능중 하나인 그림판을 Canvas 엘리먼트를 통해 구현 <br></br>
+											   해당 그림판을 제작하면서 좌표에 대한 공부를 많이 할 수 있었습니다.`,
+			   utitle: '그 밖의 다양한 아이디어',
+			   ucon : `Cmd창에서 일부 입력과 실행이 가능하도록 구현, 메모장 작성 후 파일 저장 및 불러오기 <br></br>
+											   한컴 타자연습등등.. 다양한 기능들을 구현해봤습니다.`,
+			   fsrc : './imgs/윈도.PNG',
+			   ssrc : './imgs/윈도1.PNG'
 			   },
 			]
 			let [view,setview] = useState({
