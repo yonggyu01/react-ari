@@ -36,7 +36,7 @@ export default function Aripicture(){
       </li>
 
       <li>
-        <a href="#" className="group relative block">
+        <Link to="insta" className="group relative block">
           <img
            src="/imgs/arigom.gif"
             alt=""
@@ -44,7 +44,7 @@ export default function Aripicture(){
           />
 
           <div className="absolute inset-0 flex flex-col items-start justify-end p-6">
-            <h3 className="text-xl font-medium text-white">아리 Youtube모음</h3>
+            <h3 className="text-xl font-medium text-white">아리 instagram모음</h3>
 
             <span
               className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
@@ -52,7 +52,7 @@ export default function Aripicture(){
               구독하기
             </span>
           </div>
-        </a>
+        </Link>
       </li>
 
       <li className="lg:col-span-2 lg:col-start-2 lg:row-span-2 lg:row-start-1">

@@ -16,21 +16,21 @@ import Indexpage from './pages/indexpage';
 import Ariindex from './pages/ariindex';
 import Adminpage from './pages/Adminpage';
 import Myblog from './pages/myBlog';
+
 import Portfolio from './pages/Portfolio';
 import Future from './pages/arifutuer.js';
 import Ari100pic from './pages/ari100pic';
-
+import Ari_insta from './pages/ari_insta';
+import Myblogdetail from './pages/myBlogdetail';
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       
       <Route path="/" element={<Indexpage/>} errorElement={<Notfound/>} >
       <Route index element={<Dicemain/>}/>
-
-        <Route path="/admin" element={<Adminpage/>}>
-
-        </Route>
+        <Route path="/admin" element={<Adminpage/>}></Route>
         <Route path="/blog" element={<Myblog/>}></Route>
+        <Route path="/blogdetail/:idx" element={<Myblogdetail/>}/>
         <Route path="portfolio" element={<Portfolio/>}></Route>
         <Route path="/login" element={<Loginpage/>}></Route>
         <Route path="popo" element={<Popo/>}></Route>
@@ -40,6 +40,7 @@ function App() {
           <Route path="product" element={<Productpage/>}></Route>
           <Route path="future" element={<Future/>}></Route>
           <Route path="ari100" element={<Ari100pic/>}></Route>
+          <Route path="insta" element={<Ari_insta/>}></Route>
         </Route>
       </Route>
       
@@ -48,8 +49,9 @@ function App() {
 
   return (
     <div className="App">
+     
       <RouterProvider router={router}>
-   
+
       </RouterProvider>
     </div>
   );

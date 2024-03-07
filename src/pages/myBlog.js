@@ -1,17 +1,22 @@
 import { useEffect, useState } from 'react'
 import { Client } from 'dsteem';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // var dsteem = require('dsteem')
+import { useStore } from "../store/store"
 
 export default function Myblog(){
+  const {setblog} = useStore()
+  const navigate =useNavigate()
     const [mysteemdata, setmysteem]=useState([])
     const imgsrc = /https.+[$jpg]/i
+    const [more,setmore]=useState(6)
+    const [cbtn, setcbtn] = useState(false)
     useEffect(()=>{
-        var client = new Client('https://api.steemit.com')
-        // console.log()
-        client.database.getDiscussions('trending', { tag: 'yongreact', limit: 5 })
-        .then((res)=>{
-        console.log(res)})
+        // var client = new Client('https://api.steemit.com')
+        // // console.log()
+        // client.database.getDiscussions('trending', { tag: 'yongreact', limit: 5 })
+        // .then((res)=>{
+        // console.log(res)})
         // {"jsonrpc":"2.0", "method":"tags_api.get_comment_discussions_by_payout", "params":{"tag":"steem","limit":1}, "id":1}' https://api.steemit.com
         fetch('https://api.steemit.com', {
   method: 'POST',
@@ -22,7 +27,7 @@ export default function Myblog(){
     jsonrpc: '2.0',
     method: 'condenser_api.get_blog',
     // method: 'tags_api.get_comment_discussions_by_payout',
-    params: ['yonggyu01', 0, 6],
+    params: ['yonggyu01', 0, more],
     // params: {tag : 'yongreact', limit:5},
     id: 1,
   }),
@@ -37,8 +42,8 @@ export default function Myblog(){
 })
   .catch(error => console.error('Error:', error));
 
-        
-    },[])
+  setcbtn(false)
+    },[cbtn])
 
 //    const query = '/@yonggyu01/';
 
@@ -54,6 +59,10 @@ export default function Myblog(){
   
         <section id="myblog" className="dark:bg-gray-800 dark:text-gray-100 w-full bg-white">
         <div className="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
+        <div class="mx-auto max-w-2xl lg:mx-0">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">From the blog</h2>
+      <p class="mt-2 text-lg leading-8 text-gray-600">여기는 제가 공부하며 작성한 블로그입니다.</p>
+    </div>
             {/* <a rel="noopener noreferrer" href="#" className="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-900 keychainify-checked">
                 <img src="https://source.unsplash.com/random/480x360" alt="" className="object-cover w-full h-64 rounded sm:h-96 lg:col-span-7 dark:bg-gray-500" />
                 <div className="p-6 space-y-2 lg:col-span-5">
@@ -63,7 +72,10 @@ export default function Myblog(){
                 </div>
             </a> */}
             <div className="grid justify-center  grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-               {mysteemdata&& mysteemdata.map((x)=>{ return <Link key={x.title} >
+               {mysteemdata&& mysteemdata.map((x,idx)=>{ return <Link key={x.title} onClick={()=>{
+                navigate(`/blogdetail/${idx}`)
+                setblog(x)
+               }}>
                <article className="overflow-hidden rounded-lg shadow transition hover:shadow-lg">
   <img
     alt=""
@@ -100,6 +112,13 @@ export default function Myblog(){
             {/* <div className="flex justify-center">
                 <button type="button" className="px-6 py-3 text-sm rounded-md hover:underline dark:bg-gray-900 dark:text-gray-400">글 더보기</button>
             </div> */}
+        </div>
+        <div className='flex w-full justify-center mb-5'>
+        <button type="button" className="px-8 py-3 font-semibold rounded-full bg-gray-800 text-gray-100" onClick={()=>{
+          setmore(more+6)
+          setcbtn(true)
+        }}>블로그 글 더보기</button>
+
         </div>
     </section>
     </>

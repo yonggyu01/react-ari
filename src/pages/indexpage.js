@@ -2,11 +2,13 @@ import { Outlet, useLocation } from "react-router-dom"
 import Navbar from '../components/Navbar'
 import { useEffect, useState } from "react"
 import { useStore } from "../store/store"
+
 export default function Indexpage(){
   const {setnaviscroll} = useStore()
 const location =useLocation().pathname
 const [loca,setloca] =useState(location.length)
- 
+ const {userid}=useStore()
+
 
     function scrollcontrol(){
      
@@ -33,8 +35,10 @@ const [loca,setloca] =useState(location.length)
       // 스크롤에 맞춰서 네비게이션에 마진 div하나 만들어서 높이 강제로 주고 빼고 하기
     return(
         <>
-        <Navbar/>
-        <Outlet></Outlet>
+        {location==='/admin'?  '':<Navbar/>}
+        <Outlet>
+      
+        </Outlet>
         </>
     )
 }

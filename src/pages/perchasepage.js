@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
+import React, { useId, useState } from 'react'
 import { Link } from 'react-router-dom'
+import Scrolltop from '../components/scrolltop'
+import { useStore } from '../store/store'
 
 export default function Productpage (){
   const [inputval, setinputval]=useState(1)
+  const {setmycart} =useStore()
   function sum(val){
     setinputval(val)
   }
+  
     const productlist = [
         {
         src : 'https://img.momsdiary.co.kr/board/suda/spboard2/pds/eventpost/322641/nayounoh_2109011504352.jpg',
@@ -86,12 +90,23 @@ export default function Productpage (){
         </div>
         },
     ]
+    // 물건 주문하는 함수임 여기에 저장해라
+    function putorder(idx,number){
+      const mylist = {
+     ...productlist[idx],
+     Quantity : number,
+     id : Date.now()
+      }
+
+      setmycart(mylist)
+    }
 
     function sortdata(){
 
     }
 return(
     <div>
+      <Scrolltop></Scrolltop>
  <section>
   <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
     <header>
@@ -205,7 +220,7 @@ return(
     </div>
   </dl>
 </div>
-<div>
+{/* <div>
   <label htmlFor="Quantity" className="sr-only"> Quantity </label>
 
   <div className="flex items-center gap-1 justify-center">
@@ -227,14 +242,32 @@ return(
       +
     </button>
   </div>
+</div> */}
+			<div className='flex justify-center'>
+  <label htmlFor="수량" className="block text-sm font-medium text-gray-900"> </label>
+
+  <select
+    name="HeadlineAct"
+    id={'Quantity'+idx}
+    className="mt-1.5 w-26 h-8 rounded-lg border-gray-300 text-gray-700 sm:text-sm text-center"
+
+  >
+    <option value="">수량을 선택하세요</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+   
+  </select>
 </div>
-			
 					</div>
 			
-          <form className="mt-4">
+          <form className="mt-4" onSubmit={(e)=>{e.preventDefault()
+              putorder(idx,document.querySelector(`#Quantity${idx}`).value )
+          }}>
             <button
-              className="block w-full rounded bg-gray-400 hover:bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105"
-            >
+              className="block w-full rounded bg-gray-400 hover:bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
               Add to Cart
             </button>
           </form>

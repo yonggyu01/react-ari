@@ -15,7 +15,7 @@ export default function Navbar(){
   // console.log(location.pathname.split('/')[1].length)
 return (
     <>
-    <div className="drawer z-10">
+    <div className="drawer z-50">
   <input id="my-drawer-3" type="checkbox" className="drawer-toggle" /> 
   {!naviscroll && <div className='h-16' />}
   <div className="drawer-content flex flex-col"></div>
@@ -39,24 +39,30 @@ return (
   <ul className="menu menu-horizontal bg-base-200 rounded-box max-md:hidden">
   <li><span><Link to='/ari'>아리 팬페이지</Link></span></li>
   <li>
-    <details >
+    <details id='mypopo'>
       <summary>포트폴리오 소개</summary>
       <ul>
         <li><span>기술스택</span></li>
         <li><Link onClick={(e)=>{
               e.preventDefault()
               if(location.pathname.split('/')[1].length!==0){
+                navigate('blog')
+                document.querySelector('#mypopo').open=false
+               
               }
               else{
                 document.getElementById('myblog').scrollIntoView({block: "start", inline: "nearest",behavior:'smooth'})
+                document.querySelector('#mypopo').open=false
+             
               }}}>
               <span>블로그</span></Link></li>
         <li>
-          <details >
+          <details id='mypopol' >
             {/* open하면 열림 */}
-            <summary><Link onClick={(e)=>{
+            <summary><Link onMouseEnter={(e)=>{
               e.preventDefault()
-              navigate('/portfolio', {state : {info : 'window'}})
+              document.querySelector('#mypopol').open=true
+              // navigate('/portfolio', {state : {info : 'window'}})
               // if(location.pathname.split('/')[1].length!==0){
               // }
               // else{
@@ -66,13 +72,28 @@ return (
             <ul>
               <li><Link  onClick={(e)=>{
                 e.preventDefault()
-              navigate('/portfolio', {state : {info : 'window'}})}} > <span>window Project</span></Link></li>
+              navigate('/portfolio', {state : {info : 'window'}})
+              document.querySelector('#mypopol').open=false
+              setTimeout(() => {
+                document.querySelector('#mypopo').open=false
+              }, 1000);
+              }} > <span>window Project</span></Link></li>
               <li><Link onClick={(e)=>{
                 e.preventDefault()
-              navigate('/portfolio', {state : {info : 'vue'}})}} ><span>Vue</span></Link></li>
+              navigate('/portfolio', {state : {info : 'vue'}})
+              document.querySelector('#mypopol').open=false
+              setTimeout(() => {
+                document.querySelector('#mypopo').open=false
+              }, 1000);
+              }} ><span>Vue</span></Link></li>
               <li><Link onClick={(e)=>{
                 e.preventDefault()
-              navigate('/portfolio', {state : {info : 'react'}})}}><span>React</span></Link></li>
+              navigate('/portfolio', {state : {info : 'react'}})
+              document.querySelector('#mypopol').open=false
+              setTimeout(() => {
+                document.querySelector('#mypopo').open=false
+              }, 1000);
+              }}><span>React</span></Link></li>
             </ul>
           </details>
         </li>

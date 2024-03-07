@@ -14,7 +14,7 @@ export default function Orderpage(){
             title : "똥기저귀",
             order : 'Pre-Order',
             current : '80,000원',
-            saleprice : 50000,
+            sale : 50000,
             id:useId(),
             src : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT261O_6XzHiKHXlhVORrqr9wy0eXV5ngW6lw&usqp=CAU'            
         },
@@ -22,7 +22,7 @@ export default function Orderpage(){
             title : "아리_랜덤 사진 1장",
             order : 'Pre-Order',
             current : '120,000원',
-            saleprice : 99000,
+            sale : 99000,
             id:useId(),
             src : 'https://png.pngtree.com/element_our/20200610/ourmid/pngtree-cute-baby-image_2239273.jpg'            
         },
@@ -30,7 +30,7 @@ export default function Orderpage(){
             title : "아리 사진 3장 + 악수권",
             order : 'Pre-Order',
             current : '320,000원',
-            saleprice : 199000,
+            sale : 199000,
             id:useId(),
             src : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThd4zSC4ChrBFMQqHrkkGe9tpVUw_4Yl7Yng&usqp=CAU'            
         },
@@ -38,7 +38,7 @@ export default function Orderpage(){
             title : "아리 뒤집기 관람권",
             order : 'Pre-Order',
             current : '500,000원',
-            saleprice : 499000,
+            sale : 499000,
             id:useId(),
             src : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPJ9nyvjoMJvUnJHTClbr72G3gTCfgMLrFLw&usqp=CAU'            
         },
@@ -75,7 +75,7 @@ export default function Orderpage(){
 							<p className="text-sm text-gray-600">{item.order}</p>
 						</div>
 						<div className="text-right">
-							<p className="text-lg font-semibold">{item.saleprice}</p>
+							<p className="text-lg font-semibold">{item.sale}</p>
 							<p className="text-sm line-through text-gray-400">{item.current}</p>
 						</div>
 					</div>

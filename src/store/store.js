@@ -26,6 +26,8 @@ export const useStore = create((set) => ({
   ],
   setreview : (val)=> set((state)=>({...state, review : [...state.review,val]})),
   naviscroll : false,
-  setnaviscroll : (boolean) =>set((state)=>({...state, naviscroll : boolean}))
+  setnaviscroll : (boolean) =>set((state)=>({...state, naviscroll : boolean})),
+  selectblog:{  },
+  setblog:(data)=>set((state)=>({...state,selectblog:{...data} }))
 }))
 

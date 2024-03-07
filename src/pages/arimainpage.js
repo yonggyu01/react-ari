@@ -6,12 +6,13 @@ import { useStore } from '../store/store'
 import Arireviewpage from './arireviewpage'
 import Aripicture from './aripicture'
 import Future from './arifutuer'
-
+import Scrolltop from '../components/scrolltop';
 export default function Arimain(){
   const {userid,loginnow} = useStore()
   const navigate = useNavigate()
     return(
         <>
+        <Scrolltop/>
         <div className="p-6 bg-gray-600 text-gray-50 hidden lg:block">
 	<div className="container mx-auto ">
 		<div className="flex flex-row  items-center justify-between">

@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom"
+
 export default function Adminpage(){
+  
     return(
         <div>
         <div x-data="{ userDropdownOpen: false, mobileNavOpen: false }">
@@ -191,8 +194,10 @@ export default function Adminpage(){
                 </svg>
                 <span className="grow">Account</span>
               </a>
-              <a
-                href="javascript:void(0)"
+              <Link to='/'
+                onClick={()=>{
+
+                }}
                 className="group flex items-center justify-between gap-2 rounded-md border border-transparent px-2.5 py-2 text-sm font-semibold text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200"
               >
                 <svg
@@ -209,7 +214,7 @@ export default function Adminpage(){
                   />
                 </svg>
                 <span className="grow">Logout</span>
-              </a>
+              </Link>
             </div>
           </nav>
 
@@ -474,30 +479,8 @@ export default function Adminpage(){
         <div
           className="flex flex-col space-y-2 border-t-2 border-slate-200/50 py-6 text-center text-sm font-medium text-slate-600 md:flex-row md:justify-between md:space-y-0 md:text-start"
         >
-          <div>© <span className="font-semibold">관리자 페이지 </span></div>
-          <div className="inline-flex items-center justify-center">
-            <span>Crafted with</span
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
-              className="mx-1 h-4 w-4 text-red-600"
-            >
-              <path
-                d="M9.653 16.915l-.005-.003-.019-.01a20.759 20.759 0 01-1.162-.682 22.045 22.045 0 01-2.582-1.9C4.045 12.733 2 10.352 2 7.5a4.5 4.5 0 018-2.828A4.5 4.5 0 0118 7.5c0 2.852-2.044 5.233-3.885 6.82a22.049 22.049 0 01-3.744 2.582l-.019.01-.005.003h-.002a.739.739 0 01-.69.001l-.002-.001z"
-              ></path>
-            </svg>
-            <span
-              >by
-              <a
-                className="font-medium text-indigo-600 transition hover:text-indigo-700"
-                href="https://pixelcave.com"
-                target="_blank"
-                >pixelcave</a
-              ></span
-            >
-          </div>
+          <div> <span className="font-semibold">관리자 페이지 </span></div>
+    
         </div>
       </div>
     </footer>

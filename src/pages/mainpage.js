@@ -11,6 +11,7 @@ import Myblog from "./myBlog"
 import Myskill from "./Myskill"
 import Yonggyu from "./yonggyu"
 import Realfooter from "../components/Realfooter"
+import Scrolltop from "../components/scrolltop"
 function Dicemain(){
 
     const {logoclick,islogo,rollbox,setroll} = useStore()
@@ -59,7 +60,7 @@ useEffect(()=>{
 //   const [top,settop] = useState(false)
 return(  <animated.div >
     {/* <Navbar /> */}
-   
+    <Scrolltop></Scrolltop>
     <animated.div className={rollbox? 'cube-wrapper mybest' : 'mybest' } ref={roll} style={{transform}} >
     <div className={rollbox? 'cube-front mybest' : 'mybest1'}>
     <Yonggyu></Yonggyu>
