@@ -69,7 +69,6 @@ useEffect(()=>{
                       {item.caption}
                     </span>
                   </h4>
-                
                   <p
                     className="text-xs font-medium text-gray-500 dark:text-gray-400/75 truncate"
                   >
