@@ -14,7 +14,7 @@ const [mystar,setstar] = useState()
   <div className="mx-auto max-w-screen-2xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
     <div className="md:flex md:items-end md:justify-between">
       <div className="max-w-xl">
-        <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+        <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl ">
           아리 팬분들의 구매후기
         </h2>
 
@@ -29,7 +29,7 @@ const [mystar,setstar] = useState()
         onClick={()=>{
             document.getElementById(`my_modal_review`).showModal()
         }}
-        className="mt-6 inline-flex shrink-0 items-center gap-2 rounded-full border border-rose-600 px-5 py-3 text-rose-600 transition hover:bg-rose-600 hover:text-white md:mt-0"
+        className="mt-6 inline-flex shrink-0 items-center gap-2 rounded-full shadow-lg border border-rose-600 px-5 py-3 text-rose-600 transition hover:bg-rose-600 hover:text-white md:mt-0"
       >
         <span className="font-medium"> 리뷰 등록 </span>
 

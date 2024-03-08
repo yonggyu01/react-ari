@@ -5,58 +5,29 @@ import { useStore } from '../store/store'
 export default function Orderpage(){
     const {logoclick,islogo,rollbox,setroll} = useStore()
     const navigate = useNavigate()
-    const {mycart} = useStore()
+    const {mycart,delmycart} = useStore()
     // console.log(mycart)
     const [total,settotal]  = useState(0)
-  
-    const [list,setlist] = useState([
-        {
-            title : "똥기저귀",
-            order : 'Pre-Order',
-            current : '80,000원',
-            sale : 50000,
-            id:useId(),
-            src : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT261O_6XzHiKHXlhVORrqr9wy0eXV5ngW6lw&usqp=CAU'            
-        },
-        {
-            title : "아리_랜덤 사진 1장",
-            order : 'Pre-Order',
-            current : '120,000원',
-            sale : 99000,
-            id:useId(),
-            src : 'https://png.pngtree.com/element_our/20200610/ourmid/pngtree-cute-baby-image_2239273.jpg'            
-        },
-        {
-            title : "아리 사진 3장 + 악수권",
-            order : 'Pre-Order',
-            current : '320,000원',
-            sale : 199000,
-            id:useId(),
-            src : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThd4zSC4ChrBFMQqHrkkGe9tpVUw_4Yl7Yng&usqp=CAU'            
-        },
-        {
-            title : "아리 뒤집기 관람권",
-            order : 'Pre-Order',
-            current : '500,000원',
-            sale : 499000,
-            id:useId(),
-            src : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPJ9nyvjoMJvUnJHTClbr72G3gTCfgMLrFLw&usqp=CAU'            
-        },
-
-    ]
-    )
+    const [render,setrender] =useState(false)
+    let reg = /[,원]/mg
     function totalvalue(array){
         let result = 0
-        array.map((item)=>{ result = result + item.saleprice })
+        let reg = /[,원]/mg
+        array.map((item)=>{ 
+            let num =  Number(item.sale.replace(reg,''))
+            console.log(num)
+
+            result = result + (num*item.Quantity)
+         })
         settotal(result)
         return result;
     }
     useEffect(()=>{
-      totalvalue(list)
-     
-    },[list])
+      totalvalue(mycart)
+      setrender(false)
+    },[render])
     
-    console.log('토탈',total)
+    // console.log('토탈',mycart)
     return(
         <>
         {/* <Navbar></Navbar> */}
@@ -65,7 +36,7 @@ export default function Orderpage(){
 	<h2 className="text-xl font-semibold">Your cart</h2>
 	<ul className="flex flex-col divide-y divide-gray-300">
         {/* 여기에 장바구니 목록 들어오게 세팅 */}
-        {list.map((item,idx)=>(	<li className="flex flex-col py-6 sm:flex-row sm:justify-between" key={item.title + idx}>
+        {mycart.map((item,idx)=>(	<li className="flex flex-col py-6 sm:flex-row sm:justify-between" key={item.title + idx}>
 			<div className="flex w-full space-x-2 sm:space-x-4">
 				<img className="flex-shrink-0 object-cover w-20 h-20 border-transparent rounded outline-none sm:w-32 sm:h-32 bg-gray-500" src={item.src} alt={item.title} />
 				<div className="flex flex-col justify-between w-full pb-4">
@@ -75,7 +46,7 @@ export default function Orderpage(){
 							<p className="text-sm text-gray-600">{item.order}</p>
 						</div>
 						<div className="text-right">
-							<p className="text-lg font-semibold">{item.sale}</p>
+							<p className="text-lg font-semibold">{ Number(item.sale.replace(reg,''))*item.Quantity} 원</p>
 							<p className="text-sm line-through text-gray-400">{item.current}</p>
 						</div>
 					</div>
@@ -90,13 +61,27 @@ export default function Orderpage(){
 							</svg>
 							<span onClick={()=>{
                                 // 나중에 아래 함수만 서버나 스토어로 바꿔주면 됨
-                                setlist(list.filter((it)=>{return it.id!==item.id}))
+                                delmycart(item.id)
+                                setrender(true)
+                                // setlist(list.filter((it)=>{return it.id!==item.id}))
                             }}>Remove</span>
 						</button>
 						<button type="button" className="flex items-center px-2 py-1 space-x-1">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4 h-4 fill-current">
-								<path d="M453.122,79.012a128,128,0,0,0-181.087.068l-15.511,15.7L241.142,79.114l-.1-.1a128,128,0,0,0-181.02,0l-6.91,6.91a128,128,0,0,0,0,181.019L235.485,449.314l20.595,21.578.491-.492.533.533L276.4,450.574,460.032,266.94a128.147,128.147,0,0,0,0-181.019ZM437.4,244.313,256.571,425.146,75.738,244.313a96,96,0,0,1,0-135.764l6.911-6.91a96,96,0,0,1,135.713-.051l38.093,38.787,38.274-38.736a96,96,0,0,1,135.765,0l6.91,6.909A96.11,96.11,0,0,1,437.4,244.313Z"></path>
-							</svg>
+						
+                            <label className="swap">
+  
+  {/* this hidden checkbox controls the state */}
+  <input type="checkbox" />
+  
+  {/* volume on icon */}
+  <img className="swap-off w-4 h-4 fill-current"  src="/imgs/heart-svgrepo-com.svg"></img>
+  
+  {/* volume off icon */}
+  <img className="swap-on w-4 h-4 fill-current"   src="/imgs/heart-alt-svgrepo-com.svg"></img>
+  
+</label>
+                            {/*  */}
+                          
 							<span>Add to favorites</span>
 						</button>
 					</div>
@@ -108,7 +93,7 @@ export default function Orderpage(){
 	</ul>
 	<div className="space-y-1 text-right">
 		<p>Total amount:
-			<span className="font-semibold">{total}</span>
+			<span className="font-semibold"> {total} 원</span>
 		</p>
 		<p className="text-sm text-gray-600">Not including taxes and shipping costs</p>
 	</div>

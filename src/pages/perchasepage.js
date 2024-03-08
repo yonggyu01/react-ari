@@ -18,7 +18,7 @@ export default function Productpage (){
         content : '주문 즉시 제작, 빠른배송가능',
         order : 'Pre-Order',
         price : '50,000원',
-        sale : 35000,
+        sale : '35,000원',
         hot: <div className="indicator absolute top-5 left-3">
           <span className="indicator-item badge badge-accent">hot</span> 
           <div className="grid w-32 h-32 bg-base-300 place-items-center">content</div>
@@ -31,7 +31,7 @@ export default function Productpage (){
         content : '하루 최대 3명 가능 - 아리 낯가림시 50% 환불가능',
         order : 'Pre-Order',
         price : '150,000원',
-        sale : 10000,
+        sale : '100,000원',
         hot: <div className="indicator absolute top-5 left-3">
           <span className="indicator-item badge badge-primary">new</span> 
           <div className="grid w-32 h-32 bg-base-300 place-items-center">content</div>
@@ -44,7 +44,7 @@ export default function Productpage (){
         content : '하루 최대 2명 가능 - 아리 낯가림시 100% 듣기 가능',
         order : 'Pre-Order',
         price : '350,000원',
-        sale : 20000,
+        sale : '200,000원',
         hot: <div className="indicator absolute top-5 left-3">
           <span className="indicator-item badge badge-primary">new</span> 
           <div className="grid w-32 h-32 bg-base-300 place-items-center">content</div>
@@ -57,7 +57,7 @@ export default function Productpage (){
         content : '하루 최대 1명 가능',
         order : 'Pre-Order',
         price : '450,000원',
-        sale : 20000,
+        sale : '200,000원',
         hot: <div className="indicator absolute top-5 left-3">
           <span className="indicator-item badge badge-primary">new</span> 
           <div className="grid w-32 h-32 bg-base-300 place-items-center">content</div>
@@ -70,7 +70,7 @@ export default function Productpage (){
         content : '하루 최대 4명 가능',
         order : 'Pre-Order',
         price : '350,000원',
-        sale : 30000,
+        sale : '300,000원',
         hot: <div className="indicator absolute top-5 left-3">
           <span className="indicator-item badge badge-primary">new</span> 
           <div className="grid w-32 h-32 bg-base-300 place-items-center">content</div>
@@ -83,7 +83,7 @@ export default function Productpage (){
         content : '랜덤 사진뽑기',
         order : 'Pre-Order',
         price : '30,000원',
-        sale : 29000,
+        sale : '29,000원',
         hot: <div className="indicator absolute top-5 left-3">
           <span className="indicator-item badge badge-primary">new</span> 
           <div className="grid w-32 h-32 bg-base-300 place-items-center">content</div>
@@ -108,11 +108,11 @@ return(
     <div>
       <Scrolltop></Scrolltop>
  <section>
-  <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+  <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 dark:bg-slate-800">
     <header>
-      <h2 className="text-xl font-bold text-gray-900 sm:text-3xl">상품리스트</h2>
+      <h2 className="text-xl font-bold text-gray-900 sm:text-3xl dark:text-white">상품리스트</h2>
 
-      <p className="mt-4 max-w-md text-gray-500">
+      <p className="mt-4 max-w-md text-gray-500 dark:text-white">
             이 페이지는 아리가 사용했던 물건을 소장할 수 있는 상품으로 구성되어 있습니다.
       </p>
     </header>
@@ -144,11 +144,11 @@ return(
     
       
         {productlist.map((item,idx) => {return(
-         <li key={item.title + idx}> 
-        <Link className="group relative block overflow-hidden" onClick={()=>{
+         <li key={item.title + idx} > 
+        <Link className="group relative block overflow-hidden " onClick={()=>{
         	document.getElementById(`my_modal_pr${idx}`).showModal()  
         }}>
-        <button
+        {/* <button
           className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
         >
           <span className="sr-only">구매리스트</span>
@@ -167,7 +167,7 @@ return(
               d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
             />
           </svg>
-        </button>
+        </button> */}
       
         <img
           src={item.src}
@@ -187,13 +187,13 @@ return(
       </Link>
       {/* 모달로 띄워야지 */}
       <dialog id={`my_modal_pr${idx}`} className="modal h-500px">
-				<div className="modal-box ">
-        <h3 className="font-bold text-lg text-center">{item.title}</h3>
+				<div className="modal-box dark:bg-white ">
+        <h3 className="font-bold text-lg text-center dark:text-black">{item.title}</h3>
 					<figure className='mb-3 flex justify-center'>
 					{/* <div id={'proimgs'+idx} className='h-96 w-96'/> */}
           <img src={item.src}  className='object-contain w-8/12'/>
 					</figure>
-					
+        
 					<div className=' '>
 					<div className='w-full'>
 			
@@ -211,7 +211,7 @@ return(
 
     <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
       <dt className="font-medium text-gray-900">정상가 </dt>
-      <dd className="text-gray-700 sm:col-span-2">{item.price}</dd>
+      <dd className="text-gray-700 sm:col-span-2 line-through">{item.price}</dd>
     </div>
 
     <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4 mb-5">
@@ -249,10 +249,8 @@ return(
   <select
     name="HeadlineAct"
     id={'Quantity'+idx}
-    className="mt-1.5 w-26 h-8 rounded-lg border-gray-300 text-gray-700 sm:text-sm text-center"
-
+    className="mt-1.5 w-26 h-8 rounded-lg border-gray-300 text-gray-700 sm:text-sm text-center dark:bg-white"
   >
-    <option value="">수량을 선택하세요</option>
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -263,17 +261,20 @@ return(
 </div>
 					</div>
 			
-          <form className="mt-4" onSubmit={(e)=>{e.preventDefault()
+
+          <button
+            onClick={(e)=>{e.preventDefault()
               putorder(idx,document.querySelector(`#Quantity${idx}`).value )
-          }}>
-            <button
-              className="block w-full rounded bg-gray-400 hover:bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
+              document.querySelector(`#my_modal_pr${idx}`).close()
+          }}
+              className="block w-full rounded bg-gray-400 hover:bg-yellow-400 mt-8 p-4 text-sm font-medium transition hover:scale-105 dark:bg-slate-600 dark:text-white">
               Add to Cart
             </button>
-          </form>
+         
 					</div>
 				</div>
 				<form method="dialog" className="modal-backdrop">
+   
 					<button>close</button>
 				</form>
 				</dialog>

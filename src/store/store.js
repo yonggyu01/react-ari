@@ -11,7 +11,7 @@ export const useStore = create((set) => ({
   userSign : (value)=>set((state)=>({...state, userid : value})),
   mycart : [],
   setmycart: (val)=>set((state)=>({...state,mycart:[...state.mycart,val]})),
-  delmycart : (id) =>set((state)=>({mycart : state.mycart.filter(item => item !== id)})),
+  delmycart : (id) =>set((state)=>({mycart : state.mycart.filter(item => item.id !== id)})),
   review : [ 
     {user : '',
     header : '아리 악수권 구매후기',
@@ -28,6 +28,12 @@ export const useStore = create((set) => ({
   naviscroll : false,
   setnaviscroll : (boolean) =>set((state)=>({...state, naviscroll : boolean})),
   selectblog:{  },
-  setblog:(data)=>set((state)=>({...state,selectblog:{...data} }))
+  setblog:(data)=>set((state)=>({...state,selectblog:{...data} })),
+  locallocation : '',
+  setlocation : (href)=>set((state)=>({...state, locallocation: href})),
+  darkmode :false,
+  setdarkmode : (mode)=>set((state)=>({...state, darkmode:mode })),
+  navercode : '',
+  setnavercode : (code)=>set((state)=>({...state, navercode : code}))
 }))
 

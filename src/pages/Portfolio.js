@@ -36,7 +36,7 @@ export default function Portfolio(){
 											<img src="/imgs/github-icon-1-logo-svgrepo-com.svg" alt="svg" width="35" height="35"/>
 											<p className="mt-2 dark:text-gray-400">Git hub </p>
 										</div>
-										<p className=" leadi dark:text-gray-50 text-center">Netlify<br></br>
+										<p className=" leadi dark:text-gray-50 text-center flex items-end">Netlify<br></br>
 										
 											</p> 
 			

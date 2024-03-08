@@ -1,15 +1,30 @@
-import { Outlet, useLocation } from "react-router-dom"
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom"
 import Navbar from '../components/Navbar'
 import { useEffect, useState } from "react"
 import { useStore } from "../store/store"
 
 export default function Indexpage(){
-  const {setnaviscroll} = useStore()
-const location =useLocation().pathname
-const [loca,setloca] =useState(location.length)
- const {userid}=useStore()
-
-
+  const {setnaviscroll,setnavercode} = useStore()
+  const location =useLocation()
+  const navigate = useNavigate()
+  // const parmas = new URLSearchParams(window.location.search);
+  
+  
+  const [loca,setloca] =useState(location.length)
+  const {userid,locallocation,setlocation,setdarkmode,darkmode}=useStore()
+//   useEffect(()=>{
+//     setdarkmode(window.matchMedia("(prefers-color-scheme: dark).matches"))
+//    setlocation( window.location.href)
+//    const parmas = new URLSearchParams(window.location.search);
+//   //  console.log(parmas.get('code') ,parmas.get('state'),'파람')
+//    if(parmas.get('state')==="NaverLogin"){
+//     console.log('네이버로그인임')
+//     window.opener.naveroff(parmas.get('code'))
+//     window.close()
+//     // navigate('login',{state:{naver: true}})
+//    }
+//  },[])  
+// console.log(locallocation, '잘저장되어있나?')
     function scrollcontrol(){
      
         if(this.window.scrollY>100){
