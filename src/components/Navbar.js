@@ -6,10 +6,10 @@ import { Link, useNavigate,useLocation } from 'react-router-dom';
 import { useRef } from 'react';
 
 export default function Navbar(){
-  const {mycart}=useStore()
+  const {mycart,navertoken,kakaotoken}=useStore()
   const navigate = useNavigate()
   const location = useLocation()
-  const {darkmode,setdarkmode,islogo,loginnow, loginsuc,userid,rollbox,setroll,setnaviscroll,naviscroll} = useStore()
+  const {locallocation,setdarkmode,islogo,loginnow,userSign, loginsuc,userid,loginstate,setroll,setloginstate,naviscroll} = useStore()
   function logoc(){
     islogo()
   }
@@ -26,6 +26,26 @@ export default function Navbar(){
    
     return result;
 }
+const logoutmode = ()=>{
+  userSign('로그인필요')
+       loginsuc(false)
+  if(loginstate === 'kakao'){
+    //카카오 로그아웃
+    const client_id = process.env.REACT_APP_kakao_rest
+    const kakao_java = process.env.REACT_APP_kakao_javas
+    fetch(`https://kauth.kakao.com/oauth/logout?client_id=${client_id}&logout_redirect_uri=${locallocation}`)
+   console.log( kakaotoken)
+  }else if(loginstate === 'naver'){
+    const NAVER_CLIENT_ID = process.env.REACT_APP_naver_id
+    const NAVER_CALLBACK_URL = locallocation
+    const Naversecet = process.env.REACT_APP_naver_secret
+    const url = `https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=${NAVER_CLIENT_ID}&client_secret=${Naversecet}&access_token=${navertoken}&service_provider=NAVER`
+    fetch(url).then(res=> res.json()).then(res => console.log(res))
+  }else{
+    // 내 서버에서 로그아웃하기
+  }
+}
+
 const themchange = useRef()
 
   useEffect(()=>{
@@ -180,7 +200,7 @@ return (
             <span className="badge">New</span>
           </span>
         </li>
-        {loginnow?  <li><button>Logout</button></li> :  <li><Link to="/login">Login or sign in</Link></li>}
+        {loginnow?  <li><button onClick={()=>{logoutmode()}}>Logout</button></li> :  <li><Link to="/login" state={{naver:false, kakao:false}}>Login or sign in</Link></li>}
        
       </ul>
     </div>
@@ -195,9 +215,9 @@ return (
         </div> */}
 		<div>
 
-			{loginnow? <h2 className="text-lg font-semibold">{userid}님</h2>: <h2 className="text-lg font-semibold"><Link to='/login' >로그인하세요</Link></h2>}
+			{loginnow? <h2 className="text-lg font-semibold">{userid}님</h2>: <h2 className="text-lg font-semibold"><Link to='/login' state={{naver:false, kakao:false}}>로그인하세요</Link></h2>}
 			<span className="flex items-center space-x-1">
-				{loginnow &&  <Link to='/login' className="text-xs hover:underline text-gray-600">View profile</Link> }
+				{loginnow &&  <Link to='/profile' className="text-xs hover:underline text-gray-600">View profile</Link> }
 			</span>
 		</div>
 	</div>
@@ -247,7 +267,7 @@ return (
 						<path d="M440,424V88H352V13.005L88,58.522V424H16v32h86.9L352,490.358V120h56V456h88V424ZM320,453.642,120,426.056V85.478L320,51Z"></path>
 						<rect width="32" height="64" x="256" y="232"></rect>
 					</svg>
-					<span>Logout</span>
+					{loginnow? <span><button onClick={()=>{logoutmode()}}>Logout</button></span> : <span><Link to='/login' state={{naver:false, kakao:false}}>Login</Link></span>}
 				</span>
 			</li>
 		</ul>

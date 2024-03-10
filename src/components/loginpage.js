@@ -4,16 +4,17 @@ import {useStore} from '../store/store'
 import { useLocation, useNavigate } from "react-router-dom";
 import {NaverLogin} from './naverlogin'
 import '../css/Loginpage.css'
+import Kakao from './kakaolgoin';
 export default function Loginpage(){
   const location=useLocation()
-  console.log(location)
-  const {logoclick,islogo,userSign,loginsuc,locallocation,navercode,setnavercode} = useStore()
+  console.log(location,'로그인시')
+  const {islogo,userSign,loginsuc,locallocation,setloginstate,setnavercode} = useStore()
   console.log(useStore())
   const navigate = useNavigate();
-  const [userid,setuser] = useState()
-  const [username,setusername] = useState()
-  const [yourpass,setyourpass] = useState()
-  const [passcheckme,setpasscheckme] = useState()
+  const [userid,setuser] = useState('')
+  const [username,setusername] = useState('')
+  const [yourpass,setyourpass] = useState('')
+  const [passcheckme,setpasscheckme] = useState('')
   const myid = useRef(null)
   const passw = useRef(null)
   const passcheck = useRef(null)
@@ -43,17 +44,17 @@ export default function Loginpage(){
       mode:'cors',
       body: raw
     };
-    if(username?.length<3){
+    if(username.length<3){
       window.alert('이름은 2글자 이상 입력해줘')
       myname.current.focus()
       return false;
     }
-    if(!userid?.match(/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/)){
+    if(!userid.match(/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/)){
       window.alert('이메일주소 입력해줘')
       myid.current.focus()
       return false;
     }
-    if(yourpass?.length<4||yourpass?.length>8){
+    if(yourpass.length<4||yourpass?.length>8){
       window.alert('비밀번호는 4~8글자 이상 입력해줘')
       passw.current.focus()
       return false;
@@ -63,15 +64,11 @@ export default function Loginpage(){
       return window.alert('비밀번호가 틀렸습니다.')
     }else{
       userSign(username)
-      loginsuc()
+      loginsuc(true)
       setsign(!sign)
+      setloginstate('my')
           rolling()
-    // const mydate =  await fetch("https://port-0-gemini-server-f9ohr2alrrcybbl.sel5.cloudtype.app/account", requestOptions)
-    // const mydate =  await fetch("http://localhost:3000/account", requestOptions)
-    // const result = await mydate.json()
-    // console.log(result)
-      // .then(result =>  store.commit('setsigndata', result))
-      // .catch(error => console.log('error', error));
+    
     }}
 
 
@@ -80,25 +77,26 @@ export default function Loginpage(){
 // 네이버 로그인 sdk로 그냥 할게 로그인인증요청주소 sdk 는 왜 오류나지
 const naverauthurl = 'https://nid.naver.com/oauth2.0/authorize'
 function naverauth(){
-//   let state = 'NaverLogin'
-//   let raw = {response_type : 'code',
-//   client_id : process.env.REACT_APP_naver_id,
-//   redirect_uri : locallocation,
-//   state
-// }
-// let fullurl = naverauthurl+`?response_type=${raw.response_type}&client_id=${raw.client_id}&redirect_uri=${raw.redirect_uri}&state=${raw.state}`
+  let state = 'NaverLogin'
+  let raw = {response_type : 'code',
+  client_id : process.env.REACT_APP_naver_id,
+  redirect_uri : locallocation,
+  state
+}
+let fullurl = naverauthurl+`?response_type=${raw.response_type}&client_id=${raw.client_id}&redirect_uri=${raw.redirect_uri}&state=${raw.state}`
 // const getcode = window.open(fullurl)
+window.location.href = fullurl
 //위에 잘 동작하는데 sdk로 다시해볼래
 
 
 
 }
 // 새창열린거 종료시키며 코드 받아오기
-window.naveroff = (value)=>{
-  console.log(value, '콜백 코드 받음')
-  setnavercode(value)
+// window.naveroff = (value)=>{
+//   console.log(value, '콜백 코드 받음')
+//   setnavercode(value)
 
- }
+//  }
  useEffect(() => {
   // initializeNaverLogin()
   // userAccessToken()
@@ -127,6 +125,7 @@ return(
 <div className={maxheight}>
    
   <div className="hero-content flex-col">
+    <Kakao></Kakao>
     <div className="text-center">
       {!sign? <h1 className="text-5xl font-bold">회원 로그인 </h1> :<h1 className="text-5xl font-bold">회원가입 </h1> }
       <p className="py-1">반갑습니다.  </p>
@@ -140,7 +139,9 @@ return(
           <label className="label">
             <span className="label-text">Email</span>
           </label>
-          <input type="email" placeholder="email" value={userid} onChange={(e)=>{setuser(e.target.value)}}  className="input input-bordered"  />
+          <input type="email" placeholder="email" value={userid} onChange={(e)=>{setuser(e.target.value)}
+            
+        }  className="input input-bordered"  />
         </div>
         <div className="form-control">
           <label className="label">
@@ -162,9 +163,9 @@ return(
             navigate('/')
 }}>Login</button>
   <div className='flex flex-row justify-between  '>
-          <button className="btn  btn-warning box-border  w-2/4" onClick={(e)=>{e.preventDefault()
+          <div className="btn  btn-warning box-border  w-2/4" onClick={(e)=>{e.preventDefault()
 
-}}>Kakao</button>
+}}><Kakao/></div>
         <NaverLogin >  <div className="btn btn-success box-border w-2/4" onClick={(e)=>{e.preventDefault()
           // naverauth()
 }}>Naver</div></NaverLogin>

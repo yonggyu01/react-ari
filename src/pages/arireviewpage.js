@@ -1,13 +1,59 @@
 import { renderIntoDocument } from 'react-dom/test-utils'
 import {useStore} from '../store/store'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {useStar} from '../components/usestar'
 export default function Arireviewpage(){
-const {review} = useStore()
-const [mystar,setstar] = useState()
- 
+const [render,setrender] = useState(false)
+const {review,userid,loginnow,setreview} = useStore()
+const [mystar,setstar] = useState(0)
+const [myreview,setmyreview] = useState('')
+const [mytitle,setmytitle] = useState('')
+
+
+/**
+ * @name 리뷰남겨주는함수
+ * @param1 array = elements
+ * @param2 title = 글제목
+ */ 
+ function creatreview(array,title){
+  let mynum = 0
+  for(let x= 0; x<5 ; x++){
+    if(array[x].checked ){
+      mynum= x
+    }
+  }
+  
+  // console.log(mystar,review)
+ const data = {user : userid,
+  header : title, 
+  body : myreview,
+  id:Date.now(),
+  star : mynum,
+  totalstar : 5
+}
+setreview(data)
+// 위 함수가 store에 리뷰 등록함  
+
+setrender(true)
+document.getElementById(`my_modal_review`).close() 
+setmyreview('')
+ }
+useEffect(()=>{
+  setrender(false)
+},[render])
 // console.log(review)
+function starmaker(idx,starnum){
+  let mystar = []
+  for(let x = 0 ; x<5 ; x++){
+      if(x==starnum){
+        mystar.push(<input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400" checked/>)
+      }else{
+        mystar.push(<input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400" />)
+      }
+  }
+return  mystar
+}
     return(
    
 <section className="bg-gray-50 mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -27,7 +73,7 @@ const [mystar,setstar] = useState()
 
       <Link
         onClick={()=>{
-            document.getElementById(`my_modal_review`).showModal()
+          loginnow ===true ?  document.getElementById(`my_modal_review`).showModal() : alert('로그인을 해주세요')
         }}
         className="mt-6 inline-flex shrink-0 items-center gap-2 rounded-full shadow-lg border border-rose-600 px-5 py-3 text-rose-600 transition hover:bg-rose-600 hover:text-white md:mt-0"
       >
@@ -84,7 +130,8 @@ const [mystar,setstar] = useState()
 					</svg>
 				</button> */}
         <div className="rating rating-lg">
-  <input type="radio" name="rating-10" className="mask mask-star-2 bg-orange-400" checked/>
+
+  <input type="radio" name="rating-10" className="mask mask-star-2 bg-orange-400" />
   <input type="radio" name="rating-10" className="mask mask-star-2 bg-orange-400" />
   <input type="radio" name="rating-10" className="mask mask-star-2 bg-orange-400" />
   <input type="radio" name="rating-10" className="mask mask-star-2 bg-orange-400" />
@@ -93,9 +140,13 @@ const [mystar,setstar] = useState()
 			</div>
 		</div>
 		<div className="flex flex-col w-full">
-			<textarea rows="3" placeholder="Message..." className="p-4 rounded-md resize-none dark:text-gray-100 dark:bg-gray-900"></textarea>
+      <input  placeholder='Title' className='mb-2 pl-4 h-10' id='titletext'/>
+			<textarea rows="3" placeholder="Message..." className="p-4 rounded-md resize-none dark:text-gray-100 dark:bg-gray-900"  value={myreview} onChange={(e)=>{
+        setmyreview(e.target.value)
+      }}></textarea>
 			<button className="btn btn-active btn-primary mb-4" onClick={()=>{
-       console.log( document.querySelectorAll('input[name="rating-10"]')[0].checked)
+       creatreview(document.querySelectorAll('input[name="rating-10"]'),document.querySelector('#titletext').value)  
+       document.querySelector('#titletext').value = ''
       }}>리뷰 남기기</button>
       {/* 이런식으로 찾아야할듯? */}
 		</div>
@@ -115,11 +166,8 @@ const [mystar,setstar] = useState()
         <div>
           <div className="flex gap-0.5 text-green-500">
           <div className="rating rating-lg">
-  <input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400" />
-  <input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400"  />
-  <input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400" />
-  <input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400" />
-  <input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400" checked readOnly />
+   {   starmaker(idx, item.star)}
+  
 </div>
           </div>
 
