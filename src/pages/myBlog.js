@@ -27,7 +27,6 @@ export default function Myblog(){
   body: JSON.stringify({
     jsonrpc: '2.0',
     method: 'condenser_api.get_blog',
-    // method: 'tags_api.get_comment_discussions_by_payout',
     params: ['yonggyu01', 0, more],
     // params: {tag : 'yongreact', limit:5},
     id: 1,

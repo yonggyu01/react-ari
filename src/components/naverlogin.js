@@ -3,17 +3,22 @@ import {useStore} from '../store/store'
 import { useNavigate } from 'react-router-dom'
 
 export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
-    const {logoclick,islogo,userSign,loginsuc,locallocation,navercode,setnavercode,loginnow} = useStore()
+    const {userSign,loginsuc,locallocation,setloginstate,setnavertoken,loginnow} = useStore()
     console.log(props,setUserInfo)
     const navigate=useNavigate()
   
     const NAVER_CLIENT_ID = process.env.REACT_APP_naver_id
     const NAVER_CALLBACK_URL = locallocation
+    // console.log(locallocation,'콜백주소')
+  
 
+
+    
 	const initializeNaverLogin = () => {
 		const naverLogin = new window.naver.LoginWithNaverId({
+            
 			clientId: NAVER_CLIENT_ID,
-			callbackUrl: NAVER_CALLBACK_URL,
+			callbackUrl: NAVER_CALLBACK_URL+'/login',
           // 팝업창으로 로그인을 진행할 것인지?           
 			isPopup: false,
           // 버튼 타입 ( 색상, 타입, 크기 변경 가능 )
@@ -21,7 +26,7 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
 			callbackHandle: true,
 		})
 		naverLogin.init()
-
+        console.log(window.naver , '윈도우네이버')
            // 선언된 naverLogin 을 이용하여 유저 (사용자) 정보를 불러오는데  
            // 함수 내부에서 naverLogin을 선언하였기에 지역변수처리가 되어  
            // userinfo 정보를 추출하는 것은 지역변수와 같은 함수에서 진행주어야한다.
@@ -31,8 +36,6 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
     
            // 백엔드 개발자가 정보를 전달해준다면 아래 요기! 라고 작성된 부분까지는 
            // 코드 생략이 가능하다.  
-  
-   
       naverLogin.getLoginStatus(async function (status) {
 			if (status) {
               // 아래처럼 선택하여 추출이 가능하고, 
@@ -41,8 +44,11 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
                 console.log(userid, username)
                 if(!loginnow && username){
                     userSign(username)
-                    loginsuc()
-                    // navigate(-1)
+                    loginsuc(true)
+                    setloginstate('naver')
+                    navigate('/')
+                }else{
+                    naverLogin.reprompt()
                 }
               // 정보 전체를 아래처럼 state 에 저장하여 추출하여 사용가능하다. 
             //   setUserInfo(naverLogin.user)
@@ -51,7 +57,7 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
             // 요기!
 	}
     
-    
+ 
     
             // 네이버 소셜 로그인 (네아로) 는 URL 에 엑세스 어스코드가 붙어서 전달된다.
             // 우선 아래와 같이 어스코드를 추출 할 수 있으며,
@@ -64,6 +70,7 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
       	const getToken = () => {
 		const token = window.location.href.split('=')[1].split('&')[0]
         console.log(token)
+        setnavertoken(token)
              // console.log, alert 창을 통해 어스코드가 잘 추출 되는지 확인하자! 
              // 이후 로컬 스토리지 또는 state에 저장하여 사용하자!   
                 // localStorage.setItem('access_token', token)

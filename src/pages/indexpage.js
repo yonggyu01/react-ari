@@ -7,24 +7,36 @@ export default function Indexpage(){
   const {setnaviscroll,setnavercode} = useStore()
   const location =useLocation()
   const navigate = useNavigate()
+  
   // const parmas = new URLSearchParams(window.location.search);
   
   
   const [loca,setloca] =useState(location.length)
   const {userid,locallocation,setlocation,setdarkmode,darkmode}=useStore()
-//   useEffect(()=>{
-//     setdarkmode(window.matchMedia("(prefers-color-scheme: dark).matches"))
-//    setlocation( window.location.href)
-//    const parmas = new URLSearchParams(window.location.search);
-//   //  console.log(parmas.get('code') ,parmas.get('state'),'파람')
-//    if(parmas.get('state')==="NaverLogin"){
-//     console.log('네이버로그인임')
-//     window.opener.naveroff(parmas.get('code'))
-//     window.close()
-//     // navigate('login',{state:{naver: true}})
-//    }
-//  },[])  
+  const [oauth1,setoauth1] = useState('')
+  useEffect(()=>{
+    setdarkmode(window.matchMedia("(prefers-color-scheme: dark).matches"))
+  //  setlocation( window.location.href)
+   const parmas = new URLSearchParams(window.location.search);
+  //  console.log(parmas.get('code') ,parmas.get('state'),'파람')
+   if(parmas.get('state')==="NaverLogin"){
+    console.log('네이버로그인임')
+    // window.opener.naveroff(parmas.get('code'))
+    // window.close()
+
+    setoauth1( parmas.get('code'))
+    // navigate('login',{state:{naver: true,naver_code : parmas.get('code')}})
+   }else if(parmas.get('state')==='kakao'){
+    console.log('카카오로그인')
+    setoauth1( parmas.get('code'))
+    navigate('login',{state:{kakao: true, kakao_code : parmas.get('code')}})
+   }
+ },[])  
 // console.log(locallocation, '잘저장되어있나?')
+function locationset(){
+  const href= /login/
+  setlocation( window.location.href.replace(href, ''))
+}
     function scrollcontrol(){
      
         if(this.window.scrollY>100){
@@ -34,7 +46,8 @@ export default function Indexpage(){
         }
       }
       useEffect(()=>{
-        
+
+        locationset()
    
         window.addEventListener('scroll',scrollcontrol)
         return()=>{
@@ -51,7 +64,7 @@ export default function Indexpage(){
     return(
         <>
         {location==='/admin'?  '':<Navbar/>}
-        <Outlet>
+        <Outlet aouth={oauth1}>
       
         </Outlet>
         </>
