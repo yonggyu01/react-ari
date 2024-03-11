@@ -101,10 +101,10 @@ export default function Orderpage(){
 		<button type="button" className="px-6 py-2 border rounded-md border-cyan-600" onClick={()=>{
             navigate('/')
         }}>Back
-			<span className="sr-only sm:not-sr-only">to shop</span>
+			<span className="sr-only sm:not-sr-only"> to shop</span>
 		</button>
 		<button type="button" className="px-6 py-2 border rounded-md bg-cyan-600 text-gray-50 border-cyan-600">
-			<span className="sr-only sm:not-sr-only">Continue to</span>Checkout
+			<span className="sr-only sm:not-sr-only">Continue to </span>Checkout
 		</button>
 	</div>
 </div>
