@@ -1,7 +1,23 @@
 import { Link } from "react-router-dom"
+import { useStore } from "../store/store"
+import { useEffect, useState } from "react"
+import axios from "axios"
+
 
 export default function Adminpage(){
-  
+  const {userallinfo,setuserinfo,userSign,loginsuc,setaccountP,setloginstate}=useStore()
+  function userinfo(){
+    axios.post('/sign',{mode : 'get'}).then(res => {setuserinfo(res.data)
+      // console.log(res.data)
+      console.log(userallinfo, '어드민 관련자료')
+    }  )
+   }
+const [data,setdata]=useState()
+useEffect(()=>{
+  userinfo()
+},[])
+
+ 
     return(
         <div>
         <div x-data="{ userDropdownOpen: false, mobileNavOpen: false }">
@@ -75,8 +91,8 @@ export default function Adminpage(){
           </div>
           <hr className="h-5 border-0" />
           <div className="space-y-1.5">
-            <a
-              href="javascript:void(0)"
+            <Link
+              to='user' state={{...userallinfo}}
               className="group flex items-center justify-between gap-2 rounded-md border border-transparent px-2.5 py-2 text-sm font-semibold text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200"
             >
               <svg
@@ -92,10 +108,9 @@ export default function Adminpage(){
               </svg>
               <span className="grow">Users</span>
               <span
-                className="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900"
-                >563</span
-              >
-            </a>
+                className="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900">
+                  {userallinfo.length}</span>
+            </Link>
 
           </div>
         </nav>
@@ -151,8 +166,8 @@ export default function Adminpage(){
             </div>
             <hr className="h-5 border-0" />
             <div className="space-y-1.5">
-              <a
-                href="javascript:void(0)"
+              <Link
+                to="user" state={{...userallinfo}}
                 className="group flex items-center justify-between gap-2 rounded-md border border-transparent px-2.5 py-2 text-sm font-semibold text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200"
               >
                 <svg
@@ -169,9 +184,9 @@ export default function Adminpage(){
                 <span className="grow">Users</span>
                 <span
                   className="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900"
-                  >563</span
+                  >    {userallinfo.length}</span
                 >
-              </a>
+              </Link>
            
             </div>
             <hr className="h-5 border-0" />
@@ -196,7 +211,10 @@ export default function Adminpage(){
               </a>
               <Link to='/'
                 onClick={()=>{
-
+                  userSign('로그인필요')
+                loginsuc(false)
+                setaccountP('')
+               setloginstate('')
                 }}
                 className="group flex items-center justify-between gap-2 rounded-md border border-transparent px-2.5 py-2 text-sm font-semibold text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200"
               >
@@ -260,51 +278,9 @@ export default function Adminpage(){
                   </dd>
                 </dl>
               </div>
-              {/* <div
-                className="overflow-hidden rounded-xl border border-slate-200 bg-white sm:col-span-12 lg:col-span-6"
-              >
-                <dl className="px-6 pt-6">
-                  <dt className="text-2xl font-bold">$168,682</dt>
-                  <dd className="text-sm font-medium text-slate-500">
-                    Total Earnings
-                  </dd>
-                </dl>
-                <div className="-m-2">
-                  <svg
-                    className="w-auto text-indigo-100"
-                    fill="currentColor"
-                    viewBox="0 0 1000 500"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M 0,493.9109719606716 C 14.200000000000001,490.40802978683513 42.60000000000001,487.5791262811064 71,476.39626109148924 C 99.4,465.21339590187205 113.6,453.15974467495977 142,437.99664601258576 C 170.4,422.8335473502118 184.6,406.98651600999744 213,400.58076777961935 C 241.4,394.17501954924126 255.6,416.4756240849917 284,405.9679048606953 C 312.4,395.46018563639893 326.6,358.32287941899733 355,348.0421716581375 C 383.4,337.7614638972776 397.6,368.4679124832968 426,354.5643660563959 C 454.4,340.660819629495 468.6,300.30672545627453 497,278.5244395236329 C 525.4,256.7421535909913 539.6,252.0730672209553 568,245.65293639318784 C 596.4,239.23280556542042 610.6,231.89211788080013 639,246.42378538479574 C 667.4,260.95545288879134 681.6,336.33567203932097 710,318.3112739131659 C 738.4,300.28687578701084 752.6,166.6854990107404 781,156.30179475402042 C 809.4,145.91809049730045 823.6,289.85843160308036 852,266.3927526295661 C 880.4,242.92707365605182 894.6,59.99402379966443 923,38.9733998864491 C 951.4,17.952775973233773 979.8,136.82638642808135 994,161.28963306348942,L 1000 500,L 0 500Z"
-                      fill="#E0E7FF"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div
-                className="overflow-hidden rounded-xl border border-slate-200 bg-white sm:col-span-12 lg:col-span-6"
-              >
-                <dl className="px-6 pt-6">
-                  <dt className="text-2xl font-bold">768,541</dt>
-                  <dd className="text-sm font-medium text-slate-500">
-                    Total Pageviews
-                  </dd>
-                </dl>
-                <div className="-m-2">
-                  <svg
-                    className="w-auto text-indigo-100"
-                    fill="currentColor"
-                    viewBox="0 0 1000 500"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M 0,491.97664735392186 C 14.2,487.6342321000262 42.599999999999994,479.4664419168693 71,470.26457108444356 C 99.4,461.0627002520178 113.6,460.88088046251244 142,445.967293191793 C 170.4,431.0537059210735 184.6,401.92769317557264 213,395.6966347308462 C 241.4,389.46557628611976 255.6,425.8825606617139 284,414.8120009681609 C 312.4,403.74144127460784 326.6,363.99447099184636 355,340.343836263081 C 383.4,316.6932015343157 397.6,303.4354664839433 426,296.5588273243342 C 454.4,289.68218816472506 468.6,313.94896637638396 497,305.96064046503545 C 525.4,297.97231455368694 539.6,258.86629470075934 568,256.61719776759156 C 596.4,254.36810083442379 610.6,314.6658746403039 639,294.7151557991966 C 667.4,274.76443695808933 681.6,173.183035720006 710,156.863603562055 C 738.4,140.54417140410402 752.6,214.65802978224644 781,213.11799500944176 C 809.4,211.57796023663707 823.6,150.70388385188858 852,149.16342969803156 C 880.4,147.62297554417455 894.6,213.57548048920893 923,205.4157242401567 C 951.4,197.25596799110446 979.8,127.77486361024759 994,108.36464845277033,L 1000 500,L 0 500Z"
-                    />
-                  </svg>
-                </div>
-              </div> */}
+     
+
+
               <div
                 className="overflow-hidden rounded-xl border border-slate-200 bg-white sm:col-span-12"
               >
@@ -479,7 +455,7 @@ export default function Adminpage(){
         <div
           className="flex flex-col space-y-2 border-t-2 border-slate-200/50 py-6 text-center text-sm font-medium text-slate-600 md:flex-row md:justify-between md:space-y-0 md:text-start"
         >
-          <div> <span className="font-semibold">관리자 페이지 </span></div>
+          {/* <div> <span className="font-semibold">관리자 페이지 </span></div> */}
     
         </div>
       </div>

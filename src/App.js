@@ -22,13 +22,18 @@ import Future from './pages/arifutuer.js';
 import Ari100pic from './pages/ari100pic';
 import Ari_insta from './pages/ari_insta';
 import Myblogdetail from './pages/myBlogdetail';
+import Adminuser from './pages/adminuser';
+import Adminindex from './pages/adminindex';
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       
       <Route path="/" element={<Indexpage/>} errorElement={<Notfound/>} >
       <Route index element={<Dicemain/>}/>
-        <Route path="/admin" element={<Adminpage/>}></Route>
+        <Route path="admin" element={<Adminindex/>}>
+          <Route index element={<Adminpage/>}/>
+          <Route path="user" element={<Adminuser/>}/>
+        </Route>
         <Route path="/blog" element={<Myblog/>}></Route>
         <Route path="/blogdetail/:idx" element={<Myblogdetail/>}/>
         <Route path="portfolio" element={<Portfolio/>}></Route>

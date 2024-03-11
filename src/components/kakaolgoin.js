@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import {useStore} from '../store/store'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Kakao({aouth}){
     const location = useLocation()
@@ -80,7 +81,10 @@ useEffect(()=>{
         body:url_form_data
       })
       const result = await response.json()
-      window.Kakao.isInitialized()
+      if(!window.Kakao.isInitialized()){
+
+          window.Kakao.isInitialized()
+      }
       setkakaotoken(result.access_token)
       window.Kakao.Auth.setAccessToken(result.access_token)
       window.Kakao.API.request({
@@ -94,6 +98,13 @@ useEffect(()=>{
             userSign(response.id)
             loginsuc(true)
             setloginstate('kakao')
+            axios.post('/sign',{
+                mode : 'sign',
+                name : response.id+'님',
+                uid : response.id,
+                pwd : 'kakao로그인',
+                create_account : Date.now(),
+                })
             alert(`${response.id}님 로그인에 성공하셨습니다.`)
             //  여기에 서버쪽으로 회원정보 보내야할듯함
             navigate('/')

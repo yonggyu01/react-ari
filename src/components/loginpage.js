@@ -4,11 +4,14 @@ import {useStore} from '../store/store'
 import { useLocation, useNavigate } from "react-router-dom";
 import {NaverLogin} from './naverlogin'
 import '../css/Loginpage.css'
+import axios from 'axios';
 import Kakao from './kakaolgoin';
 export default function Loginpage(){
   const location=useLocation()
+
   console.log(location,'로그인시')
-  const {islogo,userSign,loginsuc,locallocation,setloginstate,setnavercode} = useStore()
+  const store = useStore()
+  const {islogo,userSign,loginsuc,locallocation,setloginstate,setuserinfo,userallinfo,setaccountP} = useStore()
   console.log(useStore())
   const navigate = useNavigate();
   const [userid,setuser] = useState('')
@@ -19,10 +22,27 @@ export default function Loginpage(){
   const passw = useRef(null)
   const passcheck = useRef(null)
   const myname = useRef(null)
+  const [isID , setisID] = useState('')
+
   //
+  
+// 어드민 페이지에서도 써먹자
+ function userinfo(){
+  axios.post('/sign',{mode : 'get'}).then(res => {setuserinfo(res.data)
+    console.log(res.data)
+  }  )
+ }
+function idcheck(value){
+  userallinfo.map((item)=>{
+    if(value===item.u_id){
+      setisID(<span className='ml-5 text-red'>중복 아이디 </span>)
+     
+    }else{
+      setisID(<span className='ml-5 text-blue'>사용가능 아이디 </span>)
+    }
 
-
-
+  })
+}
   //
   async function signmypage(e){
     // 태그   myid   myname passcheck  passw  focus() 용도임
@@ -63,12 +83,23 @@ export default function Loginpage(){
       passcheck.current.focus()
       return window.alert('비밀번호가 틀렸습니다.')
     }else{
-      userSign(username)
-      loginsuc(true)
-      setsign(!sign)
-      setloginstate('my')
-          rolling()
-    
+      axios.post('/sign',{
+        mode : 'sign',
+        name : username,
+        uid : userid,
+        pwd : yourpass,
+        create_account : Date.now(),
+        }).then(res=> {
+          if(res.status === 200){
+            userSign(username)
+            loginsuc(true)
+            setsign(!sign)
+            setloginstate('my')
+                rolling()
+          }else{
+            window.alert('회원가입 서버가 닫혀있습니다. 관리자에게 연락하세요')
+          }
+        })       
     }}
 
 
@@ -100,15 +131,13 @@ window.location.href = fullurl
  useEffect(() => {
   // initializeNaverLogin()
   // userAccessToken()
+  userinfo()
 }, [])
 
 // 네이버 접근토큰 발급 , 갱신주소
 // const url = 'https://nid.naver.com/oauth2.0/token'
 // 네이버 회원프로필 조회주소
 // const url = 'https://openapi.naver.com/v1/nid/me'
-
-  
- 
   const [sign,setsign]=useState(false)
   const [maxheight,setmax] = useState('hero min-h-screen bg-base-200')
   const [tranrotate,setroll] = useState({transform: 'perspective(700px) rotateX(0deg) rotateY( 0deg)'}) ;
@@ -116,8 +145,35 @@ window.location.href = fullurl
     setsign(!sign)
     setroll( {transform: `perspective(700px) rotateX(0deg) rotateY(${ sign? 0 : 180}deg)` })
   }
-  function clicklogo(){
-    islogo()
+ 
+  async function loginuser(){
+    axios.post('/sign',{
+      mode: 'login',
+      uid : userid,
+      pwd : yourpass
+    }).then(res =>{
+      console.log(res)
+      if(res.data.state){
+        userSign(res.data.u_name)
+        loginsuc(true)
+        // setsign(!sign)
+        setaccountP({
+          name : res.data.u_name,
+          id : res.data.u_id,
+          create_account : res.data.create_account,
+          pwd: res.data.pwd
+        })
+        setloginstate('my')
+            rolling()
+            if(res.data.u_id !== 'admin'){
+              navigate('/')
+            }else{
+              navigate('/admin')
+            }
+      }else{
+        window.alert(res.data.text)
+      }
+    })
   }
 return(
 <>
@@ -125,7 +181,7 @@ return(
 <div className={maxheight}>
    
   <div className="hero-content flex-col">
-    <Kakao></Kakao>
+    {/* <Kakao></Kakao> */}
     <div className="text-center">
       {!sign? <h1 className="text-5xl font-bold">회원 로그인 </h1> :<h1 className="text-5xl font-bold">회원가입 </h1> }
       <p className="py-1">반갑습니다.  </p>
@@ -141,7 +197,7 @@ return(
           </label>
           <input type="email" placeholder="email" value={userid} onChange={(e)=>{setuser(e.target.value)}
             
-        }  className="input input-bordered"  />
+        }  className="input input-bordered"  /> 
         </div>
         <div className="form-control">
           <label className="label">
@@ -160,8 +216,8 @@ return(
             rolling()
           }}>Sign in</button>
           <button className="btn btn-primary mb-2" onClick={(e)=>{e.preventDefault()
-            navigate('/')
-}}>Login</button>
+          loginuser()
+          }}>Login</button>
   <div className='flex flex-row justify-between  '>
           <div className="btn  btn-warning box-border  w-2/4" onClick={(e)=>{e.preventDefault()
 
@@ -188,7 +244,10 @@ return(
           <label className="label">
             <span className="label-text">Email</span>
           </label>
-          <input type="userid" placeholder="Email" className="input input-bordered" ref={myid} required value={userid} onChange={(e)=>{setuser(e.target.value)}}  />
+          <input type="userid" placeholder="Email" className="input input-bordered" ref={myid} required value={userid} onChange={(e)=>{setuser(e.target.value)
+              idcheck(e.target.value)
+        }}  />
+          {isID}
         </div>
         <div className="form-control">
           <label className="label">
@@ -221,3 +280,4 @@ return(
 </>
 )
 }
+

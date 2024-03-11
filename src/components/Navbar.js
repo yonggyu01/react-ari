@@ -6,7 +6,7 @@ import { Link, useNavigate,useLocation } from 'react-router-dom';
 import { useRef } from 'react';
 
 export default function Navbar(){
-  const {mycart,navertoken,kakaotoken}=useStore()
+  const {mycart,navertoken,kakaotoken,setaccountP}=useStore()
   const navigate = useNavigate()
   const location = useLocation()
   const {locallocation,setdarkmode,islogo,loginnow,userSign, loginsuc,userid,loginstate,setroll,setloginstate,naviscroll} = useStore()
@@ -29,6 +29,8 @@ export default function Navbar(){
 const logoutmode = ()=>{
   userSign('로그인필요')
        loginsuc(false)
+       setaccountP('')
+       setloginstate('')
   if(loginstate === 'kakao'){
     //카카오 로그아웃
     const client_id = process.env.REACT_APP_kakao_rest
@@ -40,9 +42,11 @@ const logoutmode = ()=>{
     const NAVER_CALLBACK_URL = locallocation
     const Naversecet = process.env.REACT_APP_naver_secret
     const url = `https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=${NAVER_CLIENT_ID}&client_secret=${Naversecet}&access_token=${navertoken}&service_provider=NAVER`
-    fetch(url).then(res=> res.json()).then(res => console.log(res))
+    fetch(url)
+    // .then(res=> res.json()).then(res => console.log(res))
   }else{
     // 내 서버에서 로그아웃하기
+    window.location.reload()
   }
 }
 
@@ -188,7 +192,7 @@ return (
     </div>
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar ">
-        <div className="flex items-center   rounded-full bg-neutral text-neutral-content  w-12" style={{display:'flex', alignItems:'center'}}>
+        <div className="flex items-center justify-center  rounded-full bg-neutral text-neutral-content  w-12" style={{display:'flex', alignItems:'center'}}>
         <span className="text-sm truncate ">{userid}</span>
         </div>
 

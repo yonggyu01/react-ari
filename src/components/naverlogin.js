@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import {useStore} from '../store/store'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
     const {userSign,loginsuc,locallocation,setloginstate,setnavertoken,loginnow} = useStore()
@@ -46,6 +47,13 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
                     userSign(username)
                     loginsuc(true)
                     setloginstate('naver')
+                    axios.post('/sign',{
+                        mode : 'sign',
+                        name : username,
+                        uid : userid,
+                        pwd : '네이버로그인',
+                        create_account : Date.now(),
+                        })
                     navigate('/')
                 }else{
                     naverLogin.reprompt()

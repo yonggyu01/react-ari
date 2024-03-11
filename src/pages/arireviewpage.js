@@ -3,12 +3,23 @@ import {useStore} from '../store/store'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import {useStar} from '../components/usestar'
+import axios from 'axios'
 export default function Arireviewpage(){
 const [render,setrender] = useState(false)
-const {review,userid,loginnow,setreview} = useStore()
+const {review,userid,loginnow,setreview,accountP} = useStore()
 const [mystar,setstar] = useState(0)
 const [myreview,setmyreview] = useState('')
 const [mytitle,setmytitle] = useState('')
+const [dbreview , setdbreview] =useState([])
+// console.log(accountP)
+
+  function getreview(){
+    axios.post('/review',{
+      mode:'get'
+    }).then(res => { setreview(...res.data)
+    setdbreview(res.data)
+  }).catch(err => window.alert('데이터 회신 실패'))
+  }
 
 
 /**
@@ -16,7 +27,13 @@ const [mytitle,setmytitle] = useState('')
  * @param1 array = elements
  * @param2 title = 글제목
  */ 
- function creatreview(array,title){
+async function creatreview(array,title){
+  if(!title){
+    return window.alert('글제목을 작성해주세요')
+  }
+  if(!myreview){
+    return window.alert('글 내용을 작성해주세요')
+  }
   let mynum = 0
   for(let x= 0; x<5 ; x++){
     if(array[x].checked ){
@@ -25,13 +42,15 @@ const [mytitle,setmytitle] = useState('')
   }
   
   // console.log(mystar,review)
- const data = {user : userid,
-  header : title, 
-  body : myreview,
-  id:Date.now(),
+ const data = {
+  mode : 'add',
+  title : title, 
+  content : myreview,
   star : mynum,
-  totalstar : 5
+  totalstar : 5,
+  uid : accountP.id
 }
+axios.post('/review',data).then(res => console.log(res, '리뷰받아옴'))
 setreview(data)
 // 위 함수가 store에 리뷰 등록함  
 
@@ -40,6 +59,7 @@ document.getElementById(`my_modal_review`).close()
 setmyreview('')
  }
 useEffect(()=>{
+  getreview()
   setrender(false)
 },[render])
 // console.log(review)
@@ -47,9 +67,9 @@ function starmaker(idx,starnum){
   let mystar = []
   for(let x = 0 ; x<5 ; x++){
       if(x==starnum){
-        mystar.push(<input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400" checked/>)
+        mystar.push(<input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400" readOnly checked/>)
       }else{
-        mystar.push(<input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400" />)
+        mystar.push(<input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400" readOnly/>)
       }
   }
 return  mystar
@@ -162,7 +182,7 @@ return  mystar
 
     {/* 리뷰모달완료 */}
     <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
-        {review.map((item,idx)=> ( <blockquote key={item.id+idx} className="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8">
+        {dbreview && dbreview.map((item,idx)=> ( <blockquote key={item.title+idx} className="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8">
         <div>
           <div className="flex gap-0.5 text-green-500">
           <div className="rating rating-lg">
@@ -172,10 +192,10 @@ return  mystar
           </div>
 
           <div className="mt-4">
-            <p className="text-2xl font-bold text-rose-600 sm:text-3xl">{item.header}</p>
+            <p className="text-2xl font-bold text-rose-600 sm:text-3xl">{item.title}</p>
 
             <p className="mt-4 leading-relaxed text-gray-700">
-             {item.body}
+             {item.content}
             </p>
           </div>
         </div>
@@ -185,7 +205,6 @@ return  mystar
 
         ))}
       
-
     </div>
   </div>
 </section>

@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react"
+import { useEffect,useRef,useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 export default function Ari_insta(){
@@ -6,20 +6,33 @@ export default function Ari_insta(){
     // console.log(process.env.REACT_APP_insta_code)
     const [render, setrender] = useState(false)
     const [baby,setbaby ]= useState()
+    const baby1= useRef([])
     const mydata = []
     const navigate= useNavigate()
-   async function instaget(){
+    const [more,setmore]=useState(12)
+   async function instaget(num){
     const data = await fetch(`https://graph.instagram.com/me/media?fields=id,caption,timestamp,media_type,media_url,thumbnail_url&access_token=${process.env.REACT_APP_insta_code}`)
     const result  =await data.json()
     // console.log(result)
     setbaby(result)
     // console.log(baby)
 }
+function instamore(num){
+  setmore(more + num)
+  baby&& baby.data.map((item,idx)=> {
+    if(more>idx){
+      baby1.current[idx] = item
+    }})
+  
+}
+// 더보기는 좀 고민해보자 충분히 가능함
+
 
 useEffect(()=>{
     instaget()
 },[])
 useEffect(()=>{
+  instamore(2)
   setrender(false)
 },[render])
     return(
@@ -109,7 +122,13 @@ useEffect(()=>{
 
         }
     })}
+     <div className='flex w-full justify-center mb-5'>
+        <button type="button" className="px-8 py-3 font-semibold rounded-full bg-gray-800 text-gray-100 dark:bg-indigo-700 dark:text-white" onClick={()=>{
+          console.log(baby1.current)
+          instamore(2)
+        }}>더보기</button>
 
+        </div>
 
 </div>
        
