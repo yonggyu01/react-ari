@@ -1,20 +1,36 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { useStore } from "../store/store"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
 
 export default function Adminpage(){
-  const {userallinfo,setuserinfo,userSign,loginsuc,setaccountP,setloginstate}=useStore()
+  const {setuserinfo,userSign,loginsuc,setaccountP,setreview,userallinfo,setloginstate,review}=useStore()
+  const [re,setre] =useState([])
+  const [ubuy,setubuy] =useState([])
+
   function userinfo(){
     axios.post('/sign',{mode : 'get'}).then(res => {setuserinfo(res.data)
-      // console.log(res.data)
-      console.log(userallinfo, '어드민 관련자료')
     }  )
+  }
+   function get_cartlist(){
+    axios.post('/cart',{
+      mode:'get'
+    }).then(res => {
+      setubuy(res.data)
+      }).catch(err => window.alert('구매데이터 회신 실패'))
    }
-const [data,setdata]=useState()
+   function getreview(){
+    axios.post('/review',{
+      mode:'get'
+    }).then(res => { setre(res.data)
+      // console.log(res.data, '앞은 디비데이터',review,'뒤는 리뷰데이터')
+  }).catch(err => window.alert('데이터 회신 실패'))
+  }
 useEffect(()=>{
   userinfo()
+  get_cartlist()
+  getreview()
 },[])
 
  
@@ -28,7 +44,7 @@ useEffect(()=>{
     <div id="page-header" className="z-1 flex flex-none items-center">
       <div className="container mx-auto px-4 lg:px-8 xl:max-w-7xl">
         <div className="flex justify-between border-b-2 border-slate-200/50 py-6">
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <a
               href="javascript:void(0)"
               className="text-md group inline-flex items-center gap-1 font-bold tracking-wide text-slate-700 hover:text-indigo-600 active:text-slate-700 sm:text-lg"
@@ -36,7 +52,7 @@ useEffect(()=>{
           
               <span>관리자 페이지</span>
             </a>
-          </div>
+          </div> */}
 
    
         </div>
@@ -64,8 +80,8 @@ useEffect(()=>{
           </a>
           <hr className="h-5 border-0" />
           <div className="space-y-1.5">
-            <a
-              href="javascript:void(0)"
+            <Link
+              to="buy"
               className="group flex items-center justify-between gap-2 rounded-md border border-transparent px-2.5 py-2 text-sm font-semibold text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200"
             >
               <svg
@@ -81,12 +97,12 @@ useEffect(()=>{
                   clip-rule="evenodd"
                 />
               </svg>
-              <span className="grow">Sales</span>
+              <span className="grow">회원 구매정보</span>
               <span
                 className="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900"
-                >250</span
+                >{ubuy.length}</span
               >
-            </a>
+            </Link>
  
           </div>
           <hr className="h-5 border-0" />
@@ -106,7 +122,7 @@ useEffect(()=>{
                   d="M10 9a3 3 0 100-6 3 3 0 000 6zM6 8a2 2 0 11-4 0 2 2 0 014 0zM1.49 15.326a.78.78 0 01-.358-.442 3 3 0 014.308-3.516 6.484 6.484 0 00-1.905 3.959c-.023.222-.014.442.025.654a4.97 4.97 0 01-2.07-.655zM16.44 15.98a4.97 4.97 0 002.07-.654.78.78 0 00.357-.442 3 3 0 00-4.308-3.517 6.484 6.484 0 011.907 3.96 2.32 2.32 0 01-.026.654zM18 8a2 2 0 11-4 0 2 2 0 014 0zM5.304 16.19a.844.844 0 01-.277-.71 5 5 0 019.947 0 .843.843 0 01-.277.71A6.975 6.975 0 0110 18a6.974 6.974 0 01-4.696-1.81z"
                 />
               </svg>
-              <span className="grow">Users</span>
+              <span className="grow">회원관리</span>
               <span
                 className="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900">
                   {userallinfo.length}</span>
@@ -139,8 +155,8 @@ useEffect(()=>{
             </a>
             <hr className="h-5 border-0" />
             <div className="space-y-1.5">
-              <a
-                href="javascript:void(0)"
+              <Link
+                to="buy"
                 className="group flex items-center justify-between gap-2 rounded-md border border-transparent px-2.5 py-2 text-sm font-semibold text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200"
               >
                 <svg
@@ -156,12 +172,12 @@ useEffect(()=>{
                     clip-rule="evenodd"
                   />
                 </svg>
-                <span className="grow">Sales</span>
+                <span className="grow">회원 구매정보</span>
                 <span
                   className="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900"
-                  >250</span
+                  >{ubuy.length}</span
                 >
-              </a>
+              </Link>
         
             </div>
             <hr className="h-5 border-0" />
@@ -181,7 +197,7 @@ useEffect(()=>{
                     d="M10 9a3 3 0 100-6 3 3 0 000 6zM6 8a2 2 0 11-4 0 2 2 0 014 0zM1.49 15.326a.78.78 0 01-.358-.442 3 3 0 014.308-3.516 6.484 6.484 0 00-1.905 3.959c-.023.222-.014.442.025.654a4.97 4.97 0 01-2.07-.655zM16.44 15.98a4.97 4.97 0 002.07-.654.78.78 0 00.357-.442 3 3 0 00-4.308-3.517 6.484 6.484 0 011.907 3.96 2.32 2.32 0 01-.026.654zM18 8a2 2 0 11-4 0 2 2 0 014 0zM5.304 16.19a.844.844 0 01-.277-.71 5 5 0 019.947 0 .843.843 0 01-.277.71A6.975 6.975 0 0110 18a6.974 6.974 0 01-4.696-1.81z"
                   />
                 </svg>
-                <span className="grow">Users</span>
+                <span className="grow">회원관리</span>
                 <span
                   className="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900"
                   >    {userallinfo.length}</span
@@ -191,8 +207,8 @@ useEffect(()=>{
             </div>
             <hr className="h-5 border-0" />
             <div className="space-y-1.5">
-              <a
-                href="javascript:void(0)"
+              <Link
+                to='review'
                 className="group flex items-center justify-between gap-2 rounded-md border border-transparent px-2.5 py-2 text-sm font-semibold text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200"
               >
                 <svg
@@ -207,8 +223,12 @@ useEffect(()=>{
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span className="grow">Account</span>
-              </a>
+               
+                <span className="grow">회원 리뷰관리</span> <span
+                  className="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900"
+                  >{re.length}</span
+                >
+              </Link>
               <Link to='/'
                 onClick={()=>{
                   userSign('로그인필요')
@@ -242,9 +262,9 @@ useEffect(()=>{
                 className="rounded-lg border border-slate-200 bg-white p-6 sm:col-span-6 xl:col-span-3"
               >
                 <dl>
-                  <dt className="text-2xl font-bold">63</dt>
+                  <dt className="text-2xl font-bold">{userallinfo.length}</dt>
                   <dd className="text-sm font-medium text-slate-500">
-                    Accounts today
+                    총 회원수
                   </dd>
                 </dl>
               </div>
@@ -252,9 +272,9 @@ useEffect(()=>{
                 className="rounded-lg border border-slate-200 bg-white p-6 sm:col-span-6 xl:col-span-3"
               >
                 <dl>
-                  <dt className="text-2xl font-bold">6</dt>
+                  <dt className="text-2xl font-bold">{ubuy.length}</dt>
                   <dd className="text-sm font-medium text-slate-500">
-                    Sales today
+                    판매 현황
                   </dd>
                 </dl>
               </div>
@@ -262,32 +282,19 @@ useEffect(()=>{
                 className="rounded-lg border border-slate-200 bg-white p-6 sm:col-span-6 xl:col-span-3"
               >
                 <dl>
-                  <dt className="text-2xl font-bold">5</dt>
+                  <dt className="text-2xl font-bold">{re.length}</dt>
                   <dd className="text-sm font-medium text-slate-500">
-                    Open Tickets
+                   회원 리뷰
                   </dd>
                 </dl>
               </div>
-              <div
-                className="rounded-lg border border-slate-200 bg-white p-6 sm:col-span-6 xl:col-span-3"
-              >
-                <dl>
-                  <dt className="text-2xl font-bold">10</dt>
-                  <dd className="text-sm font-medium text-slate-500">
-                    Pending Invoices
-                  </dd>
-                </dl>
-              </div>
-     
-
-
               <div
                 className="overflow-hidden rounded-xl border border-slate-200 bg-white sm:col-span-12"
               >
                 <div className="px-6 pt-6">
                   <h2 className="text-2xl font-bold">판매 목록</h2>
                   <h3 className="text-sm font-medium text-slate-500">
-                    You have 6 new sales today, keep it up!
+                     총 {ubuy.length} 개의 상품이 팔렸습니다.  
                   </h3>
                 </div>
                 <div className="p-6">
@@ -298,7 +305,7 @@ useEffect(()=>{
                           <th
                             className="px-3 py-2 text-start text-sm font-semibold uppercase tracking-wider text-slate-700"
                           >
-                            id
+                            Order_id
                           </th>
                           <th
                             className="hidden px-3 py-2 text-start text-sm font-semibold uppercase tracking-wider text-slate-700 md:table-cell"
@@ -319,126 +326,25 @@ useEffect(()=>{
                       </thead>
 
                       <tbody>
-                        <tr>
-                          <td className="p-3 text-start">
-                            <a
-                              className="font-medium text-indigo-500 hover:text-indigo-700"
-                              href="javascript:void(0)"
-                              >order_0006578</a
-                            >
-                          </td>
-                          <td className="hidden p-3 text-slate-600 md:table-cell">
-                            g.taylor@example.com
-                          </td>
-                          <td className="hidden p-3 text-start md:table-cell">
-                            <div
-                              className="inline-block rounded-full border border-orange-200 bg-orange-50 px-2 py-1 text-xs font-semibold leading-4 text-orange-700"
-                            >
-                              Pending
-                            </div>
-                          </td>
-                          <td className="p-3 text-end font-medium">$185.13</td>
-                        </tr>
-                        <tr className="bg-slate-50">
-                          <td className="p-3 text-start">
-                            <a
-                              className="font-medium text-indigo-500 hover:text-indigo-700"
-                              href="javascript:void(0)"
-                              >order_0006577</a
-                            >
-                          </td>
-                          <td className="hidden p-3 text-slate-600 md:table-cell">
-                            j.keily@example.com
-                          </td>
-                          <td className="hidden p-3 text-start md:table-cell">
-                            <div
-                              className="inline-block rounded-full border border-orange-200 bg-orange-50 px-2 py-1 text-xs font-semibold leading-4 text-orange-700"
-                            >
-                              Pending
-                            </div>
-                          </td>
-                          <td className="p-3 text-end font-medium">$280.63</td>
-                        </tr>
-                        <tr>
-                          <td className="p-3 text-start">
-                            <a
-                              className="font-medium text-indigo-500 hover:text-indigo-700"
-                              href="javascript:void(0)"
-                              >order_0006576</a
-                            >
-                          </td>
-                          <td className="hidden p-3 text-slate-600 md:table-cell">
-                            n.hart@example.com
-                          </td>
-                          <td className="hidden p-3 text-start md:table-cell">
-                            <div
-                              className="inline-block rounded-full border border-emerald-200 bg-emerald-50 px-2 py-1 text-xs font-semibold leading-4 text-emerald-700"
-                            >
-                              Completed
-                            </div>
-                          </td>
-                          <td className="p-3 text-end font-medium">$110.69</td>
-                        </tr>
-                        <tr className="bg-slate-50">
-                          <td className="p-3 text-start">
-                            <a
-                              className="font-medium text-indigo-500 hover:text-indigo-700"
-                              href="javascript:void(0)"
-                              >order_0006575</a
-                            >
-                          </td>
-                          <td className="hidden p-3 text-slate-600 md:table-cell">
-                            j.doe@example.com
-                          </td>
-                          <td className="hidden p-3 text-start md:table-cell">
-                            <div
-                              className="inline-block rounded-full border border-emerald-200 bg-emerald-50 px-2 py-1 text-xs font-semibold leading-4 text-emerald-700"
-                            >
-                              Completed
-                            </div>
-                          </td>
-                          <td className="p-3 text-end font-medium">$120.37</td>
-                        </tr>
-                        <tr>
-                          <td className="p-3 text-start">
-                            <a
-                              className="font-medium text-indigo-500 hover:text-indigo-700"
-                              href="javascript:void(0)"
-                              >order_0006574</a
-                            >
-                          </td>
-                          <td className="hidden p-3 text-slate-600 md:table-cell">
-                            o.smith@example.com
-                          </td>
-                          <td className="hidden p-3 text-start md:table-cell">
-                            <div
-                              className="inline-block rounded-full border border-emerald-200 bg-emerald-50 px-2 py-1 text-xs font-semibold leading-4 text-emerald-700"
-                            >
-                              Completed
-                            </div>
-                          </td>
-                          <td className="p-3 text-end font-medium">$150.27</td>
-                        </tr>
-                        <tr className="bg-slate-50">
-                          <td className="p-3 text-start">
-                            <a
-                              className="font-medium text-indigo-500 hover:text-indigo-700"
-                              href="javascript:void(0)"
-                              >order_0006573</a
-                            >
-                          </td>
-                          <td className="hidden p-3 text-slate-600 md:table-cell">
-                            n.hart@example.com
-                          </td>
-                          <td className="hidden p-3 text-start md:table-cell">
-                            <div
-                              className="inline-block rounded-full border border-emerald-200 bg-emerald-50 px-2 py-1 text-xs font-semibold leading-4 text-emerald-700"
-                            >
-                              Completed
-                            </div>
-                          </td>
-                          <td className="p-3 text-end font-medium">$215.25</td>
-                        </tr>
+                        {
+                          ubuy&&ubuy.map((item)=>( <tr key = {item.id}>
+                            <td className="p-3 text-start">
+                              <a
+                                className="font-medium text-indigo-500 hover:text-indigo-700"
+                                href="javascript:void(0)"
+                                >{item.order_id}</a
+                              >
+                            </td>
+                            <td className="hidden p-3 text-slate-600 md:table-cell">
+                              {item.u_id}
+                            </td>
+                            <td className="hidden p-3 text-start md:table-cell">
+                              {item.item}
+                            </td>
+                            <td className="p-3 text-end font-medium">{item.price}원</td>
+                          </tr>
+  ))            }
+                                     
                       </tbody>
                     </table>
                   </div>
@@ -450,16 +356,7 @@ useEffect(()=>{
       </div>
     </main>
 
-    <footer id="page-footer" className="flex grow-0 items-center">
-      <div className="container mx-auto px-4 lg:px-8 xl:max-w-7xl">
-        <div
-          className="flex flex-col space-y-2 border-t-2 border-slate-200/50 py-6 text-center text-sm font-medium text-slate-600 md:flex-row md:justify-between md:space-y-0 md:text-start"
-        >
-          {/* <div> <span className="font-semibold">관리자 페이지 </span></div> */}
     
-        </div>
-      </div>
-    </footer>
   </div>
 </div>
         </div>

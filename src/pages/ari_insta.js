@@ -1,6 +1,6 @@
 import { useEffect,useRef,useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-
+import Realfooter from '../components/Realfooter'
 export default function Ari_insta(){
     // https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url&access_token=YOUR_ACCESS_TOKEN
     // console.log(process.env.REACT_APP_insta_code)
@@ -15,32 +15,36 @@ export default function Ari_insta(){
     const result  =await data.json()
     // console.log(result)
     setbaby(result)
+
     // console.log(baby)
 }
-function instamore(num){
-  setmore(more + num)
-  baby&& baby.data.map((item,idx)=> {
-    if(more>idx){
-      baby1.current[idx] = item
-    }})
-  
-}
-// 더보기는 좀 고민해보자 충분히 가능함
 
+// 더보기는 좀 고민해보자 충분히 가능함
+function moreinsta(number = more){
+ let morebtn = document.querySelectorAll('.nthgogo')
+ let btnlength =morebtn.length 
+ for(let x = 0 ; x<number; x++){
+   morebtn[x].style.display='block' 
+ }
+ for(let x = number ; x<btnlength; x++){
+   morebtn[x].style.display='none' 
+ }
+
+}
 
 useEffect(()=>{
     instaget()
+
 },[])
 useEffect(()=>{
-  instamore(2)
+  
   setrender(false)
 },[render])
     return(
-     
-<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-8 xl:grid-cols-4">
+     <>
+<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-8 xl:grid-cols-4 ">
       {baby&&baby.data.map((item,idx)=>{
-        if(idx <12){
-            return  <div className="mx-auto w-full  p-4 lg:p-8 overflow-hidden " key={item.id+idx}>
+                return  <div className="mx-auto w-full  p-4 lg:p-8 overflow-hidden nthgogo" key={item.id+idx}>
             <div
               className="grid grid-cols-1 gap-4  lg:gap-8 justify-center md:gap-8  aspect-video rounded-full"
             >
@@ -121,16 +125,11 @@ useEffect(()=>{
 
 
         }
-    })}
-     <div className='flex w-full justify-center mb-5'>
-        <button type="button" className="px-8 py-3 font-semibold rounded-full bg-gray-800 text-gray-100 dark:bg-indigo-700 dark:text-white" onClick={()=>{
-          console.log(baby1.current)
-          instamore(2)
-        }}>더보기</button>
-
-        </div>
+    )}
+  
 
 </div>
-       
+<Realfooter></Realfooter>
+</>
     )
 }

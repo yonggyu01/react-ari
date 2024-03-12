@@ -1,5 +1,6 @@
 import {Outlet } from "react-router-dom"
-import Adminnav from './adminnav'
+import Adminnav from "../components/adminnav"
+
 export default function Adminindex(){
   
 return(

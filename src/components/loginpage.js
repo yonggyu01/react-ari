@@ -168,7 +168,7 @@ window.location.href = fullurl
             if(res.data.u_id !== 'admin'){
               navigate('/')
             }else{
-              navigate('/admin')
+              navigate('/admin',{state: {userallinfo}})
             }
       }else{
         window.alert(res.data.text)

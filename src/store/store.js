@@ -14,6 +14,11 @@ export const useStore = create((set) => ({
   mycart : [],
   setmycart: (val)=>set((state)=>({...state,mycart:[...state.mycart,val]})),
   delmycart : (id) =>set((state)=>({mycart : state.mycart.filter(item => item.id !== id)})),
+  alldelcart : ()=>set((state)=>({...state, mycart :[]})),
+  orderid : '',
+  setorderid : (val) =>set((state)=>({...state,orderid : val})),
+  isOrder : false,
+  setisOrder :(boolean)=>set((state)=>({...state, isOrder : boolean})),
   review : [ 
     
   ],

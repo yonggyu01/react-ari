@@ -7,7 +7,7 @@ export default function Realfooter(){
 	<div className="container flex flex-wrap items-center justify-center mx-auto space-y-4 sm:justify-between sm:space-y-0">
 		<div className="flex flex-row pr-3 space-x-4 sm:space-x-8">
 			<div className="flex items-center justify-center flex-shrink-0 w-12 h-12 rounded-full bg-white-600 dark:text-white dark:invert">
-				<img src="./imgs/ari_logo.png"  />
+				<img src="/imgs/ari_logo.png"  />
 			</div>
 			<ul className="flex flex-wrap items-center space-x-4 sm:space-x-8">
 		
@@ -42,12 +42,12 @@ export default function Realfooter(){
             <Link>
             <div className="flex flex-col items-center dark:text-white">
         
-              <img src='./imgs/youtube-svgrepo-com.svg' className="h-6 w-6 dark:invert"></img>
+              <img src='/imgs/youtube-svgrepo-com.svg' className="h-6 w-6 dark:invert"></img>
 				Youtube
                 </div></Link>
 				
 			</li>
-			<li><Link >
+			<li><Link  >
             <div className="flex flex-col items-center dark:text-white">
             <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path

@@ -2,10 +2,13 @@ import { useEffect, useId, useState ,useRef} from 'react'
 // import Navbar from '../components/Navbar'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '../store/store'
+import axios from 'axios'
+
 export default function Orderpage(){
-    const {logoclick,islogo,rollbox,setroll} = useStore()
+    
+    const {logoclick,islogo,rollbox,setroll,accountP,loginnow,setisOrder} = useStore()
     const navigate = useNavigate()
-    const {mycart,delmycart} = useStore()
+    const {mycart,delmycart,alldelcart} = useStore()
     // console.log(mycart)
     const [total,settotal]  = useState(0)
     const [render,setrender] =useState(false)
@@ -26,7 +29,29 @@ export default function Orderpage(){
       totalvalue(mycart)
       setrender(false)
     },[render])
-    
+    function mapitems(){
+        // const date = new Date()
+        // create_date :date.getFullYear()+'년'+date.getMonth()+'월'+date.getDate()+'일'
+        mycart.map((item)=>{
+            onBuy(item)
+        })
+        alldelcart()
+        window.alert('구매완료')
+        setisOrder(false)
+    }    
+
+    function onBuy(item){
+        const data = {
+            item : item.title,
+            price : Number(item.sale.replace(reg,''))*item.Quantity,
+            quantity: item.Quantity,
+            total:total,
+            u_id: accountP.id,
+            create_date:item.create_date,
+            order_id:'order_'+item.order_id
+        }
+        axios.put('/cart', data).then(res => console.log(res,'구매잘들어감?'))
+    }
     // console.log('토탈',mycart)
     return(
         <>
@@ -103,7 +128,14 @@ export default function Orderpage(){
         }}>Back
 			<span className="sr-only sm:not-sr-only"> to shop</span>
 		</button>
-		<button type="button" className="px-6 py-2 border rounded-md bg-cyan-600 text-gray-50 border-cyan-600">
+		<button type="button" className="px-6 py-2 border rounded-md bg-cyan-600 text-gray-50 border-cyan-600" onClick={()=>{
+         if(!loginnow){
+            window.alert('로그인 후 이용가능합니다')
+            navigate('/login')
+         }else{
+            mapitems()
+         }   
+        }}>
 			<span className="sr-only sm:not-sr-only">Continue to </span>Checkout
 		</button>
 	</div>

@@ -24,6 +24,11 @@ import Ari_insta from './pages/ari_insta';
 import Myblogdetail from './pages/myBlogdetail';
 import Adminuser from './pages/adminuser';
 import Adminindex from './pages/adminindex';
+import Profile from './components/profile';
+import Adminreview from './pages/adminrevie';
+import Adminsetbuy from './pages/adminsetbuy';
+
+
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -33,11 +38,14 @@ function App() {
         <Route path="admin" element={<Adminindex/>}>
           <Route index element={<Adminpage/>}/>
           <Route path="user" element={<Adminuser/>}/>
+          <Route path="review" element={<Adminreview/>}/>
+          <Route path="buy" element={<Adminsetbuy/>}/>
         </Route>
         <Route path="/blog" element={<Myblog/>}></Route>
         <Route path="/blogdetail/:idx" element={<Myblogdetail/>}/>
         <Route path="portfolio" element={<Portfolio/>}></Route>
         <Route path="/login" element={<Loginpage/>}></Route>
+        <Route path="profile" element={<Profile/>}></Route>
         <Route path="popo" element={<Popo/>}></Route>
         <Route path="order" element={<Orderpage/>}></Route>
         <Route path="ari" element={<Ariindex/>}>

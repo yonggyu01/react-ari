@@ -1,11 +1,12 @@
-import React, { useId, useState } from 'react'
+import React, { useEffect, useId, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Scrolltop from '../components/scrolltop'
 import { useStore } from '../store/store'
 
+
 export default function Productpage (){
   const [inputval, setinputval]=useState(1)
-  const {setmycart} =useStore()
+  const {setmycart,setorderid,orderid,isOrder,setisOrder} =useStore()
   function sum(val){
     setinputval(val)
   }
@@ -90,11 +91,27 @@ export default function Productpage (){
         </div>
         },
     ]
+    const myorder_id = useId()
+    function setstoreorderid(){
+      if(!isOrder){
+        setorderid(myorder_id)
+        setisOrder(true)
+      }
+    }
+
+    useEffect(()=>{
+      setstoreorderid()
+
+    },[])
+    // console.log(orderid)
     // 물건 주문하는 함수임 여기에 저장해라
     function putorder(idx,number){
+      const date = new Date()
       const mylist = {
      ...productlist[idx],
      Quantity : number,
+     order_id : orderid,
+     create_date:date.getFullYear()+'년'+date.getMonth()+'월'+date.getDate()+'일' ,
      id : Date.now()
       }
 
