@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Client } from 'dsteem';
 import { Link, useNavigate } from 'react-router-dom';
-// var dsteem = require('dsteem')
 import { useStore } from "../store/store"
 
 export default function Myblog(){

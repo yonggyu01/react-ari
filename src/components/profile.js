@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect,  useState } from 'react'
 import {useStore} from '../store/store'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -13,7 +13,7 @@ export default function Profile(){
     const [pwdcheck , setpwdcheck]=useState('')
     const [render, setrender]=useState(false)
     async function onChangeprofile(){
-             if( pwd !== pwdcheck || pwd.length == 0){
+             if( pwd !== pwdcheck || pwd.length === 0){
                 return window.alert('회원정보 변경시 비밀번호를 입력해주세요.')
              } else{
             axios.put('/edit', {

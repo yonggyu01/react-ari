@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import {useStore} from '../store/store'
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import {  useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Kakao({aouth}){

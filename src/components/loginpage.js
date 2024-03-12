@@ -10,9 +10,8 @@ export default function Loginpage(){
   const location=useLocation()
 
   console.log(location,'로그인시')
-  const store = useStore()
-  const {islogo,userSign,loginsuc,locallocation,setloginstate,setuserinfo,userallinfo,setaccountP} = useStore()
-  console.log(useStore())
+
+  const {userSign,loginsuc,locallocation,setloginstate,setuserinfo,userallinfo,setaccountP} = useStore()
   const navigate = useNavigate();
   const [userid,setuser] = useState('')
   const [username,setusername] = useState('')
@@ -29,7 +28,6 @@ export default function Loginpage(){
 // 어드민 페이지에서도 써먹자
  function userinfo(){
   axios.post('/sign',{mode : 'get'}).then(res => {setuserinfo(res.data)
-    console.log(res.data)
   }  )
  }
 function idcheck(value){
@@ -79,7 +77,7 @@ function idcheck(value){
       passw.current.focus()
       return false;
     }
-    if(yourpass != passcheckme){
+    if(yourpass !== passcheckme){
       passcheck.current.focus()
       return window.alert('비밀번호가 틀렸습니다.')
     }else{

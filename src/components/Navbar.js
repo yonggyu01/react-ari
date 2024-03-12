@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
-import baby from '../imgs/baba.jpg'
-// import Drawlist from '../components/darwlist'
+import { useEffect } from 'react';
+
 import {useStore} from '../store/store'
 import { Link, useNavigate,useLocation } from 'react-router-dom';
 import { useRef } from 'react';
