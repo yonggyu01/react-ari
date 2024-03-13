@@ -47,21 +47,7 @@ function idcheck(value){
     // const mydata = [myid,myname,passcheck,passw]
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    let raw = JSON.stringify({
-      "state": 'account_create',
-      "id": userid,
-      "password":yourpass,
-      "name": username,
-      todo:[],
-      cart : [],
-    
-    });
-    let requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      mode:'cors',
-      body: raw
-    };
+   
     if(username.length<3){
       window.alert('이름은 2글자 이상 입력해줘')
       myname.current.focus()
@@ -161,8 +147,12 @@ window.location.href = fullurl
         setloginstate('my')
             rolling()
             if(res.data.u_id !== 'admin'){
+              setuser('')
+              setyourpass('')
               navigate('/')
             }else{
+              setuser('')
+              setyourpass('')
               navigate('/admin',{state: {userallinfo}})
             }
       }      
