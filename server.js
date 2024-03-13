@@ -21,10 +21,10 @@ res.sendFile(path.join(__dirname, "build", "index.html"));
 
 // 데이터베이스주소 위치 로그인아이디 패스워드 데이터베이스명
 const db = mysql.createConnection({
-  host : 'localhost',
-  user : 'root',
-  password: '',
-  database: 'userinfo'
+  host : 'maria-myari-public-db.cdeqy6w08pq4.ap-northeast-2.rds.amazonaws.com',
+  user : 'yonggyu',
+  password: 'kimyonggyu',
+  database: 'innodb'
 })
 
 let select = null

@@ -19,7 +19,7 @@ import Myblog from './pages/myBlog';
 import Portfolio from './pages/Portfolio';
 import Future from './pages/arifutuer.js';
 import Ari100pic from './pages/ari100pic';
-import AriInsta from './pages/ari_insta';
+import AriInsta from './pages/ariinsta';
 import Myblogdetail from './pages/myBlogdetail';
 import Adminuser from './pages/adminuser';
 import Adminindex from './pages/adminindex';
