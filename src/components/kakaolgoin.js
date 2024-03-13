@@ -95,22 +95,40 @@ useEffect(()=>{
         })
           .then(function(response) {
             axios.post('/sign',{
-                mode : 'sign',
-                name : response.id+'님',
-                uid : response.id,
-                pwd : 'kakao로그인',
-                create_account : Date.now(),
-                }).then(res => {
-                   setaccountP({
+              mode: 'login',
+              uid : userid,
+              pwd : 'kakao로그인'}).then(res=>{
+                if(res.data.state){
+                userSign(res.data.u_name)
+                loginsuc(true)
+                // setsign(!sign)
+                setaccountP({
+                  name : res.data.u_name,
+                  id : res.data.u_id,
+                  create_account : res.data.create_account,
+                  pwd: res.data.pwd
+                })
+                navigate('/') }else{
+                  axios.post('/sign',{
+                    mode : 'sign',
                     name : response.id+'님',
-                    id : response.id,
+                    uid : response.id,
+                    pwd : 'kakao로그인',
                     create_account : Date.now(),
-                    pwd: 'kakao로그인'
-                  })
-                  userSign(response.id)
-                  loginsuc(true)
-                  setloginstate('kakao')
-                  console.log(res, '카카오')})
+                    }).then(res => {
+                       setaccountP({
+                        name : response.id+'님',
+                        id : response.id,
+                        create_account : Date.now(),
+                        pwd: 'kakao로그인'
+                      })
+                      userSign(response.id)
+                      loginsuc(true)
+                      setloginstate('kakao')
+                      console.log(res, '카카오')}).catch(err=>console.error(err))
+                }
+              })
+
             alert(`${response.id}님 로그인에 성공하셨습니다.`)
             //  여기에 서버쪽으로 회원정보 보내야할듯함
             navigate('/')

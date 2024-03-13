@@ -38,24 +38,44 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
 				const username = naverLogin.user.getName()
                 console.log(userid, username)
                 if(!loginnow && username){
-                        axios.post('/sign',{
-                        mode : 'sign',
-                        name : username,
+                    axios.post('/sign',{
+                        mode: 'login',
                         uid : userid,
-                        pwd : '네이버로그인',
-                        create_account : Date.now(),
-                        }).then(res => {
-                            setaccountP({
-                                name : username,
-                                id : userid,
-                                create_account : Date.now(),
-                                pwd: '네이버로그인'
-                              })
-                            userSign(username)
+                        pwd : '네이버로그인'
+                      }).then(res=> {
+                        if(res.data.state){
+                            userSign(res.data.u_name)
                             loginsuc(true)
-                            setloginstate('naver')
-                            console.log(res, '네이버 가입')}).catch(err => console.log('가입오류'))
-                    navigate('/')
+                            // setsign(!sign)
+                            setaccountP({
+                              name : res.data.u_name,
+                              id : res.data.u_id,
+                              create_account : res.data.create_account,
+                              pwd: res.data.pwd
+                            })
+                            navigate('/')
+                        }else{
+                                axios.post('/sign',{
+                                    mode : 'sign',
+                                    name : username,
+                                    uid : userid,
+                                    pwd : '네이버로그인',
+                                    create_account : Date.now(),
+                                    }).then(res => {
+                                        setaccountP({
+                                            name : username,
+                                            id : userid,
+                                            create_account : Date.now(),
+                                            pwd: '네이버로그인'
+                                          })
+                                        userSign(username)
+                                        loginsuc(true)
+                                        setloginstate('naver')
+                                        console.log(res, '네이버 가입')}).catch(err => console.log('가입오류'))
+                                navigate('/')
+                            }
+                    }).catch(err => console.log('오류'))
+                       
                 }else{
                     naverLogin.reprompt()
                 }
