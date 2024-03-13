@@ -96,7 +96,7 @@ useEffect(()=>{
           .then(function(response) {
             axios.post('/sign',{
               mode: 'login',
-              uid : userid,
+              uid : response.id,
               pwd : 'kakao로그인'}).then(res=>{
                 if(res.data.state){
                 userSign(res.data.u_name)
