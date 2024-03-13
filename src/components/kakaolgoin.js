@@ -15,11 +15,11 @@ useEffect(()=>{
     if(!window.Kakao.isInitialized()){
         window.Kakao.init(kakao_java);
         // window.Kakao.isInitialized()
-    
     }
     // locationtoken()
-    // kakaoreq()
-
+    if(location.state.kakao){
+      kakaoreq(location.state.kakao_code)
+    }
 },[])
 
 // 문제점과 해결방안 그리고 처리방법 적기
@@ -81,7 +81,7 @@ useEffect(()=>{
         body:url_form_data
       })
       const result = await response.json()
-      console.log(result)
+      console.log(result , '결과')
       if(!window.Kakao.isInitialized()){
 
           window.Kakao.isInitialized()
@@ -138,7 +138,6 @@ useEffect(()=>{
           .catch(function(error) {
             console.log(error);
           });
-      console.log(result)
       
       } 
       catch(error){
@@ -191,7 +190,7 @@ return(
                     kakao()
                 }else{
                     // userdata()
-                    kakaoreq(location.state.kakao_code)
+                    // kakaoreq(location.state.kakao_code)
                 }
                 }}>KAKAO</button>
         </div> 
