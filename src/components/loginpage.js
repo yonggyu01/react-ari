@@ -155,7 +155,7 @@ window.location.href = fullurl
               setyourpass('')
               navigate('/admin',{state: {userallinfo}})
             }
-      }      
+      }else{window.alert('아이디 및 비밀번호 오류입니다.')}      
     }).catch(err => window.alert('서버가 닫혀있습니다. 관리자에게 연락하세요'))      
   }
 return(
