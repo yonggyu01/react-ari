@@ -20,20 +20,20 @@ res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 // 데이터베이스주소 위치 로그인아이디 패스워드 데이터베이스명
-// const db = mysql.createConnection({
-//   host : 'maria-myari-public-db.cdeqy6w08pq4.ap-northeast-2.rds.amazonaws.com',
-//   user : 'yonggyu',
-//   password: 'kimyonggyu',
-//   database: 'innodb'
-// })
+const db = mysql.createConnection({
+  host : 'maria-myari-public-db.cdeqy6w08pq4.ap-northeast-2.rds.amazonaws.com',
+  user : 'yonggyu',
+  password: 'kimyonggyu',
+  database: 'innodb'
+})
 
 // 로컬 테스트할때는 테스트 db로 할까.. 아래는 테스트 db임
-const db = mysql.createConnection({
-  host : 'localhost',
-  user : 'root',
-  password: '',
-  database: 'userinfo'
-})
+// const db = mysql.createConnection({
+//   host : 'localhost',
+//   user : 'root',
+//   password: '',
+//   database: 'userinfo'
+// })
 
 
 let select = null
