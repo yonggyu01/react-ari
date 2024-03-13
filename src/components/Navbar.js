@@ -99,7 +99,11 @@ return (
       <summary className='dark:text-black'>포트폴리오 소개</summary>
       <ul className='dark:bg-white'>
         <li><Link onClick={(e)=>{e.preventDefault()
-           document.getElementById('stackme').scrollIntoView({block: "start", inline: "nearest",behavior:'smooth'})
+        if(location.pathname.length > 1){
+          navigate('/')
+        }else{
+          document.getElementById('stackme').scrollIntoView({block: "start", inline: "nearest",behavior:'smooth'})
+        }
         }} className='dark:text-black'>기술스택</Link></li>
         <li><Link onClick={(e)=>{
               e.preventDefault()

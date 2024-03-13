@@ -12,7 +12,7 @@ export default function Adminsetbuy(){
           mode:'get'
         }).then(res => {
           setubuy(res.data)
-          }).catch(err => window.alert('구매데이터 회신 실패'))
+          }).catch(err => console.log('구매데이터 회신 실패'))
        }
 useEffect(()=>{
 

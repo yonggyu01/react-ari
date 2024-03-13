@@ -11,7 +11,7 @@ export default function Ariinsta(){
     const navigate= useNavigate()
     const [more,setmore]=useState(12)
    async function instaget(num){
-    const data = await fetch(`https://graph.instagram.com/me/media?fields=id,caption,timestamp,media_type,media_url,thumbnail_url&access_token=${process.env.REACT_APP_insta_code}`)
+    const data = await fetch(`https://graph.instagram.com/me/media?fields=id,caption,timestamp,media_type,media_url,thumbnail_url&access_token=${process.env.REACT_APP_insta_code}`).catch(err => console.log('서버에서 유저정보 받아올 수 없음'))
     const result  =await data.json()
     // console.log(result)
     setbaby(result)

@@ -226,7 +226,7 @@ export default function Portfolio(){
 					if(location.state.info === x.id){
 						setview({...x})
 					}
-					console.log(view)
+					// console.log(view)
 				}
 			},[port])
     return(

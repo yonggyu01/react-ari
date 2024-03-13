@@ -28,7 +28,7 @@ export default function Loginpage(){
 // 어드민 페이지에서도 써먹자
  function userinfo(){
   axios.post('/sign',{mode : 'get'}).then(res => {setuserinfo(res.data)
-  }  )
+  }  ).catch(err => console.log('서버가 닫혀있습니다. 관리자에게 연락하세요'))      
  }
 function idcheck(value){
   userallinfo.map((item)=>{
@@ -94,10 +94,8 @@ function idcheck(value){
             setsign(!sign)
             setloginstate('my')
                 rolling()
-          }else{
-            window.alert('회원가입 서버가 닫혀있습니다. 관리자에게 연락하세요')
-          }
-        })       
+          }          
+        }).catch(err => console.log('서버가 닫혀있습니다. 관리자에게 연락하세요'))       
     }}
 
 
@@ -150,7 +148,6 @@ window.location.href = fullurl
       uid : userid,
       pwd : yourpass
     }).then(res =>{
-      console.log(res)
       if(res.data.state){
         userSign(res.data.u_name)
         loginsuc(true)
@@ -168,10 +165,8 @@ window.location.href = fullurl
             }else{
               navigate('/admin',{state: {userallinfo}})
             }
-      }else{
-        window.alert(res.data.text)
-      }
-    })
+      }      
+    }).catch(err => window.alert('서버가 닫혀있습니다. 관리자에게 연락하세요'))      
   }
 return(
 <>

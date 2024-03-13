@@ -1,6 +1,6 @@
 export default function Yonggyu(){
     return(
-        <div className="w-full m-auto dark:bg-slate-800 dark:text-gray-100 px-8">
+        <div className="w-full m-auto dark:bg-slate-800 bg-white dark:text-gray-100 px-8 h-full">
             {/* <h1 className="text-4xl font-bold md:text-4xl ">  About me </h1> */}
             <div className="grid grid-cols-2 items-center gap-4 justify-center">
             <img className="mask mask-hexagon-2 grayscale lg:w-96 md:w-64 w-32 dark:grayscale-0 m-auto " src="/imgs/yong.jpg" alt='내사진' />

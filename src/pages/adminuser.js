@@ -9,7 +9,7 @@ export default function Adminuser(){
         axios.post('/sign',{mode : 'get'}).then(res => {setuserinfo(res.data)
           // console.log(res.data)
         //   console.log(userallinfo, '어드민 관련자료')
-        }  )
+        }  ).catch(err => console.log('서버에서 유저정보 받아올 수 없음'))
        }
     const location  =useLocation()
     const [render,setrender] = useState(false)
@@ -19,7 +19,7 @@ export default function Adminuser(){
     async function deleteid(id){
         axios.post('/dele',{ mode : 'delete',uid : id} ).then(res => {setrender(true)
         console.log(res,'삭제결과')
-        })
+        }).catch(err => console.log('데이터 삭제 오류'))
     }
     useEffect(()=>{
         setrender(false)

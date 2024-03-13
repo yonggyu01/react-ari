@@ -25,14 +25,20 @@ export default function Myblog(){
   body: JSON.stringify({
     jsonrpc: '2.0',
     method: 'condenser_api.get_blog',
-    params: ['yonggyu01', 0, more],
-    // params: {tag : 'yongreact', limit:5},
-    id: 1,
+    params: ['yonggyu01', 0, more],  
+    // 위에는 정상 작동함
+    // method: 'tags_api.get_discussions_by_trending',
+    // method: 'condenser_api.get_trending_tags',
+    // method: "tags_api.get_discussions_by_created",
+    //     params: {"tag":"yongreact","limit":5},
+    // params: {tag : 'yongreact', limit:8},
+    // params: [null,15],
+    id: '1',
   }),
 })
   .then(response => response.json())
  .then((res)=>{
-   console.log(res)
+   console.log(res , '리액트 yong으로 가져옴')
     setmysteem(res.result)
     // console.log(res)
     console.log(mysteemdata)
@@ -55,7 +61,7 @@ export default function Myblog(){
     return (
         <>
   
-        <section id="myblog" className="dark:bg-slate-800 dark:text-gray-100 w-full bg-white">
+        <section id="myblog" className="dark:bg-slate-800 dark:text-gray-100 w-full bg-white ">
         <div className="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
         <div className="mx-auto max-w-2xl lg:mx-0">
       <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">From the blog</h2>
@@ -74,7 +80,7 @@ export default function Myblog(){
                 navigate(`/blogdetail/${idx}`)
                 setblog(x)
                }}>
-               <article className="overflow-hidden rounded-lg shadow transition hover:shadow-lg dark:bg-slate-800">
+               <article className="overflow-hidden rounded-lg shadow transition border-2 hover:shadow-lg dark:bg-slate-800">
   <img
     alt=""
     src={x.comment.body.match(imgsrc)}

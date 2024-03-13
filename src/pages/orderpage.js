@@ -50,7 +50,7 @@ export default function Orderpage(){
             create_date:item.create_date,
             order_id:'order_'+item.order_id
         }
-        axios.put('/cart', data).then(res => console.log(res,'구매잘들어감?'))
+        axios.put('/cart', data).then(res => console.log(res,'구매잘들어감?')).catch(err => console.log('서버 다운됨'))
     }
     // console.log('토탈',mycart)
     return(

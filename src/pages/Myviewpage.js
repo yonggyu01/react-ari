@@ -99,7 +99,7 @@ export default function Myviewpage({Clicklogo}){
 
 
 	return(
-        <div className='bg-white h-full  '>
+        <div className='bg-white h-full  dark:bg-slate-800'>
         <section className=" py-6 sm:py-12 dark:bg-gray-800 dark:text-gray-100">
 	<div className="container p-6 mx-auto space-y-8">
 		<div className="space-y-2 text-center">
@@ -116,7 +116,7 @@ export default function Myviewpage({Clicklogo}){
   <span className="absolute inset-0 border-2 border-dashed border-black "></span>
 
   <div
-    className="relative flex h-full dark:bg-indigo-700 transform items-end border-2 border-black bg-white transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2 dark:bg-slate-800"
+    className="relative flex h-full dark:bg-slate-700 transform items-end border-2 border-black bg-white transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2 dark:bg-slate-800"
   >
     <div
       className="p-4 !pt-0 transition-opacity  group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 w-full"

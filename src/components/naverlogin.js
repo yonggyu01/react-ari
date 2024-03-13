@@ -15,14 +15,12 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
 
 
     
-	const initializeNaverLogin = () => {
+	const initNaverLogin = () => {
 		const naverLogin = new window.naver.LoginWithNaverId({
             
 			clientId: NAVER_CLIENT_ID,
-			callbackUrl: NAVER_CALLBACK_URL+'/login',
-          // 팝업창으로 로그인을 진행할 것인지?           
+			callbackUrl: NAVER_CALLBACK_URL+'/login',         
 			isPopup: false,
-          // 버튼 타입 ( 색상, 타입, 크기 변경 가능 )
 			loginButton:{ color: 'green', type: 3, height: 100 },
 			callbackHandle: true,
 		})
@@ -31,12 +29,8 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
            // 선언된 naverLogin 을 이용하여 유저 (사용자) 정보를 불러오는데  
            // 함수 내부에서 naverLogin을 선언하였기에 지역변수처리가 되어  
            // userinfo 정보를 추출하는 것은 지역변수와 같은 함수에서 진행주어야한다.
-		
            // 아래와 같이 로그인한 유저 ( 사용자 ) 정보를 직접 접근하여 추출가능하다.
-           // 이때, 데이터는 첫 연동시 정보 동의한 데이터만 추출 가능하다.
-    
-           // 백엔드 개발자가 정보를 전달해준다면 아래 요기! 라고 작성된 부분까지는 
-           // 코드 생략이 가능하다.  
+     
       naverLogin.getLoginStatus(async function (status) {
 			if (status) {
               // 아래처럼 선택하여 추출이 가능하고, 
@@ -58,19 +52,16 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
                 }else{
                     naverLogin.reprompt()
                 }
-              // 정보 전체를 아래처럼 state 에 저장하여 추출하여 사용가능하다. 
-            //   setUserInfo(naverLogin.user)
+         
 			}
 		})     
-            // 요기!
+           
 	}
     
  
     
             // 네이버 소셜 로그인 (네아로) 는 URL 에 엑세스 어스코드가 붙어서 전달된다.
-            // 우선 아래와 같이 어스코드를 추출 할 수 있으며,
-            // 3부에 작성 될 Redirect 페이지를 통해 빠르고, 깨끗하게 처리가 가능하다.
-   
+           
 	    const userAccessToken = () => {
 		    window.location.href.includes('access_token') && getToken()
 	}
@@ -85,17 +76,14 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
 		        // setGetToken(token)
 	}
 	useEffect(() => {
-		initializeNaverLogin()
+		initNaverLogin()
 		userAccessToken()
 	}, [])
-
-
     // const getData = () => {
     //     if (window.location.href.includes("access_token")) {
     //       console.log("We got AccessToken");
     //     }
     //   };
-      
 	return (
 		<>
             <div className='btn btn-success box-border w-2/4' style={{cursor:'pointer'}} onClick={()=>{

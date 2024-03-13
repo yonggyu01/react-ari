@@ -26,7 +26,7 @@ export default function Profile(){
                 loginuser()
                 const suc = window.alert('프로필 변경 성공!')
                 navigate(-1)
-            }).catch(err => window.alert('서버전송 오류입니다.'))
+            }).catch(err => console.log('서버전송 오류입니다.'))
         }
       
     }
@@ -46,7 +46,7 @@ export default function Profile(){
                 pwd: res.data.pwd
             })
             setrender(true)
-        }})}
+        }}).catch(err => console.log('서버전송 오류입니다.'))}
 
     useEffect(()=>{
 

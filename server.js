@@ -27,6 +27,15 @@ const db = mysql.createConnection({
   database: 'innodb'
 })
 
+// 로컬 테스트할때는 테스트 db로 할까.. 아래는 테스트 db임
+// const db = mysql.createConnection({
+//   host : 'localhost',
+//   user : 'root',
+//   password: '',
+//   database: 'mydata'
+// })
+
+
 let select = null
 //여기서 데이터베이스랑 연동 및 로그인 데이터 구현해보기
 app.post('/sign',(req,res)=>{
@@ -132,9 +141,10 @@ app.delete('/review/:id', (req,res)=>{
   })
 })
 
+
 app.post('/cart',(req,res)=>{
   if(req.body.mode ==='get'){
-    const sql = 'SELECT * FROM cart'
+    const sql = 'SELECT * FROM cart ORDER BY id DESC'
     db.query(sql, (err,data)=>{
       if(err) return res.json(err)
       return res.json(data)

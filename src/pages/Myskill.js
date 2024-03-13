@@ -1,6 +1,6 @@
 export default function Myskill(){
     return(
-        <section  className="bg-gray-100 text-gray-800 w-full" id="stackme">
+        <section  className="bg-gray-100 text-gray-800 w-full h-full"  id="stackme">
 	<div className="container p-6 mx-auto space-y-6 text-center lg:p-8 lg:space-y-8">
 		<h2 className="text-3xl font-bold">기술스택</h2>
 		<div className="flex flex-wrap justify-center lg:justify-between">

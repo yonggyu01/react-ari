@@ -11,7 +11,7 @@ export default function Adminreview(){
           mode:'get'
         }).then(res => { setreview(...res.data)
         setdbreview(res.data)
-      }).catch(err => window.alert('데이터 회신 실패'))
+      }).catch(err => console.log('데이터 회신 실패'))
       }
       function deletereview(id){
         axios.delete('/review/'+id).then(res =>   setrender(true)).catch(err => window.alert('서버 응답이 없습니다.'))

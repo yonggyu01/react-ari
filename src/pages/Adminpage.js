@@ -11,14 +11,14 @@ export default function Adminpage(){
 
   function userinfo(){
     axios.post('/sign',{mode : 'get'}).then(res => {setuserinfo(res.data)
-    }  )
+    }  ).catch(err => console.log('서버 종료상태.'))
   }
    function get_cartlist(){
     axios.post('/cart',{
       mode:'get'
     }).then(res => {
       setubuy(res.data)
-      }).catch(err => window.alert('구매데이터 회신 실패'))
+      }).catch(err => console.log('구매데이터 회신 실패'))
    }
    function getreview(){
     axios.post('/review',{
