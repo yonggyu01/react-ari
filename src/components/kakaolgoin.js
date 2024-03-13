@@ -7,7 +7,7 @@ export default function Kakao({aouth}){
     const location = useLocation()
     const {setkakaotoken} = useStore()
     const navigate = useNavigate()
-    const {logoclick,islogo,userSign,loginsuc,locallocation,setloginstate,setnavercode,loginnow} = useStore()
+    const {logoclick,islogo,userSign,loginsuc,locallocation,setloginstate,setaccountP,loginnow} = useStore()
     const kakao_java = process.env.REACT_APP_kakao_javas
     const kakaorest = process.env.REACT_APP_kakao_rest
     console.log(location)
@@ -94,7 +94,6 @@ useEffect(()=>{
             }
         })
           .then(function(response) {
-         
             axios.post('/sign',{
                 mode : 'sign',
                 name : response.id+'님',
@@ -102,7 +101,12 @@ useEffect(()=>{
                 pwd : 'kakao로그인',
                 create_account : Date.now(),
                 }).then(res => {
-                  console.log(response.id)
+                   setaccountP({
+                    name : response.id+'님',
+                    id : response.id,
+                    create_account : Date.now(),
+                    pwd: 'kakao로그인'
+                  })
                   userSign(response.id)
                   loginsuc(true)
                   setloginstate('kakao')

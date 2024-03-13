@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
-    const {userSign,loginsuc,locallocation,setloginstate,setnavertoken,loginnow} = useStore()
+    const {userSign,loginsuc,locallocation,setloginstate,setnavertoken,loginnow,setaccountP} = useStore()
     console.log(props,setUserInfo)
     const navigate=useNavigate()
   
@@ -45,6 +45,12 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
                         pwd : '네이버로그인',
                         create_account : Date.now(),
                         }).then(res => {
+                            setaccountP({
+                                name : username,
+                                id : userid,
+                                create_account : Date.now(),
+                                pwd: '네이버로그인'
+                              })
                             userSign(username)
                             loginsuc(true)
                             setloginstate('naver')
