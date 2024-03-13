@@ -71,7 +71,7 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
                                         userSign(username)
                                         loginsuc(true)
                                         setloginstate('naver')
-                                        console.log(res, '네이버 가입')}).catch(err => console.log('가입오류'))
+                                        }).catch(err => console.log('가입오류'))
                                 navigate('/')
                             }
                     }).catch(err => console.log('오류'))

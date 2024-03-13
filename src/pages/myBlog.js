@@ -44,7 +44,7 @@ export default function Myblog(){
     console.log(mysteemdata)
     // datamaker(res)
 })
-  .catch(error => console.error('Error:', error));
+  .catch(error => console.error('Error:',error ));
 
   setcbtn(false)
     },[cbtn])

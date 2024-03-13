@@ -10,7 +10,7 @@ export default function Kakao({aouth}){
     const {logoclick,islogo,userSign,loginsuc,locallocation,setloginstate,setaccountP,loginnow} = useStore()
     const kakao_java = process.env.REACT_APP_kakao_javas
     const kakaorest = process.env.REACT_APP_kakao_rest
-    console.log(locallocation,'리디렉션 주소')
+    // console.log(locallocation,'리디렉션 주소')
 useEffect(()=>{
     if(!window.Kakao.isInitialized()){
         window.Kakao.init(kakao_java);
@@ -81,6 +81,7 @@ useEffect(()=>{
         body:url_form_data
       })
       const result = await response.json()
+      console.log(result)
       if(!window.Kakao.isInitialized()){
 
           window.Kakao.isInitialized()

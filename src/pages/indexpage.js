@@ -20,14 +20,14 @@ export default function Indexpage(){
    const parmas = new URLSearchParams(window.location.search);
   //  console.log(parmas.get('code') ,parmas.get('state'),'파람')
    if(parmas.get('state')==="NaverLogin"){
-    console.log('네이버로그인임')
+    // console.log('네이버로그인임')
     // window.opener.naveroff(parmas.get('code'))
     // window.close()
 
     setoauth1( parmas.get('code'))
     // navigate('login',{state:{naver: true,naver_code : parmas.get('code')}})
    }else if(parmas.get('state')==='kakao'){
-    console.log('카카오로그인')
+    // console.log('카카오로그인')
     setoauth1( parmas.get('code'))
     navigate('login',{state:{kakao: true, kakao_code : parmas.get('code')}})
    }
@@ -55,7 +55,7 @@ function locationset(){
         }
       },[])
       useEffect(()=>{
-        console.log('화면올리기')
+        // console.log('화면올리기')
              if(location.length>1){
               document.getElementById("root").scrollTo(0, 0);
         }
