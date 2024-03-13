@@ -315,7 +315,7 @@ useEffect(()=>{
                           <th
                             className="hidden px-3 py-2 text-start text-sm font-semibold uppercase tracking-wider text-slate-700 md:table-cell"
                           >
-                            Status
+                            Item_name
                           </th>
                           <th
                             className="px-3 py-2 text-end text-sm font-semibold uppercase tracking-wider text-slate-700"
