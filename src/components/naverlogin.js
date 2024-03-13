@@ -38,16 +38,17 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
 				const username = naverLogin.user.getName()
                 console.log(userid, username)
                 if(!loginnow && username){
-                    userSign(username)
-                    loginsuc(true)
-                    setloginstate('naver')
-                    axios.post('/sign',{
+                        axios.post('/sign',{
                         mode : 'sign',
                         name : username,
                         uid : userid,
                         pwd : '네이버로그인',
                         create_account : Date.now(),
-                        })
+                        }).then(res => {
+                            userSign(username)
+                            loginsuc(true)
+                            setloginstate('naver')
+                            console.log(res, '네이버 가입')}).catch(err => console.log('가입오류'))
                     navigate('/')
                 }else{
                     naverLogin.reprompt()

@@ -94,17 +94,19 @@ useEffect(()=>{
             }
         })
           .then(function(response) {
-            console.log(response.id)
-            userSign(response.id)
-            loginsuc(true)
-            setloginstate('kakao')
+         
             axios.post('/sign',{
                 mode : 'sign',
                 name : response.id+'님',
                 uid : response.id,
                 pwd : 'kakao로그인',
                 create_account : Date.now(),
-                })
+                }).then(res => {
+                  console.log(response.id)
+                  userSign(response.id)
+                  loginsuc(true)
+                  setloginstate('kakao')
+                  console.log(res, '카카오')})
             alert(`${response.id}님 로그인에 성공하셨습니다.`)
             //  여기에 서버쪽으로 회원정보 보내야할듯함
             navigate('/')
