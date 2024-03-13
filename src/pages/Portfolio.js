@@ -151,11 +151,7 @@ export default function Portfolio(){
 											   <img src="/imgs/github-icon-1-logo-svgrepo-com.svg" alt="svg" width="35" height="35"/>
 											   <p className="mt-2 dark:text-gray-400">Git hub </p>
 										   </div>
-										   <div className="flex flex-col justify-center items-center">
-											   <img src="/imgs/firebase-icon.svg" alt="svg" width="35" height="35"/>
-											   <p className="mt-2 dark:text-gray-400">Firebase 배포 </p>
-										   </div>
-										   <div className="flex flex-col justify-center items-center">
+										  <div className="flex flex-col justify-center items-center">
 											   <img src="/imgs/aws-icon.svg" alt="svg" width="35" height="35"/>
 											   <p className="mt-2 dark:text-gray-400">AWS 배포 </p>
 										   </div>
@@ -167,13 +163,13 @@ export default function Portfolio(){
 										   </div>,
 			   mainend : `React를 활용한 SPA프로젝트입니다. 제 포트폴리오를 소개할 수 있는 페이지와 딸의 팬페이지를 합쳐서 만들었습니다.`,
 			   secondtitle : '다양한 API를 도입하여 제작',
-			   secondsubtitle : 'Kakao login, Youtube, Steemit 등의 API사용',
-			   ttitle:'AWS EC2 서버, AWS RDB + mysql MariaDB 사용. ',
-			   tcon : '해당 서버를 활용하여 회원가입 기능및 장바구니 등을 처리하였습니다.',
+			   secondsubtitle : 'Kakao, Naver, Instagram, Steemit 등의 API사용',
+			   ttitle:'AWS EC2 서버, AWS RDS + mysql MariaDB 사용. ',
+			   tcon : 'Aws rds, mariaDB를 기본적인 CRUD 구현, 회원가입 기능및 장바구니, 회원정보 수정등을 처리하였습니다.',
 			   ytitle:'디자인 라이브러리 Tailwind css, Daisy ui',
 			   ycon : `이전에 제작했던 Vue 프로젝트에서의 경험을 토대로 이번 React 프로젝트에서는 디자인을 전부 라이브러리를 사용하여 처리하였습니다.`,
 			   utitle: 'Admin Page 도입',
-			   ucon : `회원 정보, 관리, 상품판매 관련 정보를 확인 할 수 있도록 admin page를 도입하였습니다.`,
+			   ucon : `회원 관리(계정 삭제), 상품판매 관련 정보, 리뷰 등을 확인 할 수 있도록 Admin page를 도입하였습니다.`,
 			   fsrc : './imgs/arifanpage.PNG',
 			   ssrc : './imgs/arifanpage1.PNG'
 			   },	{
