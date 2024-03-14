@@ -15,19 +15,16 @@ const par = /(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}([\/a-z0-9-%#?&=\
             <Scrolltop></Scrolltop>
   <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 ">
     <div className="grid grid-cols-1 gap-8 ">
-      <div className="relative h-full overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
-        
+      {/* <div className="relative h-full overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
+        </div> */}
         {/* {selectblog.comment.body.match(imgsrc).map((item)=><img
         alt=""
         src={item}
         className=" inset-0 w-full object-cover mb-8"
       />)} */}
-      </div>
-
       <div className="lg:py-8">
         <h2 className="text-3xl font-bold sm:text-4xl  dark:text-white mb-2">{selectblog.comment.title}</h2>
          <p className="mb-8 text-gray">작성일 : {selectblog.comment.created.match(/\d{4}-\d{2}-\d{2}/ , '')[0] } </p>
-
         {selectblog.comment.body.split("\n").map((text,idx)=>{      
             if(text.match(/!.*\)/gm)){
               return <img
