@@ -20,7 +20,7 @@ export default function Indexpage(){
    const parmas = new URLSearchParams(window.location.search);
   //  console.log(parmas.get('code') ,parmas.get('state'),'파람')
    if(parmas.get('state')==="NaverLogin"){
-    // console.log('네이버로그인임')
+    // console.log('네이버로그인임')  
     // window.opener.naveroff(parmas.get('code'))
     // window.close()
 
