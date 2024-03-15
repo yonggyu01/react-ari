@@ -1,11 +1,13 @@
 const http = require("http");
 const express = require("express");
 const path = require("path");
+require("dotenv").config();
 const mysql= require('mysql')
 const app = express();
 const cors = require('cors')
 app.use(express.json())
 app.use(cors())
+
 const port = 3000;
 
 app.use(express.static(path.join(__dirname, "build")));
@@ -18,13 +20,13 @@ res.set({
 });
 res.sendFile(path.join(__dirname, "build", "index.html"));
 });
-
+console.log(process.env.DB_USER,process.env.DB_PASS)
 // 데이터베이스주소 위치 로그인아이디 패스워드 데이터베이스명
 const db = mysql.createConnection({
-  host : 'maria-myari-public-db.cdeqy6w08pq4.ap-northeast-2.rds.amazonaws.com',
-  user : 'yonggyu',
-  password: 'kimyonggyu',
-  database: 'innodb'
+  host : process.env.DB_HOST,
+  user : process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
 })
 
 // 로컬 테스트할때는 테스트 db로 할까.. 아래는 테스트 db임
