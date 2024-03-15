@@ -27,35 +27,41 @@ export default function Navbar(){
     return result;
 }
 const logoutmode = ()=>{
-  userSign('로그인필요')
-       loginsuc(false)
-       setaccountP('')
-       setloginstate('')
+
   if(loginstate === 'kakao'){
     //카카오 로그아웃
     const client_id = process.env.REACT_APP_kakao_rest
     const kakao_java = process.env.REACT_APP_kakao_javas
-    fetch(`https://kauth.kakao.com/oauth/logout?client_id=${client_id}&logout_redirect_uri=${locallocation}`)
+    fetch(`https://kauth.kakao.com/oauth/logout?client_id=${client_id}&logout_redirect_uri=${locallocation}`).then(res=>{
+      userSign('Login')
+      loginsuc(false)
+      setaccountP('')
+      setloginstate('')
+    }).catch(err=>console.log('로그아웃 실패'))
    console.log( kakaotoken)
   }else if(loginstate === 'naver'){
     const NAVER_CLIENT_ID = process.env.REACT_APP_naver_id
     const NAVER_CALLBACK_URL = locallocation
     const Naversecet = process.env.REACT_APP_naver_secret
     const url = `https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=${NAVER_CLIENT_ID}&client_secret=${Naversecet}&access_token=${navertoken}&service_provider=NAVER`
-    fetch(url)
+    fetch(url).then(res=>{
+      userSign('Login')
+      loginsuc(false)
+      setaccountP('')
+      setloginstate('')
+    }).catch(err=>console.log('로그아웃 실패'))
     // .then(res=> res.json()).then(res => console.log(res))
   }else{
     // 내 서버에서 로그아웃하기
+    userSign('Login')
+    loginsuc(false)
+    setaccountP('')
+    setloginstate('')
     window.location.reload()
   }
 }
  let nowtheme = window.matchMedia("(prefers-color-scheme: dark).matches")
-function themechangebtn(){
-  
-  let color =nowtheme? "light" : "dark" 
-  nowtheme = !nowtheme
-  document.querySelector('html').setAttribute('data-theme',color)
-}
+
 
   useEffect(()=>{
     // themechangebtn()
