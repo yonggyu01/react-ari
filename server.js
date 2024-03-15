@@ -82,8 +82,12 @@ app.post('/sign',(req,res)=>{
           }
       
   })
+  }else if(req.body.mode === 'logout'){
+    return select=null
   }
+
 })
+
 // 프로필 수정
 app.put('/edit',(req,res)=>{
   const sql = `update user set u_name=?, u_id=?, pwd=? where create_account=?`

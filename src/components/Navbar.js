@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import {useStore} from '../store/store'
 import { Link, useNavigate,useLocation } from 'react-router-dom';
 import { useRef } from 'react';
+import axios from 'axios';
 
 export default function Navbar(){
   
@@ -37,6 +38,7 @@ const logoutmode = ()=>{
       loginsuc(false)
       setaccountP('')
       setloginstate('')
+      
     }).catch(err=>console.log('로그아웃 실패'))
    console.log( kakaotoken)
   }else if(loginstate === 'naver'){
@@ -57,8 +59,10 @@ const logoutmode = ()=>{
     loginsuc(false)
     setaccountP('')
     setloginstate('')
-    window.location.reload()
   }
+  axios.post('/sign',{
+    mode : 'logout'
+  }).then(res=>res).catch(err=>console.log(err))
 }
  let nowtheme = window.matchMedia("(prefers-color-scheme: dark).matches")
 

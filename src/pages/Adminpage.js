@@ -231,10 +231,13 @@ useEffect(()=>{
               </Link>
               <Link to='/'
                 onClick={()=>{
-                  userSign('로그인필요')
+                  userSign('login')
                 loginsuc(false)
                 setaccountP('')
                setloginstate('')
+               axios.post('/sign',{
+                mode : 'logout'
+              }).then(res=>res).catch(err=>console.log(err))
                 }}
                 className="group flex items-center justify-between gap-2 rounded-md border border-transparent px-2.5 py-2 text-sm font-semibold text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200"
               >
