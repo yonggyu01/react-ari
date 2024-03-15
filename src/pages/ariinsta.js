@@ -129,7 +129,7 @@ useEffect(()=>{
   
 
 </div>
-<Realfooter></Realfooter>
+{baby&&<Realfooter></Realfooter>}
 </>
     )
 }
