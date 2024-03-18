@@ -1,12 +1,11 @@
 import './App.css';
 // 사용기술  -> 상태관리 zustand, api 상태관리 react-query
 // 디자인 
-import Parallaxpage from './pages/parallax'
-import Footerline from './components/Footerline';  
+ 
 import Dicemain from './pages/mainpage'
-import Navbar from './components/Navbar'
+
 import Arimain from './pages/arimainpage';
-import { BrowserRouter, Routes, Route , RouterProvider,createBrowserRouter,createRoutesFromElements,useRouteError} from 'react-router-dom';
+import {  Route , RouterProvider,createBrowserRouter,createRoutesFromElements} from 'react-router-dom';
 import Loginpage from './components/loginpage';
 import Popo from './pages/popo'
 import Orderpage from './pages/orderpage';
@@ -16,9 +15,18 @@ import Indexpage from './pages/indexpage';
 import Ariindex from './pages/ariindex';
 import Adminpage from './pages/Adminpage';
 import Myblog from './pages/myBlog';
+
 import Portfolio from './pages/Portfolio';
 import Future from './pages/arifutuer.js';
 import Ari100pic from './pages/ari100pic';
+import AriInsta from './pages/ariinsta';
+import Myblogdetail from './pages/myBlogdetail';
+import Adminuser from './pages/adminuser';
+import Adminindex from './pages/adminindex';
+import Profile from './components/profile';
+import Adminreview from './pages/adminrevie';
+import Adminsetbuy from './pages/adminsetbuy';
+
 
 function App() {
   const router = createBrowserRouter(
@@ -26,13 +34,17 @@ function App() {
       
       <Route path="/" element={<Indexpage/>} errorElement={<Notfound/>} >
       <Route index element={<Dicemain/>}/>
-
-        <Route path="/admin" element={<Adminpage/>}>
-
+        <Route path="admin" element={<Adminindex/>}>
+          <Route index element={<Adminpage/>}/>
+          <Route path="user" element={<Adminuser/>}/>
+          <Route path="review" element={<Adminreview/>}/>
+          <Route path="buy" element={<Adminsetbuy/>}/>
         </Route>
         <Route path="/blog" element={<Myblog/>}></Route>
+        <Route path="/blogdetail/:idx" element={<Myblogdetail/>}/>
         <Route path="portfolio" element={<Portfolio/>}></Route>
         <Route path="/login" element={<Loginpage/>}></Route>
+        <Route path="profile" element={<Profile/>}></Route>
         <Route path="popo" element={<Popo/>}></Route>
         <Route path="order" element={<Orderpage/>}></Route>
         <Route path="ari" element={<Ariindex/>}>
@@ -40,6 +52,7 @@ function App() {
           <Route path="product" element={<Productpage/>}></Route>
           <Route path="future" element={<Future/>}></Route>
           <Route path="ari100" element={<Ari100pic/>}></Route>
+          <Route path="insta" element={<AriInsta/>}></Route>
         </Route>
       </Route>
       
@@ -48,8 +61,9 @@ function App() {
 
   return (
     <div className="App">
+     
       <RouterProvider router={router}>
-   
+
       </RouterProvider>
     </div>
   );

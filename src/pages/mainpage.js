@@ -11,6 +11,7 @@ import Myblog from "./myBlog"
 import Myskill from "./Myskill"
 import Yonggyu from "./yonggyu"
 import Realfooter from "../components/Realfooter"
+import Scrolltop from "../components/scrolltop"
 function Dicemain(){
 
     const {logoclick,islogo,rollbox,setroll} = useStore()
@@ -57,16 +58,16 @@ useEffect(()=>{
     console.log(value)
   }
 //   const [top,settop] = useState(false)
-return(  <animated.div >
+return(  <animated.div className={rollbox? 'bg-slate-400 dark:bg-pink': '' }>
     {/* <Navbar /> */}
-   
+    <Scrolltop></Scrolltop>
     <animated.div className={rollbox? 'cube-wrapper mybest' : 'mybest' } ref={roll} style={{transform}} >
     <div className={rollbox? 'cube-front mybest' : 'mybest1'}>
     <Yonggyu></Yonggyu>
     
  
     </div>
-    <div className={rollbox? "cube-back mybest" : 'mybest2'}>
+    <div className={rollbox? "cube-back mybest overflow-hidden" : 'mybest2'}>
     {/* <Itemview></Itemview> */}
     <Myviewpage Clicklogo={Clicklogo}></Myviewpage>
     </div>
@@ -76,7 +77,7 @@ return(  <animated.div >
     <div className={rollbox? "cube-bottom mybest" : 'mybest2'}>
     <Timeline Clicklogo={Clicklogo}></Timeline>
     </div>
-    <div className={rollbox? "cube-left mybest" : 'mybest1'}>
+    <div className={rollbox? "cube-left mybest overflow-hidden" : 'mybest1'}>
         <Myblog/>
     </div>
     <div className={rollbox? "cube-right mybest" : 'mybest2'}>

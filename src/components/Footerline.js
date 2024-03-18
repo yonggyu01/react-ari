@@ -1,4 +1,4 @@
-import {useState} from 'react'
+
 import '../css/footer.css'
 function Footerline(event){
 	const {clickwhat,onLogoclick} = event

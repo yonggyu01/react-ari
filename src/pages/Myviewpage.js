@@ -99,40 +99,40 @@ export default function Myviewpage({Clicklogo}){
 
 
 	return(
-        <div className='bg-white h-full'>
-        <section className="card py-6 sm:py-12 dark:bg-gray-800 dark:text-gray-100">
+        <div className='bg-white h-full  dark:bg-slate-800'>
+        <section className=" py-6 sm:py-12 dark:bg-gray-800 dark:text-gray-100">
 	<div className="container p-6 mx-auto space-y-8">
 		<div className="space-y-2 text-center">
-			<h2 className="text-2xl font-bold md:text-4xl ">Portfolio Website</h2>
-			<p className="font-serif text-sm dark:text-gray-400">내 포트폴리오</p>
+			<h2 className="text-2xl font-bold md:text-4xl dark:text-white-400">Portfolio Website</h2>
+			<p className="font-serif text-sm dark:text-white-400">내 포트폴리오</p>
 		</div>
-		<div className="grid  gap-x-4 gap-y-8  sm:grid-col-1 md:grid-cols-2 lg:grid-cols-4">
-		{mypage && mypage.map((item,idx )=>  <article className="card bg-white shadow-xl flex flex-col dark:bg-gray-900" key={item.id}>
+		<div className="grid  gap-x-4 gap-y-8  sm:grid-col-1 md:grid-cols-2 lg:grid-cols-4  ">
+		{mypage && mypage.map((item,idx )=>  <article className="card bg-white shadow-xl flex flex-col dark:bg-white" key={item.id}>
 				{/* 디자인 바꿀것 */}
-				<Link className="group relative block h-64 sm:h-80 lg:h-96"onClick={(e)=>{
+				<Link className="group relative block h-64 sm:h-80 lg:h-96 "onClick={(e)=>{
 					e.preventDefault()
 					// navigate('/popo',{state :{page : item.pagestate.page}})
 					document.getElementById(`my_modal_${idx}`).showModal()}}				>
-  <span className="absolute inset-0 border-2 border-dashed border-black"></span>
+  <span className="absolute inset-0 border-2 border-dashed border-black "></span>
 
   <div
-    className="relative flex h-full transform items-end border-2 border-black bg-white transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2"
+    className="relative flex h-full dark:bg-slate-700 transform items-end border-2 border-black bg-white transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2 dark:bg-slate-800"
   >
     <div
-      className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 w-full"
+      className="p-4 !pt-0 transition-opacity  group-hover:absolute group-hover:opacity-0 sm:p-6 lg:p-8 w-full"
     >
 			<figure>
-					<img alt="" id={`my_img${idx}`} className="object-fit w-full sm:h-52 h-32 dark:bg-gray-500 rounded-lg object-center text-center " src={item.src} />
+					<img alt="" id={`my_img${idx}`} className="object-fit w-full sm:h-52 h-32  rounded-lg object-center text-center " src={item.src} />
 			
 					</figure>
-      <h2 className="mt-4 text-xl font-medium sm:text-2xl">{item.title}</h2>
+      <h2 className="mt-4 text-xl font-medium sm:text-2xl dark:text-black-400">{item.title}</h2>
     </div>
 
     <div
       className="absolute p-4 opacity-0 transition-opacity group-hover:relative group-hover:opacity-100 sm:p-6 lg:p-8"
     >
 
-      <h3 className="mt-4 text-xl font-medium sm:text-2xl">{item.title}</h3>
+      <h3 className="mt-4 text-xl font-medium sm:text-2xl dark:text-black-400">{item.title}</h3>
 
       <p className="mt-4 text-sm sm:text-base mb-3">
       {item.contents}

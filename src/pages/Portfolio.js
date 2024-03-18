@@ -1,6 +1,6 @@
 import { useEffect,useState } from "react"
 import { useLocation, useNavigate } from "react-router"
-
+import Scrolltop from '../components/scrolltop';
 export default function Portfolio(){
 		const location = useLocation()
 		const [port , setport] = useState(location.state.info)
@@ -36,7 +36,7 @@ export default function Portfolio(){
 											<img src="/imgs/github-icon-1-logo-svgrepo-com.svg" alt="svg" width="35" height="35"/>
 											<p className="mt-2 dark:text-gray-400">Git hub </p>
 										</div>
-										<p className=" leadi dark:text-gray-50 text-center">Netlify<br></br>
+										<p className=" leadi dark:text-gray-50 text-center flex items-end">Netlify<br></br>
 										
 											</p> 
 			
@@ -151,11 +151,7 @@ export default function Portfolio(){
 											   <img src="/imgs/github-icon-1-logo-svgrepo-com.svg" alt="svg" width="35" height="35"/>
 											   <p className="mt-2 dark:text-gray-400">Git hub </p>
 										   </div>
-										   <div className="flex flex-col justify-center items-center">
-											   <img src="/imgs/firebase-icon.svg" alt="svg" width="35" height="35"/>
-											   <p className="mt-2 dark:text-gray-400">Firebase 배포 </p>
-										   </div>
-										   <div className="flex flex-col justify-center items-center">
+										  <div className="flex flex-col justify-center items-center">
 											   <img src="/imgs/aws-icon.svg" alt="svg" width="35" height="35"/>
 											   <p className="mt-2 dark:text-gray-400">AWS 배포 </p>
 										   </div>
@@ -167,13 +163,13 @@ export default function Portfolio(){
 										   </div>,
 			   mainend : `React를 활용한 SPA프로젝트입니다. 제 포트폴리오를 소개할 수 있는 페이지와 딸의 팬페이지를 합쳐서 만들었습니다.`,
 			   secondtitle : '다양한 API를 도입하여 제작',
-			   secondsubtitle : 'Kakao login, Youtube, Steemit 등의 API사용',
-			   ttitle:'AWS EC2 서버, AWS RDB + mysql MariaDB 사용. ',
-			   tcon : '해당 서버를 활용하여 회원가입 기능및 장바구니 등을 처리하였습니다.',
+			   secondsubtitle : 'Kakao, Naver, Instagram, Steemit 등의 API사용',
+			   ttitle:'AWS EC2 서버, AWS RDS + mysql MariaDB 사용. ',
+			   tcon : 'Aws rds, mariaDB를 기본적인 CRUD 구현, 회원가입 기능및 장바구니, 회원정보 수정등을 처리하였습니다.',
 			   ytitle:'디자인 라이브러리 Tailwind css, Daisy ui',
 			   ycon : `이전에 제작했던 Vue 프로젝트에서의 경험을 토대로 이번 React 프로젝트에서는 디자인을 전부 라이브러리를 사용하여 처리하였습니다.`,
 			   utitle: 'Admin Page 도입',
-			   ucon : `회원 정보, 관리, 상품판매 관련 정보를 확인 할 수 있도록 admin page를 도입하였습니다.`,
+			   ucon : `회원 관리(계정 삭제), 상품판매 관련 정보, 리뷰 등을 확인 할 수 있도록 Admin page를 도입하였습니다.`,
 			   fsrc : './imgs/arifanpage.PNG',
 			   ssrc : './imgs/arifanpage1.PNG'
 			   },	{
@@ -203,25 +199,18 @@ export default function Portfolio(){
 											   <img src="/imgs/github-icon-1-logo-svgrepo-com.svg" alt="svg" width="35" height="35"/>
 											   <p className="mt-2 dark:text-gray-400">Git hub </p>
 										   </div>
-										   <p className=" leadi dark:text-gray-50 text-center">Netlify<br></br>
-										   
-											   </p> 
-			   
 										   </div>,
-			   mainend : `순수 자바스크립트, CSS를 활용한 SPA 프로젝트입니다.  <br/>
-											   페이지별로 화면 전환이 없고 전부 한 페이지에서 작동합니다.`,
-			   secondtitle : 'Window95와 유사하게 동작',
-			   secondsubtitle : 'Window운영체제에 포함된 기능들을 최대한 Javascript와 css를 활용해서 구현하기 위해 노력했습니다.',
-			   ttitle:'파일 드래그 앤 드롭기능',
-			   tcon : '바탕화면에 아이콘을 드래그 앤 드롭을 통해 다른 폴더로 옮길 수 있습니다.',
-			   ytitle:'Canvas 활용한 그림판 구현',
-			   ycon : `Window의 대표기능중 하나인 그림판을 Canvas 엘리먼트를 통해 구현 <br></br>
-											   해당 그림판을 제작하면서 좌표에 대한 공부를 많이 할 수 있었습니다.`,
-			   utitle: '그 밖의 다양한 아이디어',
-			   ucon : `Cmd창에서 일부 입력과 실행이 가능하도록 구현, 메모장 작성 후 파일 저장 및 불러오기 <br></br>
-											   한컴 타자연습등등.. 다양한 기능들을 구현해봤습니다.`,
-			   fsrc : './imgs/윈도.PNG',
-			   ssrc : './imgs/윈도1.PNG'
+			   mainend : `첫 팀프로젝트로 다양한 기능을 구현해보며 자바스크립트에 익숙해지는 계기가 되는 프로젝트입니다.`,
+			   secondtitle : 'CGV 페이지의 대부분의 기능 구현',
+			   secondsubtitle : '간단한 슬라이드 부터 회원가입 기능까지 구현',
+			   ttitle:'영화 정렬기능 구현',
+			   tcon : 'sort함수를 사용하여 영화 정렬기능 구현',
+			   ytitle:'Event 페이지에 카드 맞추기 게임 구현',
+			   ycon : `클릭한 카드의 class명을 받아와서 비교하는 방식으로 구현.`,
+			   utitle: '회원가입 및 로그인 기능 구현',
+			   ucon : `Localstorage를 활용하여 간단한 회원정보를 저장하여 로그인 기능, 회원 중복검사 기능들을 구현함`,
+			   fsrc : './imgs/cgv1.PNG',
+			   ssrc : './imgs/cgv2.PNG'
 			   },
 			]
 			let [view,setview] = useState({
@@ -233,11 +222,12 @@ export default function Portfolio(){
 					if(location.state.info === x.id){
 						setview({...x})
 					}
-					console.log(view)
+					// console.log(view)
 				}
 			},[port])
     return(
         <>
+		<Scrolltop></Scrolltop>
         <section className="dark:bg-gray-800 dark:text-gray-100">
 			
 	<div className="container max-w-xl p-6 py-12 mx-auto space-y-24 lg:px-8 lg:max-w-7xl">

@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 export default function Ariindex(){
     const {userid,loginnow} = useStore()
     return(<>
-        <div className="navbar fixed lg:hidden z-10">
+        {/* <div className="navbar fixed lg:hidden z-10">
   <div className="flex-1">
    </div>
   <div className="flex-none gap-2">
@@ -30,7 +30,7 @@ export default function Ariindex(){
       </ul>
     </div>
   </div>
-</div>
+</div> */}
         <Outlet></Outlet>
         </>
     )

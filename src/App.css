@@ -154,7 +154,7 @@ background-color: red;
   transform: rotate3d( 0deg 0deg 0deg) ;
 }
 .h460px{
-  height: 460px;
+  height: 500px;
 }
 #bgimgs0{
 background-image: url('./imgs/aripagePNG.PNG'); 

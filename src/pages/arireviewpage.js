@@ -1,20 +1,87 @@
 import { renderIntoDocument } from 'react-dom/test-utils'
 import {useStore} from '../store/store'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {useStar} from '../components/usestar'
+import axios from 'axios'
 export default function Arireviewpage(){
-const {review} = useStore()
-const [mystar,setstar] = useState()
- 
+const [render,setrender] = useState(false)
+const {review,userid,loginnow,setreview,accountP} = useStore()
+const [mystar,setstar] = useState(0)
+const [myreview,setmyreview] = useState('')
+const [mytitle,setmytitle] = useState('')
+const [dbreview , setdbreview] =useState([])
+// console.log(dbreview, '디비자료')
+
+  function getreview(){
+    axios.post('/review',{
+      mode:'get'
+    }).then(res => { setreview(...res.data)
+    setdbreview(res.data)
+  }).catch(err => window.alert('데이터 회신 실패'))
+  }
+
+
+/**
+ * @name 리뷰남겨주는함수
+ * @param1 array = elements
+ * @param2 title = 글제목
+ */ 
+async function creatreview(array,title){
+  if(!title){
+    return window.alert('글제목을 작성해주세요')
+  }
+  if(!myreview){
+    return window.alert('글 내용을 작성해주세요')
+  }
+  let mynum = 0
+  for(let x= 0; x<5 ; x++){
+    if(array[x].checked ){
+      mynum= x
+    }
+  }
+  const date = new Date()
+  // console.log(mystar,review)
+ const data = {
+  mode : 'add',
+  title : title, 
+  content : myreview,
+  star : mynum,
+  totalstar : 5,
+  uid : accountP.id,
+  create_date :date.getFullYear()+'년'+date.getMonth()+'월'+date.getDate()+'일'
+}
+axios.post('/review',data).then(res => console.log(res, '리뷰받아옴'))
+setreview(data)
+// 위 함수가 store에 리뷰 등록함  
+
+setrender(true)
+document.getElementById(`my_modal_review`).close() 
+setmyreview('')
+ }
+useEffect(()=>{
+  getreview()
+  setrender(false)
+},[render])
 // console.log(review)
+function starmaker(idx,starnum){
+  let mystar = []
+  for(let x = 0 ; x<5 ; x++){
+      if(x==starnum){
+        mystar.push(<input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400" readOnly checked/>)
+      }else{
+        mystar.push(<input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400" readOnly/>)
+      }
+  }
+return  mystar
+}
     return(
    
 <section className="bg-gray-50 mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
   <div className="mx-auto max-w-screen-2xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
     <div className="md:flex md:items-end md:justify-between">
       <div className="max-w-xl">
-        <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+        <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl ">
           아리 팬분들의 구매후기
         </h2>
 
@@ -27,9 +94,9 @@ const [mystar,setstar] = useState()
 
       <Link
         onClick={()=>{
-            document.getElementById(`my_modal_review`).showModal()
+          loginnow ===true ?  document.getElementById(`my_modal_review`).showModal() : alert('로그인을 해주세요')
         }}
-        className="mt-6 inline-flex shrink-0 items-center gap-2 rounded-full border border-rose-600 px-5 py-3 text-rose-600 transition hover:bg-rose-600 hover:text-white md:mt-0"
+        className="mt-6 inline-flex shrink-0 items-center gap-2 rounded-full shadow-lg border border-rose-600 px-5 py-3 text-rose-600 transition hover:bg-rose-600 hover:text-white md:mt-0"
       >
         <span className="font-medium"> 리뷰 등록 </span>
 
@@ -58,33 +125,10 @@ const [mystar,setstar] = useState()
 		<div className="flex flex-col items-center py-6 space-y-3">
 			<span className="text-center">평점을 입력해주세요</span>
 			<div className="flex space-x-3">
-				{/* <button type="button" title="Rate 1 stars" aria-label="Rate 1 stars">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-10 h-10 dark:text-yellow-500">
-						<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-					</svg>
-				</button>
-				<button type="button" title="Rate 2 stars" aria-label="Rate 2 stars">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-10 h-10 dark:text-yellow-500">
-						<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-					</svg>
-				</button>
-				<button type="button" title="Rate 3 stars" aria-label="Rate 3 stars">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-10 h-10 dark:text-yellow-500">
-						<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-					</svg>
-				</button>
-				<button type="button" title="Rate 4 stars" aria-label="Rate 4 stars">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-10 h-10 dark:text-yellow-500">
-						<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-					</svg>
-				</button>
-				<button type="button" title="Rate 5 stars" aria-label="Rate 5 stars">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-10 h-10 dark:text-gray-600">
-						<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-					</svg>
-				</button> */}
+			
         <div className="rating rating-lg">
-  <input type="radio" name="rating-10" className="mask mask-star-2 bg-orange-400" checked/>
+
+  <input type="radio" name="rating-10" className="mask mask-star-2 bg-orange-400" />
   <input type="radio" name="rating-10" className="mask mask-star-2 bg-orange-400" />
   <input type="radio" name="rating-10" className="mask mask-star-2 bg-orange-400" />
   <input type="radio" name="rating-10" className="mask mask-star-2 bg-orange-400" />
@@ -93,9 +137,13 @@ const [mystar,setstar] = useState()
 			</div>
 		</div>
 		<div className="flex flex-col w-full">
-			<textarea rows="3" placeholder="Message..." className="p-4 rounded-md resize-none dark:text-gray-100 dark:bg-gray-900"></textarea>
+      <input  placeholder='Title' className='mb-2 pl-4 h-10' id='titletext'/>
+			<textarea rows="3" placeholder="Message..." className="p-4 rounded-md resize-none dark:text-gray-100 dark:bg-gray-900"  value={myreview} onChange={(e)=>{
+        setmyreview(e.target.value)
+      }}></textarea>
 			<button className="btn btn-active btn-primary mb-4" onClick={()=>{
-       console.log( document.querySelectorAll('input[name="rating-10"]')[0].checked)
+       creatreview(document.querySelectorAll('input[name="rating-10"]'),document.querySelector('#titletext').value)  
+       document.querySelector('#titletext').value = ''
       }}>리뷰 남기기</button>
       {/* 이런식으로 찾아야할듯? */}
 		</div>
@@ -111,23 +159,20 @@ const [mystar,setstar] = useState()
 
     {/* 리뷰모달완료 */}
     <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
-        {review.map((item,idx)=> ( <blockquote key={item.id+idx} className="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8">
+        {dbreview && dbreview.map((item,idx)=> ( <blockquote key={item.title+idx} className="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8">
         <div>
           <div className="flex gap-0.5 text-green-500">
           <div className="rating rating-lg">
-  <input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400" />
-  <input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400"  />
-  <input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400" />
-  <input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400" />
-  <input type="radio" name={'rating-'+idx} className="mask mask-star-2 bg-orange-400" checked readOnly />
+   {   starmaker(idx, item.star)}
+  
 </div>
           </div>
 
           <div className="mt-4">
-            <p className="text-2xl font-bold text-rose-600 sm:text-3xl">{item.header}</p>
+            <p className="text-2xl font-bold text-rose-600 sm:text-3xl">{item.title}</p>
 
             <p className="mt-4 leading-relaxed text-gray-700">
-             {item.body}
+             {item.content}
             </p>
           </div>
         </div>
@@ -137,7 +182,6 @@ const [mystar,setstar] = useState()
 
         ))}
       
-
     </div>
   </div>
 </section>
