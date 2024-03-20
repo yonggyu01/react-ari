@@ -127,8 +127,40 @@ useEffect(()=>{
                 className="inline-flex items-center justify-center rounded-full border border-indigo-200 bg-indigo-50 px-1 text-xs text-indigo-900">
                   {userallinfo.length}</span>
             </Link>
-
+              
           </div>
+
+          <hr className="h-5 border-0" />
+          <div className="space-y-1.5">
+          <Link to='/'
+                onClick={()=>{
+                  userSign('login')
+                loginsuc(false)
+                setaccountP('')
+               setloginstate('')
+               axios.post('/sign',{
+                mode : 'logout'
+              }).then(res=>res).catch(err=>console.log(err))
+                }}
+                className="group flex items-center justify-between gap-2 rounded-md border border-transparent px-2.5 py-2 text-sm font-semibold text-slate-900 hover:bg-indigo-100 hover:text-indigo-600 active:border-indigo-200"
+              >
+                <svg
+                  className="hi-mini hi-lock-closed inline-block h-5 w-5 flex-none text-slate-300 group-hover:text-indigo-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span className="grow">Logout</span>
+              </Link>
+
+              </div>
         </nav>
       </div>
     </div>
