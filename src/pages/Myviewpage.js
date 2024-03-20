@@ -176,7 +176,14 @@ export default function Myviewpage({Clicklogo}){
 								navigate(`/${item.pagestate}`)
 							}}}>Go Site</button>
 					</div>
+					<h1 className='pt-3 pb-2'> 기획서 pdf 읽어보기</h1>
+					<div className='flex flex-row gap-4'>
+			
+					<button className="btn btn-outline btn-error btn-sm w-full" onClick={()=>{
+						
+					}}>기획서</button>
 				
+					</div>
 					</div>
 					</div>
 				</div>
