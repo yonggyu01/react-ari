@@ -51,7 +51,7 @@ const logoutmode = ()=>{
     const logout = window.open('http://nid.naver.com/nidlogin.logout')
     setTimeout(()=>{
       logout.close()
-    },500)
+    },100)
     userSign('Login')
       loginsuc(false)
       setaccountP('')
