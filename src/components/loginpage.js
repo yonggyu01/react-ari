@@ -8,9 +8,6 @@ import axios from 'axios';
 import Kakao from './kakaolgoin';
 export default function Loginpage(){
   const location=useLocation()
-
-  console.log(location,'로그인시')
-
   const {userSign,loginsuc,locallocation,setloginstate,setuserinfo,userallinfo,setaccountP} = useStore()
   const navigate = useNavigate();
   const [userid,setuser] = useState('')

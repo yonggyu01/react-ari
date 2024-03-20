@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
-    const {userSign,loginsuc,locallocation,setloginstate,setnavertoken,loginnow,setaccountP} = useStore()
+    const {userSign,loginsuc,locallocation,loginstate,setnaverfirst,naverfirst,setloginstate,setnavertoken,loginnow,setaccountP} = useStore()
     console.log(props,setUserInfo)
     const navigate=useNavigate()
   
@@ -16,6 +16,7 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
 
     
 	const initNaverLogin = () => {
+     
 		const naverLogin = new window.naver.LoginWithNaverId({
             
 			clientId: NAVER_CLIENT_ID,
@@ -24,21 +25,26 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
 			loginButton:{ color: 'green', type: 3, height: 100 },
 			callbackHandle: true,
 		})
-		naverLogin.init()
-        console.log(window.naver , '윈도우네이버')
+   
+        naverLogin.init()
            // 선언된 naverLogin 을 이용하여 유저 (사용자) 정보를 불러오는데  
            // 함수 내부에서 naverLogin을 선언하였기에 지역변수처리가 되어  
            // userinfo 정보를 추출하는 것은 지역변수와 같은 함수에서 진행주어야한다.
            // 아래와 같이 로그인한 유저 ( 사용자 ) 정보를 직접 접근하여 추출가능하다.
      
       naverLogin.getLoginStatus(async function (status) {
+        if(!naverfirst){
+            return false
+        }
 			if (status) {
               // 아래처럼 선택하여 추출이 가능하고, 
-				const userid = naverLogin.user.getEmail()
-				const username = naverLogin.user.getName()
-                console.log(userid, username)
-                if(!loginnow && username){
-                    axios.post('/sign',{
+             
+                  const userid = naverLogin.user.getEmail()
+                  const username = naverLogin.user.getName()
+                  console.log(userid, username)
+              
+                if(!loginnow && username &&naverfirst){
+                    axios.post('/sign',{ 
                         mode: 'login',
                         uid : userid,
                         pwd : '네이버로그인'
@@ -47,6 +53,7 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
                             userSign(res.data.u_name)
                             loginsuc(true)
                             // setsign(!sign)
+                            setloginstate('naver')
                             setaccountP({
                               name : res.data.u_name,
                               id : res.data.u_id,
@@ -71,6 +78,7 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
                                         userSign(username)
                                         loginsuc(true)
                                         setloginstate('naver')
+                                        console.log(loginstate, '네이버로그인시도')
                                         }).catch(err => console.log('가입오류'))
                                 navigate('/')
                             }
@@ -114,6 +122,7 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
 	return (
 		<>
             <div className='btn btn-success box-border w-2/4' style={{cursor:'pointer'}} onClick={()=>{
+                setnaverfirst(true)
                 document.querySelector('#naverIdLogin a').dispatchEvent(new Event('click'))
             }}>Naver</div>
 			<div id="naverIdLogin" className='w-0 h-0' >Naver</div> 
