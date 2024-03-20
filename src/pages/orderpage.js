@@ -131,7 +131,7 @@ export default function Orderpage(){
 		<button type="button" className="px-6 py-2 border rounded-md bg-cyan-600 text-gray-50 border-cyan-600" onClick={()=>{
          if(!loginnow){
             window.alert('로그인 후 이용가능합니다')
-            navigate('/login')
+            // navigate('/login')
          }else{
             mapitems()
          }   

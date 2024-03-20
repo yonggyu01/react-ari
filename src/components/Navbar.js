@@ -7,10 +7,12 @@ import axios from 'axios';
 
 export default function Navbar(){
   
-  const {mycart,navertoken,kakaotoken,setaccountP}=useStore()
+  const {mycart,navertoken,kakaotoken,setaccountP,setnaverfirst}=useStore()
   const navigate = useNavigate()
   const location = useLocation()
-  const {locallocation,setdarkmode,islogo,loginnow,userSign, loginsuc,userid,loginstate,setroll,setloginstate,naviscroll} = useStore()
+  const {locallocation,setdarkmode,islogo,loginnow,userSign, loginsuc,userid,setroll,setloginstate,naviscroll} = useStore()
+  const {loginstate} = useStore()
+  
   function logoc(){
     islogo()
   }
@@ -28,6 +30,7 @@ export default function Navbar(){
     return result;
 }
 const logoutmode = ()=>{
+  console.log(loginstate, '로그아웃 스테이트')
   if(loginstate === 'kakao'){
     //카카오 로그아웃
     const client_id = process.env.REACT_APP_kakao_rest
@@ -45,12 +48,23 @@ const logoutmode = ()=>{
     const NAVER_CALLBACK_URL = locallocation
     const Naversecet = process.env.REACT_APP_naver_secret
     const url = `https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=${NAVER_CLIENT_ID}&client_secret=${Naversecet}&access_token=${navertoken}&service_provider=NAVER`
-    fetch(url).then(res=>{
-      userSign('Login')
+    const logout = window.open('http://nid.naver.com/nidlogin.logout')
+    setTimeout(()=>{
+      logout.close()
+    },100)
+    userSign('Login')
       loginsuc(false)
       setaccountP('')
+      setnaverfirst(false)
       setloginstate('')
-    }).catch(err=>console.log('로그아웃 실패'))
+      console.log( '네이버 로그아웃')
+    // fetch(url).then(res=>{
+    //   userSign('Login')
+    //   loginsuc(false)
+    //   setaccountP('')
+    //   setloginstate('naver')
+    //   // console.log(res, '네이버 로그아웃')
+    // }).catch(err=>console.log('로그아웃 실패'))
     // .then(res=> res.json()).then(res => console.log(res))
   }else{
     // 내 서버에서 로그아웃하기

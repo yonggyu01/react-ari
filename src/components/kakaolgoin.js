@@ -7,7 +7,7 @@ export default function Kakao({aouth}){
     const location = useLocation()
     const {setkakaotoken} = useStore()
     const navigate = useNavigate()
-    const {logoclick,islogo,userSign,loginsuc,locallocation,setloginstate,setaccountP,loginnow} = useStore()
+    const {logoclick,islogo,userSign,loginsuc,locallocation,setloginstate,setaccountP,loginstate} = useStore()
     const kakao_java = process.env.REACT_APP_kakao_javas
     const kakaorest = process.env.REACT_APP_kakao_rest
     // console.log(locallocation,'리디렉션 주소')
@@ -102,6 +102,7 @@ useEffect(()=>{
                 if(res.data.state){
                 userSign(res.data.u_name)
                 loginsuc(true)
+                setloginstate('kakao')
                 // setsign(!sign)
                 setaccountP({
                   name : res.data.u_name,
@@ -123,10 +124,10 @@ useEffect(()=>{
                         create_account : Date.now(),
                         pwd: 'kakao로그인'
                       })
+                      setloginstate('kakao')
                       userSign(response.id)
                       loginsuc(true)
-                      setloginstate('kakao')
-                      console.log(res, '카카오')}).catch(err=>console.error(err))
+                      console.log(loginstate, '카카오')}).catch(err=>console.error(err))
                 }
               })
 

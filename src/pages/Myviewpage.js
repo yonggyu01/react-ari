@@ -6,6 +6,7 @@ export default function Myviewpage({Clicklogo}){
 	const navigate = useNavigate();
 	const mypage = [
 		{	id: useId(),
+			pdfurl:'https://yonggyu01.github.io/react-ari/김용규 react 프로젝트 .pdf',
 			title : 'Ari Fan Site',
 			contents : 'React,Zustand,tailwindcss',
 			create : '2024',
@@ -30,6 +31,7 @@ export default function Myviewpage({Clicklogo}){
 		},
 		{
 			id: useId(),
+			pdfurl:'https://yonggyu01.github.io/windowProject/김용규 window95.pdf',
 			title : 'window',
 			contents :  'Html,CSS, Javascript',
 			create : 'Nov 20, 2023',
@@ -52,6 +54,7 @@ export default function Myviewpage({Clicklogo}){
 		{	
 			id: useId(),
 			title : 'CGV',
+			pdfurl:'https://yonggyu01.github.io/finalcgv/CGV 5조 최종발표.pdf',
 			contents : 'Html,CSS, Javascript',
 			create : '2023',
 			views : '팀프로젝트',
@@ -69,6 +72,7 @@ export default function Myviewpage({Clicklogo}){
 		},
 		{
 			id: useId(),
+			pdfurl:'https://yonggyu01.github.io/mybabyari/김용규 project ari.pdf',
 			title : '육아정보 APP',
 			contents :  'Vue,Vuex,Node.js',
 			create : '2024',
@@ -154,7 +158,14 @@ export default function Myviewpage({Clicklogo}){
 					<div id={'bgimgs'+idx} className='block h-96 w-96'/>
 
 					</figure>
-					<h3 className="font-bold text-lg ">{item.title}</h3>
+					<div className='flex gap-8'>
+
+					<h3 className="font-bold text-lg ">{item.title}</h3> 
+					<button  className="btn btn-outline btn-error btn-sm w-18" onClick={()=>{
+						window.open(item.pdfurl)
+					}}>기획서</button>
+					</div>
+				
 					<div className='flex flex-row items-center'>
 					<div className='w-1/2'>
 					<p className="py-4 pt-2	"> Stack (사용기술) </p>

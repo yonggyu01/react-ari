@@ -9,8 +9,8 @@ export const useStore = create((set) => ({
   loginsuc : (boolean)=> set((state)=>({...state, loginnow : boolean})),
   userid : 'Login',
   userSign : (value)=>set((state)=>({...state, userid : value})),
-  loginstate : '',
-  setloginstate : (mode)=>set((state)=>({...state,loginstate : mode})),
+  loginstate : null,
+  setloginstate : (mode)=>set((state)=>({...state, loginstate : mode})),
   mycart : [],
   setmycart: (val)=>set((state)=>({...state,mycart:[...state.mycart,val]})),
   delmycart : (id) =>set((state)=>({mycart : state.mycart.filter(item => item.id !== id)})),
@@ -33,7 +33,7 @@ export const useStore = create((set) => ({
   setdarkmode : (mode)=>set((state)=>({...state, darkmode:mode })),
   navercode : '',
   setnavercode : (code)=>set((state)=>({...state, navercode : code})),
-  naverfirst : false,
+  naverfirst : true,
   setnaverfirst : (boolean) => set((state)=>({...state, naverfirst : boolean})),
   navertoken : '',
   setnavertoken : (token)=>set((state)=>({...state, navertoken : token})),
@@ -43,5 +43,6 @@ export const useStore = create((set) => ({
   setuserinfo:(data) => set((state)=>({...state, userallinfo:data})),
   accountP : {},
   setaccountP : (data) => set((state)=>({...state, accountP : data}))
+
 })) 
 
