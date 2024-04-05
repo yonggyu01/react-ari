@@ -173,6 +173,46 @@ export default function Portfolio(){
 			   fsrc : './imgs/arifanpage.PNG',
 			   ssrc : './imgs/arifanpage1.PNG'
 			   },	{
+				id:'nexttodo',
+				 maintitle :'Next.js todo리스트',
+				 mainsub : '개인프로젝트 :  TODO',
+				 main3 : '서버사이드 렌더링을 경험해보고 싶어서 next.js로 만들었습니다. ',
+				stack : 	<div className='flex flex-row gap-3'>
+					<div className="flex flex-col justify-center items-end">
+					<img src="/imgs/next-js.svg" alt="svg" className="w-[35px] h-[35px] "/>
+												 <p className="mt-2 dark:text-gray-400">Next.js </p>
+											   </div>
+											   <div className="flex flex-col justify-center items-center">
+												 <img src="/imgs/sass-1.svg" alt="svg" className="w-[35px] h-[35px] text-gray-800 dark:text-white"/>
+												<p className="mt-2 dark:text-gray-400">SCSS </p>
+											   </div>
+											   <div className="flex flex-col justify-center items-center">
+											   <img src="/imgs/typescript.svg" alt="svg" className="w-[35px] h-[35px] "/>
+											   <p className="mt-2 dark:text-gray-400">Typescript </p>
+											   </div>
+											 </div>,
+			   vers : 	<div className="flex gap-4">
+										   <div className="flex flex-col justify-center items-center">
+											   <p className="mt-2 dark:text-gray-400">Vercel </p>
+										   </div>
+										   <div className="flex flex-col justify-center items-center">
+											   <img src="/imgs/firebase-icon.svg" alt="svg" width="35" height="35"/>
+											   <p className="mt-2 dark:text-gray-400">Firestore DB </p>
+										   </div>
+										   </div>,
+			   mainend : `Next.js와 typescript scss를 처음 배우며 구현해본 페이지입니다.`,
+			   secondtitle : '상태관리 Redux toolkit을 사용',
+			   secondsubtitle : '간단하게 DB를 사용해 CRUD기능 구현 ',
+			   ttitle:'리덕스 툴킷을 사용해 클라이언트 내에서 구동하는 Todo페이지 제작',
+			   tcon : 'SCSS의 mixin 문법을 사용해 매우 간단한 디자인 처리',
+			   ytitle:'반응형 페이지',
+			   ycon : `타입스크립트를 사용해 버그를 사전에 방지`,
+			   utitle: 'Firebase 의 DB를 사용',
+			   ucon : `CRUD기능 추가`,
+			   fsrc : './imgs/next2.JPG',
+			   ssrc : './imgs/next1.JPG'
+			   },
+			   {
 				id:'team',
 				 maintitle :'CGV Clone site 제작 관련 정보',
 				 mainsub : '팀프로젝트 :  CGV',
@@ -211,7 +251,7 @@ export default function Portfolio(){
 			   ucon : `Localstorage를 활용하여 간단한 회원정보를 저장하여 로그인 기능, 회원 중복검사 기능들을 구현함`,
 			   fsrc : './imgs/cgv1.PNG',
 			   ssrc : './imgs/cgv2.PNG'
-			   },
+			   }
 			]
 			let [view,setview] = useState({
 
