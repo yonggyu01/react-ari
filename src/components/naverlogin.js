@@ -37,8 +37,6 @@ export const NaverLogin = ({ setGetToken, setUserInfo },props) => {
             return false
         }
 			if (status) {
-              // 아래처럼 선택하여 추출이 가능하고, 
-             
                   const userid = naverLogin.user.getEmail()
                   const username = naverLogin.user.getName()
                   console.log(userid, username)

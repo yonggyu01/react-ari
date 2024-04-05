@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useStore } from "../store/store"
 
@@ -10,6 +10,8 @@ export default function Myblog(){
     const hangulno = /[^ ㄱ-ㅣ가-힣]/gm
     const [more,setmore]=useState(6)
     const [cbtn, setcbtn] = useState(false)
+    // 카테고리별 변수생성
+const myreact= useRef([]) , myvue=useRef([]), myetc=useRef([]), mynext=useRef([])
     useEffect(()=>{
 
 
@@ -33,7 +35,7 @@ export default function Myblog(){
     // method: 'tags_api.get_discussions_by_trending',
     // method: 'condenser_api.get_trending_tags',
     // method: "tags_api.get_discussions_by_created",
-    //     params: {"tag":"yongreact","limit":5},
+        // params: {"start_tag":"yongreact","limit":5} ,
     // params: {tag : 'yongreact', limit:8},
     // params: [null,15],
     id: '1',
@@ -42,7 +44,10 @@ export default function Myblog(){
   .then(response => response.json())
  .then((res)=>{
    console.log(res , '리액트 yong으로 가져옴')
-    setmysteem(res.result)
+
+   filterHashtag(res)
+   
+   setmysteem(res.result)
     // console.log(res)
     console.log(mysteemdata)
     // datamaker(res)
@@ -54,6 +59,35 @@ export default function Myblog(){
 
 //    const query = '/@yonggyu01/';
 
+
+
+// 블로그 글 나눠주는 함수임   setmore변수의 값을 100이상 증가시켜서 글 분류시키면 적절하게 블로그 데이터 나눠 넣을수 잇음
+function filterHashtag(Array){
+  Array.result.forEach(item=>{
+        let {tags} = JSON.parse(item.comment.json_metadata)
+        for(let x of tags){
+          if(x === 'yongreact'){
+            return myreact.current.push(item)
+          }else if(x === 'yongvue'){
+            return  myvue.current.push(item)
+          }else if(x === 'yongetc'){
+            return myetc.current.push(item)
+          }else if( x=== 'yongnext'){
+            return  mynext.current.push(item)
+          }
+        }
+      
+    // if(parsetext.match(/yongreact/i).length > 0){
+    //   // 해당 조건문이 true라는 이야기는 yongreact 해시태그가 존재한다는 소리임
+    //   myreact.current.push(item)
+    // }else if(parsetext.match(/yongvue/i).length > 0){
+    //   myvue.current.push(item)
+    // }else{
+    //   myetc.current.push(item)
+    // }
+  })
+    // console.log(myreact.current , '리엑트 태그' , myvue.current, 'vue태그' , myetc.current, 'etc 태그 ')
+}
 
 
 

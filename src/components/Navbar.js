@@ -47,7 +47,7 @@ const logoutmode = ()=>{
     const NAVER_CLIENT_ID = process.env.REACT_APP_naver_id
     const NAVER_CALLBACK_URL = locallocation
     const Naversecet = process.env.REACT_APP_naver_secret
-    const url = `https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=${NAVER_CLIENT_ID}&client_secret=${Naversecet}&access_token=${navertoken}&service_provider=NAVER`
+    // const url = `https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=${NAVER_CLIENT_ID}&client_secret=${Naversecet}&access_token=${navertoken}&service_provider=NAVER`
     const logout = window.open('http://nid.naver.com/nidlogin.logout')
     setTimeout(()=>{
       logout.close()
