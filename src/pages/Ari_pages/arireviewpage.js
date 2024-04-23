@@ -1,8 +1,8 @@
 import { renderIntoDocument } from 'react-dom/test-utils'
-import {useStore} from '../store/store'
+import {useStore} from '../../store/store'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import {useStar} from '../components/usestar'
+import {useStar} from '../../components/usestar'
 import axios from 'axios'
 export default function Arireviewpage(){
 const [render,setrender] = useState(false)

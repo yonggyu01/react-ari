@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { useStore } from "../store/store"
+import { useStore } from "../../store/store"
 
 
 export default function Adminsetbuy(){

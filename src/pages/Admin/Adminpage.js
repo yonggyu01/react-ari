@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom"
-import { useStore } from "../store/store"
+import { useStore } from "../../store/store"
 import { useEffect, useState } from "react"
 import axios from "axios"
 

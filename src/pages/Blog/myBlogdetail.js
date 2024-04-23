@@ -1,6 +1,6 @@
 import { Link, useLocation, useParams,useNavigate } from "react-router-dom"
-import { useStore } from "../store/store"
-import Scrolltop from "../components/scrolltop"
+import { useStore } from "../../store/store"
+import Scrolltop from "../../components/scrolltop"
 
 export default function Myblogdetail(){
 const {idx} = useParams()

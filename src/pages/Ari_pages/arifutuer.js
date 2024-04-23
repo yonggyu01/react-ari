@@ -1,5 +1,5 @@
 // @import url("https://fonts.googleapis.com/css2?family=Figtree&display=swap");
-import '../css/arifutuer.css'
+import '../../css/arifutuer.css'
 
 
 export default function Future(){

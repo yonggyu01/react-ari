@@ -1,9 +1,9 @@
 import { useEffect, useState,useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { useStore } from "../store/store"
+import { useStore } from "../../store/store"
 
 export default function Myblog(){
-  const {setblog} = useStore()
+  const {setblog,setblogmorebtn,blogmorebtn} = useStore()
   const navigate =useNavigate()
     const [mysteemdata, setmysteem]=useState([])
     const imgsrc = /https.+[$jpg]/i
@@ -11,6 +11,7 @@ export default function Myblog(){
     const [more,setmore]=useState(6)
     const [cbtn, setcbtn] = useState(false)
     // 카테고리별 변수생성
+
 const myreact= useRef([]) , myvue=useRef([]), myetc=useRef([]), mynext=useRef([])
     useEffect(()=>{
 
@@ -30,7 +31,7 @@ const myreact= useRef([]) , myvue=useRef([]), myetc=useRef([]), mynext=useRef([]
   body: JSON.stringify({
     jsonrpc: '2.0',
     method: 'condenser_api.get_blog',
-    params: ['yonggyu01', 0, more],  
+    params: ['yonggyu01', 0, blogmorebtn],  
     // 위에는 정상 작동함
     // method: 'tags_api.get_discussions_by_trending',
     // method: 'condenser_api.get_trending_tags',
@@ -157,6 +158,7 @@ function filterHashtag(Array){
         <div className='flex w-full justify-center mb-5'>
         <button type="button" className="px-8 py-3 font-semibold rounded-full bg-gray-800 text-gray-100 dark:bg-indigo-700 dark:text-white" onClick={()=>{
           setmore(more+6)
+          setblogmorebtn(blogmorebtn+6)
           setcbtn(true)
         }}>블로그 글 더보기</button>
 

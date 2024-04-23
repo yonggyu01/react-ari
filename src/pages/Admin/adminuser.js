@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom"
-import { useStore } from "../store/store"
+import { useStore } from "../../store/store"
 import axios from "axios"
 
 export default function Adminuser(){

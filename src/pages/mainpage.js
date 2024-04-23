@@ -1,13 +1,13 @@
 import { useState,useRef, useEffect } from "react"
 import Myviewpage from './Myviewpage'
 import Timeline from './timelinepage'
-import Arimain from "./arimainpage"
+import Arimain from "./Ari_pages/arimainpage"
 import Navbar from '../components/Navbar'
 import Login from '../components/loginpage'
 import { animated  } from '@react-spring/web'
 import Footerline from '../components/Footerline';  
 import {useStore} from '../store/store'
-import Myblog from "./myBlog"
+import Myblog from "./Blog/myBlog"
 import Myskill from "./Myskill"
 import Yonggyu from "./yonggyu"
 import Realfooter from "../components/Realfooter"

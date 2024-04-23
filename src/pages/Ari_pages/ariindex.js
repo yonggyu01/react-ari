@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import { useStore } from '../store/store'
+import { useStore } from '../../store/store'
 import { Link, useNavigate } from 'react-router-dom'
 export default function Ariindex(){
     const {userid,loginnow} = useStore()

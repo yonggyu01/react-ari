@@ -4,7 +4,7 @@ import './App.css';
  
 import Dicemain from './pages/mainpage'
 
-import Arimain from './pages/arimainpage';
+import Arimain from './pages/Ari_pages/arimainpage';
 import {  Route , RouterProvider,createBrowserRouter,createRoutesFromElements} from 'react-router-dom';
 import Loginpage from './components/loginpage';
 import Popo from './pages/popo'
@@ -12,20 +12,20 @@ import Orderpage from './pages/orderpage';
 import Productpage from './pages/perchasepage';
 import Notfound from './pages/notfound';
 import Indexpage from './pages/indexpage';
-import Ariindex from './pages/ariindex';
-import Adminpage from './pages/Adminpage';
-import Myblog from './pages/myBlog';
+import Ariindex from './pages/Ari_pages/ariindex';
+import Adminpage from './pages/Admin/Adminpage';
+import Myblog from './pages/Blog/myBlog';
 
 import Portfolio from './pages/Portfolio';
-import Future from './pages/arifutuer.js';
-import Ari100pic from './pages/ari100pic';
-import AriInsta from './pages/ariinsta';
-import Myblogdetail from './pages/myBlogdetail';
-import Adminuser from './pages/adminuser';
-import Adminindex from './pages/adminindex';
+import Future from './pages/Ari_pages/arifutuer.js';
+import Ari100pic from './pages/Ari_pages/ari100pic';
+import AriInsta from './pages/Ari_pages/ariinsta';
+import Myblogdetail from './pages/Blog/myBlogdetail';
+import Adminuser from './pages/Admin/adminuser';
+import Adminindex from './pages/Admin/adminindex';
 import Profile from './components/profile';
-import Adminreview from './pages/adminrevie';
-import Adminsetbuy from './pages/adminsetbuy';
+import Adminreview from './pages/Admin/adminrevie';
+import Adminsetbuy from './pages/Admin/adminsetbuy';
 
 
 function App() {

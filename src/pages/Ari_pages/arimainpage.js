@@ -1,12 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom'
-import aripic1 from '../imgs/ari1.jpg'
-import aripic2 from '../imgs/ari2.jpg'
-import Productpage from './perchasepage'
-import { useStore } from '../store/store'
+import aripic1 from '../../imgs/ari1.jpg'
+import aripic2 from '../../imgs/ari2.jpg'
+import Productpage from '../perchasepage'
+import { useStore } from '../../store/store'
 import Arireviewpage from './arireviewpage'
 import Aripicture from './aripicture'
 import Future from './arifutuer'
-import Scrolltop from '../components/scrolltop';
+import Scrolltop from '../../components/scrolltop';
 export default function Arimain(){
   const {userid,loginnow} = useStore()
   const navigate = useNavigate()

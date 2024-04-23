@@ -1,6 +1,6 @@
 import { useEffect,useRef,useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import Realfooter from '../components/Realfooter'
+import Realfooter from '../../components/Realfooter'
 export default function Ariinsta(){
     // https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url&access_token=YOUR_ACCESS_TOKEN
     // console.log(process.env.REACT_APP_insta_code)

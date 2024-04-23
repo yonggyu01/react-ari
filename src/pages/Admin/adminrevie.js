@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import {useStore} from '../store/store'
+import {useStore} from '../../store/store'
 export default function Adminreview(){
     const {review,setreview,accountP} = useStore()
     const [dbreview , setdbreview] =useState([])

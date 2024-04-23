@@ -42,7 +42,9 @@ export const useStore = create((set) => ({
   userallinfo : [],
   setuserinfo:(data) => set((state)=>({...state, userallinfo:data})),
   accountP : {},
-  setaccountP : (data) => set((state)=>({...state, accountP : data}))
+  setaccountP : (data) => set((state)=>({...state, accountP : data})),
+  blogmorebtn : 6,
+  setblogmorebtn : (number) => set((state)=>({...state, blogmorebtn : number}))
 
 })) 
 
