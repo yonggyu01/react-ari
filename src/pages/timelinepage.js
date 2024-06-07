@@ -14,6 +14,26 @@ return (<>
 								<path d="M426.072,86.928A238.75,238.75,0,0,0,88.428,424.572,238.75,238.75,0,0,0,426.072,86.928ZM257.25,462.5c-114,0-206.75-92.748-206.75-206.75S143.248,49,257.25,49,464,141.748,464,255.75,371.252,462.5,257.25,462.5Z"></path>
 								<polygon points="221.27 305.808 147.857 232.396 125.23 255.023 221.27 351.063 388.77 183.564 366.142 160.937 221.27 305.808"></polygon>
 							</svg>
+							<h4 className="font-medium">2024-05 ~ 드림코딩 타입스크립트 수강</h4>
+						</div>
+						<p className="ml-7 dark:text-gray-400">객체지향, 타입스크립트 심화 과정</p>
+					</li>
+					<li className="space-y-1">
+						<div className="flex items-center space-x-2">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4 h-4 fill-current dark:text-blue-400">
+								<path d="M426.072,86.928A238.75,238.75,0,0,0,88.428,424.572,238.75,238.75,0,0,0,426.072,86.928ZM257.25,462.5c-114,0-206.75-92.748-206.75-206.75S143.248,49,257.25,49,464,141.748,464,255.75,371.252,462.5,257.25,462.5Z"></path>
+								<polygon points="221.27 305.808 147.857 232.396 125.23 255.023 221.27 351.063 388.77 183.564 366.142 160.937 221.27 305.808"></polygon>
+							</svg>
+							<h4 className="font-medium">2024-05 개인 블로그 제작</h4>
+						</div>
+						<p className="ml-7 dark:text-gray-400"> Typescript, SCSS, next.js 활용하여 제작</p>
+					</li>
+					<li className="space-y-1">
+						<div className="flex items-center space-x-2">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4 h-4 fill-current dark:text-blue-400">
+								<path d="M426.072,86.928A238.75,238.75,0,0,0,88.428,424.572,238.75,238.75,0,0,0,426.072,86.928ZM257.25,462.5c-114,0-206.75-92.748-206.75-206.75S143.248,49,257.25,49,464,141.748,464,255.75,371.252,462.5,257.25,462.5Z"></path>
+								<polygon points="221.27 305.808 147.857 232.396 125.23 255.023 221.27 351.063 388.77 183.564 366.142 160.937 221.27 305.808"></polygon>
+							</svg>
 							<h4 className="font-medium">2024-03-21 그린컴퓨터 학원 수료</h4>
 						</div>
 						<p className="ml-7 dark:text-gray-400">프로젝트 기반 프론트엔드 웹앱 개발자 양성과정</p>
@@ -36,13 +56,33 @@ return (<>
 							</svg>
 							<h4 className="font-medium">2024-02 React, Vue 공부 시작</h4>
 						</div>
-						<p className="ml-7 dark:text-gray-400"> Vue.js 활용한 개인 프로젝트 Ari 제작 </p>
+						<p className="ml-7 dark:text-gray-400"> Vue.js 활용한 육아앱 제작 </p>
+					</li>
+					<li className="space-y-1">
+						<div className="flex items-center space-x-2">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4 h-4 fill-current dark:text-blue-400">
+								<path d="M426.072,86.928A238.75,238.75,0,0,0,88.428,424.572,238.75,238.75,0,0,0,426.072,86.928ZM257.25,462.5c-114,0-206.75-92.748-206.75-206.75S143.248,49,257.25,49,464,141.748,464,255.75,371.252,462.5,257.25,462.5Z"></path>
+								<polygon points="221.27 305.808 147.857 232.396 125.23 255.023 221.27 351.063 388.77 183.564 366.142 160.937 221.27 305.808"></polygon>
+							</svg>
+							<h4 className="font-medium">2024-01 PWA, vue 공부 시작</h4>
+						</div>
+						<p className="ml-7 dark:text-gray-400"> Vue.js 기본문법 options api, compositon api 학습 </p>
 					</li>
 				</ul>
 			</div>
 			<div>
 				<h3 className="mb-3 text-lg font-bold md:text-xl">2023</h3>
 				<ul className="space-y-4">
+					<li className="space-y-1">
+						<div className="flex items-center space-x-2">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4 h-4 fill-current dark:text-blue-400">
+								<path d="M426.072,86.928A238.75,238.75,0,0,0,88.428,424.572,238.75,238.75,0,0,0,426.072,86.928ZM257.25,462.5c-114,0-206.75-92.748-206.75-206.75S143.248,49,257.25,49,464,141.748,464,255.75,371.252,462.5,257.25,462.5Z"></path>
+								<polygon points="221.27 305.808 147.857 232.396 125.23 255.023 221.27 351.063 388.77 183.564 366.142 160.937 221.27 305.808"></polygon>
+							</svg>
+							<h4 className="font-medium">2023-11 ~ 2023-12 자바스크립트 마스터리(ES6+) 수료</h4>
+						</div>
+						<p className="ml-7 dark:text-gray-400">드림코딩 온라인강좌 등록 및 수료</p>
+					</li>
 					<li className="space-y-1">
 						<div className="flex items-center space-x-2">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4 h-4 fill-current dark:text-blue-400">
@@ -62,6 +102,16 @@ return (<>
 							<h4 className="font-medium">2023-11 첫 팀 프로젝트 시작</h4>
 						</div>
 						<p className="ml-7 dark:text-gray-400">바닐라 자바스크립트를 활용한 clone코딩 사이트 CGV제작 </p>
+					</li>
+					<li className="space-y-1">
+						<div className="flex items-center space-x-2">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4 h-4 fill-current dark:text-blue-400">
+								<path d="M426.072,86.928A238.75,238.75,0,0,0,88.428,424.572,238.75,238.75,0,0,0,426.072,86.928ZM257.25,462.5c-114,0-206.75-92.748-206.75-206.75S143.248,49,257.25,49,464,141.748,464,255.75,371.252,462.5,257.25,462.5Z"></path>
+								<polygon points="221.27 305.808 147.857 232.396 125.23 255.023 221.27 351.063 388.77 183.564 366.142 160.937 221.27 305.808"></polygon>
+							</svg>
+							<h4 className="font-medium">2023-11 클라이언트 사이드 스크립트 과정수료</h4>
+						</div>
+						<p className="ml-7 dark:text-gray-400">그린컴퓨터학원 온라인강좌 자바스크립트 기초과정 </p>
 					</li>
 					<li className="space-y-1">
 						<div className="flex items-center space-x-2">

@@ -26,8 +26,7 @@ import Adminindex from './pages/Admin/adminindex';
 import Profile from './components/profile';
 import Adminreview from './pages/Admin/adminrevie';
 import Adminsetbuy from './pages/Admin/adminsetbuy';
-
-
+import { Helmet } from 'react-helmet-async';
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -61,9 +60,14 @@ function App() {
 
   return (
     <div className="App">
-     
+           <Helmet>
+          <title> 용규의 포트폴리오</title>
+          <meta name="author" content="yonggyu" />
+          <meta name="description" content="용규의 포트폴리오를 보여주는 페이지입니다 리엑트로 개발했습니다." />
+          <link rel="canonical" href="http://ec2-13-209-26-80.ap-northeast-2.compute.amazonaws.com/" />
+        </Helmet>
       <RouterProvider router={router}>
-
+ 
       </RouterProvider>
     </div>
   );

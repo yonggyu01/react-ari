@@ -4,7 +4,8 @@ const path = require("path");
 require("dotenv").config();
 const mysql= require('mysql')
 const app = express();
-const cors = require('cors')
+const cors = require('cors');
+const { default: axios } = require("axios");
 app.use(express.json())
 app.use(cors())
 
@@ -35,6 +36,28 @@ const db = mysql.createConnection({
 //   password: '',
 //   database: 'userinfo'
 // })
+
+// Axios 인스턴스 생성
+const axiosInstance = axios.create();
+
+// 응답 인터셉터 추가
+axiosInstance.interceptors.response.use(
+    response => {
+        // 응답이 성공적으로 수신될 때 실행
+        console.log('가로채서 실행');
+        return response;
+    },
+    error => {
+        // 오류 응답을 수신할 때 실행
+        console.log('바보');
+        return Promise.reject(error);
+    }
+);
+app.post('/test', async (req, res) => {
+  let data = await axios.get('https://jsonplaceholder.typicode.com/todos/1')
+  let result = data.data
+  res.send(result,'이게 먼저 실행될것임');
+});
 
 
 let select = null

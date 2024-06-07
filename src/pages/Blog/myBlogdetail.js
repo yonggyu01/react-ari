@@ -1,6 +1,10 @@
 import { Link, useLocation, useParams,useNavigate } from "react-router-dom"
 import { useStore } from "../../store/store"
 import Scrolltop from "../../components/scrolltop"
+import blogfetch from './blogfetch'
+import {
+  useQuery,
+} from '@tanstack/react-query';
 
 export default function Myblogdetail(){
 const {idx} = useParams()
@@ -10,6 +14,19 @@ const imgsrc = /https.+[$jpg]/igm
 const hangulno = /[^ ㄱ-ㅣ가-힣]/gm
 const hangul = /[ㄱ-ㅣ가-힣].+/gm
 const par = /(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}([\/a-z0-9-%#?&=\w])+(\.[a-z0-9]{2,4}(\?[\/a-z0-9-%#?&=\w]+)*)*/gi
+const {data,error} = useQuery({
+  queryKey :['blogdata'],
+  queryFn : ()=>blogfetch(),
+  select: (data) => data.result[idx],
+  placeholderData: { comment : {
+    title : 'Loading...',
+    created : '2024-00-00',
+    body:  'loading now'
+  } },
+  notifyOnChangeProps: ['data', 'error'],
+
+})
+// console.log(data,'쿼리 가져옴')
     return(
         <section className="flex justify-center">
             <Scrolltop></Scrolltop>
@@ -23,9 +40,9 @@ const par = /(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}([\/a-z0-9-%#?&=\
         className=" inset-0 w-full object-cover mb-8"
       />)} */}
       <div className="lg:py-8">
-        <h2 className="text-3xl font-bold sm:text-4xl  dark:text-white mb-2">{selectblog.comment.title}</h2>
-         <p className="mb-8 text-gray">작성일 : {selectblog.comment.created.match(/\d{4}-\d{2}-\d{2}/ , '')[0] } </p>
-        {selectblog.comment.body.split("\n").map((text,idx)=>{      
+        <h2 className="text-3xl font-bold sm:text-4xl  dark:text-white mb-2">{data.comment.title}</h2>
+         <p className="mb-8 text-gray">작성일 : {data.comment.created.match(/\d{4}-\d{2}-\d{2}/ , '')[0] } </p>
+        {data?.comment.body.split("\n").map((text,idx)=>{      
             if(text.match(/!.*\)/gm)){
               return <img
               alt=""

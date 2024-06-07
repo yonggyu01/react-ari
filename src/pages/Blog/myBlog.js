@@ -1,7 +1,11 @@
 import { useEffect, useState,useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useStore } from "../../store/store"
-
+import blogfetch from './blogfetch'
+import {
+  useQuery,
+} from '@tanstack/react-query';
+import axios from 'axios';
 export default function Myblog(){
   const {setblog,setblogmorebtn,blogmorebtn} = useStore()
   const navigate =useNavigate()
@@ -13,15 +17,39 @@ export default function Myblog(){
     // 카테고리별 변수생성
 
 const myreact= useRef([]) , myvue=useRef([]), myetc=useRef([]), mynext=useRef([])
+
+
+const { status, data, error } = useQuery({
+  queryKey: ['blogdata'],
+  queryFn: ()=>blogfetch(),
+  staleTime:43200,
+  gcTime: 43200,
+  notifyOnChangeProps: ['data', 'error'],
+  // refetchOnWindowFocus: false, // react-query는 사용자가 사용하는 윈도우가 다른 곳을 갔다가 다시 화면으로 돌아오면 이 함수를 재실행합니다. 그 재실행 여부 옵션 입니다.
+  // retry: 0, // 실패시 재호출 몇번 할지
+  // onSuccess: data => {
+  //   // 성공시 호출
+  //   console.log(data ,'무슨데이터가 나오는지 보자');
+  // },
+  // onError: e => {
+  //   // 실패시 호출 (401, 404 같은 error가 아니라 정말 api 호출이 실패한 경우만 호출됩니다.)
+  //   // 강제로 에러 발생시키려면 api단에서 throw Error 날립니다. (참조: https://react-query.tanstack.com/guides/query-functions#usage-with-fetch-and-other-clients-that-do-not-throw-by-default)
+  //   console.log(e.message);
+  // }
+});
+if(status==='error'){
+  return <span>Error: {error.message}</span>;
+}
+if (status === "loading") {
+  return <span>Loading...</span>;
+}
+/*
     useEffect(()=>{
-
-
         // var client = new Client('https://api.steemit.com')
         // // console.log()
         // client.database.getDiscussions('trending', { tag: 'yongreact', limit: 5 })
         // .then((res)=>{
         // console.log(res)})
-
         // {"jsonrpc":"2.0", "method":"tags_api.get_comment_discussions_by_payout", "params":{"tag":"steem","limit":1}, "id":1}' https://api.steemit.com
         fetch('https://api.steemit.com', {
   method: 'POST',
@@ -45,19 +73,17 @@ const myreact= useRef([]) , myvue=useRef([]), myetc=useRef([]), mynext=useRef([]
   .then(response => response.json())
  .then((res)=>{
    console.log(res , '리액트 yong으로 가져옴')
-
    filterHashtag(res)
-   
    setmysteem(res.result)
     // console.log(res)
     console.log(mysteemdata)
     // datamaker(res)
 })
   .catch(error => console.error('Error:',error ));
-
   setcbtn(false)
-    },[cbtn])
-
+    // },[cbtn])
+    },[])
+**/
 //    const query = '/@yonggyu01/';
 
 
@@ -114,39 +140,39 @@ function filterHashtag(Array){
                 </div>
             </a> */}
             <div className="grid justify-center  grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
-               {mysteemdata&& mysteemdata.map((x,idx)=>{ return <Link key={x.title+x.comment.created} onClick={()=>{
+               {data&& data.result.map((x,idx)=>{return  idx < more? <Link key={'list'+x.title+x.comment.created} onClick={()=>{
                 navigate(`/blogdetail/${idx}`)
                 setblog(x)
                }}>
                <article className="overflow-hidden rounded-lg shadow transition border-2 hover:shadow-lg dark:bg-slate-800">
-  <img
-    alt=""
-    src={x.comment.body.match(imgsrc)}
-    className="h-56 w-full object-cover"
-  />
+                  <img
+                    alt=""
+                    src={x.comment.body.match(imgsrc)}
+                    className="h-56 w-full object-cover"
+                  />
 
-  <div className="bg-white p-4 sm:p-6">
-    <time dateTime="2022-10-10" className="block text-xs text-gray-500"> 작성일 : {x.comment.created.match(/\d{4}-\d{2}-\d{2}/ , '')[0] }</time>
+                  <div className="bg-white p-4 sm:p-6">
+                    <time dateTime="2022-10-10" className="block text-xs text-gray-500"> 작성일 : {x.comment.created.match(/\d{4}-\d{2}-\d{2}/ , '')[0] }</time>
 
 
-      <h3 className="mt-0.5 text-lg text-gray-900 truncate">{x.comment.title}</h3>
-  
+                      <h3 className="mt-0.5 text-lg text-gray-900 truncate">{x.comment.title}</h3>
+                  
 
-    <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
-    {x.comment.body.replace(hangulno,'')}
-    </p>
-  </div>
-</article>
-        
-        
-        {/* <img role="presentation" className="object-cover w-full rounded h-44 dark:bg-gray-500" src={x.comment.body.match(imgsrc)} />
-        <div className="p-6 space-y-2">
-            <h3 className="text-2xl font-semibold group-hover:underline group-focus:underline truncate">{x.comment.title}</h3>
-            <span className="text-xs dark:text-gray-400 ">{x.comment.created}</span> */}
-            {/* <p>{x.comment.body}</p> */}
-        {/* </div> */}
-    </Link>
-    
+                    <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+                    {x.comment.body.replace(hangulno,'')}
+                    </p>
+                  </div>
+                </article>
+                        
+                        
+                        {/* <img role="presentation" className="object-cover w-full rounded h-44 dark:bg-gray-500" src={x.comment.body.match(imgsrc)} />
+                        <div className="p-6 space-y-2">
+                            <h3 className="text-2xl font-semibold group-hover:underline group-focus:underline truncate">{x.comment.title}</h3>
+                            <span className="text-xs dark:text-gray-400 ">{x.comment.created}</span> */}
+                            {/* <p>{x.comment.body}</p> */}
+                        {/* </div> */}
+                    </Link> :<></>
+                    
 })}
                
          

@@ -4,12 +4,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 // require("dotenv").config();
+import {Helmet,HelmetProvider } from 'react-helmet-async';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+const queryClient = new QueryClient()
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <HelmetProvider>
+      
     <App />
-  </React.StrictMode>
+    {/* <ReactQueryDevtools initialIsOpen={true} /> */}
+    </HelmetProvider>
+    </QueryClientProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

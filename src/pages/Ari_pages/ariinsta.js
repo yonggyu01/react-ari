@@ -1,7 +1,20 @@
 import { useEffect,useRef,useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Realfooter from '../../components/Realfooter'
+import {
+  useQuery,
+} from '@tanstack/react-query';
+// import {instagetdata} from './arifetchdata'
+
+
 export default function Ariinsta(){
+  const {data,error} = useQuery({
+    queryKey: ['instagramdata'],
+    queryFn: ()=>instaget(),
+    staleTime:43200,
+    gcTime: 43200,
+    notifyOnChangeProps: ['data', 'error'],
+  })
     // https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url&access_token=YOUR_ACCESS_TOKEN
     // console.log(process.env.REACT_APP_insta_code)
     const [render, setrender] = useState(false)
@@ -10,12 +23,13 @@ export default function Ariinsta(){
     const mydata = []
     const navigate= useNavigate()
     const [more,setmore]=useState(12)
+
    async function instaget(num){
     const data = await fetch(`https://graph.instagram.com/me/media?fields=id,caption,timestamp,media_type,media_url,thumbnail_url&access_token=${process.env.REACT_APP_insta_code}`).catch(err => console.log('서버에서 유저정보 받아올 수 없음'))
     const result  =await data.json()
-    console.log(result)
-    setbaby(result)
-
+    // console.log(result)
+    // setbaby(result)  
+    return result
     // console.log(baby)
 }
 
@@ -27,19 +41,14 @@ function moreshow(num){
 
 // 더보기는 좀 고민해보자 충분히 가능함
 
-
-useEffect(()=>{
-    instaget()
-
-},[])
-useEffect(()=>{
-  
-  setrender(false)
-},[render])
+// useEffect(()=>{
+//   // instaget()
+//   setrender(false)
+// },[render])
     return(
      <>
 <div id="moreinsta" className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-8 xl:grid-cols-4 mb-8">
-      {baby&&baby.data.map((item,idx)=>{
+      {data&&data.data.map((item,idx)=>{
         if(idx<more){
           return  (<div className="mx-auto w-full  p-4 lg:p-8 overflow-hidden nthgogo" key={item.id+idx}>
               
