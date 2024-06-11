@@ -4,13 +4,13 @@ import Realfooter from '../../components/Realfooter'
 import {
   useQuery,
 } from '@tanstack/react-query';
-// import {instagetdata} from './arifetchdata'
+import {instagetdata} from './arifetchdata'
 
 
 export default function Ariinsta(){
   const {data,error} = useQuery({
     queryKey: ['instagramdata'],
-    queryFn: ()=>instaget(),
+    queryFn: ()=>instagetdata(),
     staleTime:43200,
     gcTime: 43200,
     notifyOnChangeProps: ['data', 'error'],
