@@ -3,6 +3,7 @@
 배포 AWs ec2, Db: aws rds - mariaDB 사용 
 
 사이트주소 : 
-http://ec2-13-209-26-80.ap-northeast-2.compute.amazonaws.com/
+도메인 변경하였습니다.
+http://arifansite.shop/
 
 
